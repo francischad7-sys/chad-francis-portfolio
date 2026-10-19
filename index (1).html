@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Chad Francis, mechanical engineering student at Stevens Institute of Technology. Born to innovate.">
+<title>Chad Francis Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+body{margin:0}
+/* Layout: quiet dark minimalism — one column of generous whitespace, a single typeface family, hairline rules, and a soft fade-up as sections enter. Intro first, work below. */
+:root{
+  color-scheme:dark;
+  --bg:#0c0d0e;
+  --raise:#141517;
+  --text:#ececea;
+  --dim:#8b8d90;
+  --faint:#5a5c60;
+  --line:#232427;
+  --accent:#c9d6e3;
+  --sans:"Geist","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:"Geist Mono",ui-monospace,Menlo,Consolas,monospace;
+  --ease:cubic-bezier(.22,.8,.26,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{background:var(--bg);color:var(--text);font:400 17px/1.7 var(--sans);-webkit-font-smoothing:antialiased;
+  padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));padding-block:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:1px solid var(--text);outline-offset:4px}
+.wrap{max-width:1040px;margin:0 auto}
+.label{font:400 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+
+/* nav */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:20px;border-bottom:1px solid transparent;transition:border-color .3s}
+nav.scrolled .wrap{border-color:var(--line)}
+.name{font:500 15px/1 var(--sans);text-decoration:none;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:12px}
+.mark{width:28px;height:28px;flex:none}
+.big-mark{width:clamp(56px,7vw,80px);height:auto;color:var(--text);margin-bottom:28px}
+nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+nav ul a{font-size:14px;color:var(--dim);text-decoration:none;transition:color .2s}
+nav ul a:hover,nav ul a.on{color:var(--text)}
+@media (max-width:560px){nav ul{gap:18px}nav ul li:first-child{display:none}}
+
+/* intro */
+.intro{padding-block:clamp(72px,14vw,160px) clamp(56px,8vw,96px)}
+h1{font:300 clamp(48px,8.5vw,96px)/1 var(--sans);letter-spacing:-.045em;margin:20px 0 0}
+.role-line{font:400 clamp(19px,2.2vw,24px)/1.4 var(--sans);color:var(--dim);letter-spacing:-.01em;margin:18px 0 0;max-width:36ch}
+.intro-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:clamp(40px,6vw,72px);margin-top:clamp(56px,8vw,96px);padding-top:40px;border-top:1px solid var(--line)}
+@media (max-width:820px){.intro-grid{grid-template-columns:1fr}}
+.bio p{margin:0 0 22px;color:var(--dim);max-width:60ch}
+.bio p:first-child{color:var(--text);font-size:clamp(19px,1.8vw,21px);line-height:1.6}
+.side{display:grid;grid-template-columns:minmax(0,max-content) auto;justify-content:space-evenly;gap:clamp(24px,3vw,40px);align-items:center;min-width:0;height:100%}
+.portrait{margin:0;width:clamp(247px,32.5vw,377px);max-width:100%;aspect-ratio:1;border-radius:50%;padding:5px;border:1px solid var(--line)}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;border-radius:50%;filter:saturate(.92)}
+@media (max-width:420px){.side{grid-template-columns:1fr}.portrait{order:-1}}
+.facts{margin:0;display:grid;gap:22px;align-content:start}
+.facts dt{margin-bottom:6px}
+.facts dd{margin:0;font-size:16px}
+.facts dd span{display:block;color:var(--dim);font-size:14px}
+.status{display:inline-flex;align-items:center;gap:8px}
+.status::before{content:"";width:6px;height:6px;border-radius:50%;background:#7fd1a0}
+
+/* sections */
+section{padding-block:clamp(64px,9vw,112px);border-top:1px solid var(--line)}
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:24px;margin-bottom:clamp(40px,6vw,64px)}
+@media (max-width:820px){.sec-head{grid-template-columns:1fr}}
+h2{font:400 clamp(28px,3.6vw,40px)/1.1 var(--sans);letter-spacing:-.03em;margin:0}
+.sec-head p{margin:0;color:var(--dim);max-width:52ch}
+
+/* experience */
+.exp{list-style:none;margin:0;padding:0}
+.exp li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:24px;padding-block:24px;border-top:1px solid var(--line)}
+.exp li:last-child{border-bottom:1px solid var(--line)}
+@media (max-width:820px){.exp li{grid-template-columns:1fr;gap:6px}}
+.exp h3{font:500 18px/1.35 var(--sans);margin:0 0 4px;letter-spacing:-.01em}
+.exp .org{color:var(--dim);font-size:15px;margin:0 0 8px}
+.exp p.d{margin:0;color:var(--dim);font-size:16px;max-width:58ch}
+.when{padding-top:4px}
+
+/* work */
+.work{display:grid;gap:clamp(72px,10vw,128px)}
+.proj{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:start}
+.proj:nth-child(even) .media{order:2}
+@media (max-width:860px){.proj{grid-template-columns:1fr}.proj:nth-child(even) .media{order:0}}
+.media{min-width:0}
+.shot{display:block;width:100%;padding:0;border:0;border-radius:6px;overflow:hidden;background:#f2f2f0;aspect-ratio:4/3.3;cursor:zoom-in}
+.shot.cover img{object-fit:cover}
+.shot img{width:100%;height:100%;object-fit:contain;transition:opacity .3s var(--ease),transform 1s var(--ease)}
+.shot:hover img{transform:scale(1.025)}
+.cap{margin-top:10px;display:flex;justify-content:space-between;gap:12px}
+.thumbs{display:flex;gap:6px;flex-wrap:wrap}
+.thumbs button{width:44px;height:44px;padding:0;border:0;border-radius:4px;overflow:hidden;background:#f2f2f0;cursor:pointer;opacity:.4;transition:opacity .2s;outline-offset:2px}
+.thumbs button img{width:100%;height:100%;object-fit:cover}
+.thumbs button:hover{opacity:.8}
+.thumbs button[aria-current="true"]{opacity:1}
+.cur-cap{color:var(--faint);font:400 12px/44px var(--mono);white-space:nowrap}
+@media (max-width:480px){.cur-cap{display:none}}
+
+.panel{border-radius:6px;background:var(--raise);aspect-ratio:4/3.3;padding:clamp(24px,4vw,40px);display:flex;flex-direction:column;justify-content:space-between;min-width:0}
+.panel .num{font:300 clamp(80px,12vw,140px)/.9 var(--sans);letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.panel .num small{font-size:.22em;letter-spacing:0;color:var(--dim);margin-left:6px}
+.panel p{margin:10px 0 0;color:var(--dim);font-size:15px}
+
+.text{min-width:0}
+.text h3{font:400 clamp(24px,2.6vw,30px)/1.2 var(--sans);letter-spacing:-.025em;margin:14px 0 14px}
+.text > p{color:var(--dim);margin:0 0 24px;max-width:54ch}
+.specs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:0 0 24px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.specs div{padding:14px 0;min-width:0}
+.specs div+div{padding-left:16px;border-left:1px solid var(--line)}
+.specs dt{margin-bottom:8px}
+.specs dd{margin:0;font:400 19px/1.1 var(--sans);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.text ul{margin:0 0 24px;padding:0;list-style:none;display:grid;gap:10px;max-width:54ch}
+.text li{color:var(--dim);font-size:16px;padding-left:20px;position:relative}
+.text li::before{content:"";position:absolute;left:0;top:.8em;width:8px;height:1px;background:var(--faint)}
+.mine{font-size:15px;color:var(--dim);margin:0;max-width:54ch}
+.mine b{color:var(--text);font-weight:500}
+.tools{margin-top:20px;font:400 12px/1.8 var(--mono);color:var(--faint);letter-spacing:.02em}
+
+/* coming soon */
+.soon{display:grid;place-items:center;text-align:center;padding-block:clamp(48px,8vw,96px);border:1px dashed var(--line);border-radius:8px}
+.soon h2{font-size:clamp(32px,5vw,56px);margin:14px 0 12px}
+.soon p{margin:0;color:var(--dim);max-width:44ch}
+.soon .dots{display:inline-flex;gap:6px;margin-top:24px}
+.soon .dots i{width:6px;height:6px;border-radius:50%;background:var(--dim);animation:dot 1.4s infinite}
+.soon .dots i:nth-child(2){animation-delay:.2s}.soon .dots i:nth-child(3){animation-delay:.4s}
+@keyframes dot{0%,80%,100%{opacity:.2}40%{opacity:1}}
+
+/* contact */
+.contact-line{font:300 clamp(36px,6vw,72px)/1.05 var(--sans);letter-spacing:-.04em;margin:0 0 36px;max-width:16ch}
+.links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line)}
+@media (max-width:640px){.links{grid-template-columns:1fr}}
+.link{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:20px 0;border-bottom:1px solid var(--line);min-width:0}
+.links .link:nth-child(odd){padding-right:24px}
+@media (min-width:641px){.links .link:nth-child(even){padding-left:24px;border-left:1px solid var(--line)}}
+.link code{font:400 15px/1.3 var(--sans);overflow-wrap:anywhere;user-select:all}
+.link .act{flex:none;font:400 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--dim);background:none;border:1px solid var(--line);border-radius:99px;padding:9px 14px;cursor:pointer;text-decoration:none;transition:color .2s,border-color .2s}
+.link .act:hover{color:var(--text);border-color:var(--dim)}
+footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding-block:32px 48px}
+
+/* lightbox */
+dialog{border:0;padding:0;background:transparent;max-width:min(1100px,94vw);max-height:92vh;color:var(--text)}
+dialog::backdrop{background:rgba(6,6,7,.92)}
+dialog img{max-height:84vh;width:auto;margin:0 auto;border-radius:6px;background:#f2f2f0}
+dialog .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px}
+dialog button{font:400 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--text);background:none;border:1px solid var(--line);border-radius:99px;padding:9px 14px;cursor:pointer}
+
+/* motion: visible at rest; once JS runs, elements below the fold ease up as they enter */
+@media (prefers-reduced-motion:no-preference){
+  .js .rv{opacity:.001;transform:translateY(24px);transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s)}
+  .js .rv.in{opacity:1;transform:none}
+  .js .intro .rv{transition-duration:1.2s}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.soon .dots i{animation:none;opacity:.6}}
+</style>
+</head>
+<body>
+
+
+<nav id="nav"><div class="wrap">
+  <a class="name" href="#top" aria-label="Chad Francis, home"><svg class="mark" viewBox="222 150 256 260" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="17" stroke-linecap="square" stroke-linejoin="round"><path d="M420 162 L304 162 Q234 162 234 240 Q234 318 304 318 L376 318"/><path d="M466 224 L446 348 Q438 396 392 396 L282 396"/></g></svg><span>Chad Francis</span></a>
+  <ul>
+    <li><a href="#experience" data-s="experience">Experience</a></li>
+    <li><a href="#work" data-s="work">Work</a></li>
+    <li><a href="#soon" data-s="soon">Coming soon</a></li>
+    <li><a href="#contact" data-s="contact">Contact</a></li>
+  </ul>
+</div></nav>
+
+<main class="wrap" id="top">
+  <header class="intro">
+    <svg class="big-mark rv" viewBox="222 150 256 260" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="13" stroke-linecap="square" stroke-linejoin="round"><path d="M420 162 L304 162 Q234 162 234 240 Q234 318 304 318 L376 318"/><path d="M466 224 L446 348 Q438 396 392 396 L282 396"/></g></svg>
+    <div class="label rv">Mechanical Engineering · Stevens Institute of Technology</div>
+    <h1 class="rv" style="--d:.08s">Chad Francis</h1>
+    <p class="role-line rv" style="--d:.16s">Born to innovate.</p>
+
+    <div class="intro-grid">
+      <div class="bio">
+        <p class="rv" style="--d:.24s">I am a mechanical engineering student at Stevens Institute of Technology, Class of 2029, with a particular interest in the point where analysis meets physical reality. My work moves from concept sketches and CAD models to fabricated prototypes, and I treat testing as the stage where a design either proves itself or reveals what still needs to change.</p>
+        <p class="rv" style="--d:.3s">I also compete as a sprinter on the Stevens varsity track and field team. Sustaining an NCAA training schedule alongside a demanding engineering curriculum has required disciplined planning and consistent performance under pressure. My experience on a competitive robotics team and as a counselor responsible for a group of thirty has strengthened my ability to communicate clearly and coordinate people toward a shared objective.</p>
+        <p class="rv" style="--d:.36s">My interest in research and development comes from a conviction that the most meaningful engineering produces something genuinely new. R&amp;D is where ideas are validated, refined through iteration, and translated into products that address problems in ways existing solutions do not. I want to contribute across that full cycle, from early concept through prototyping and verification, while continually questioning how a design could perform better.</p>
+        <p class="rv" style="--d:.42s">I am seeking an R&amp;D or product development internship where I can contribute to that work, learn from experienced engineers, and help carry new products from concept to reality.</p>
+      </div>
+      <div class="side">
+      <dl class="facts">
+        <div class="rv" style="--d:.3s"><dt class="label">Education</dt><dd>Stevens Institute of Technology<span>B.E. Mechanical Engineering, 2029</span></dd></div>
+        <div class="rv" style="--d:.36s"><dt class="label">Athletics</dt><dd>Varsity Track &amp; Field<span>NCAA Division III · MAC</span></dd></div>
+        <div class="rv" style="--d:.42s"><dt class="label">Tools</dt><dd>SolidWorks, AutoCAD, 3D printing<span>C++ (Arduino), soldering, Excel</span></dd></div>
+        <div class="rv" style="--d:.48s"><dt class="label">Based in</dt><dd>Hoboken, NJ</dd></div>
+        <div class="rv" style="--d:.54s"><dt class="label">Status</dt><dd class="status">Open to internships</dd></div>
+      </dl>
+      <figure class="portrait rv" style="--d:.3s"><img src="headshot.jpg" alt="Portrait of Chad Francis"></figure>
+      </div>
+    </div>
+  </header>
+
+  <section id="experience">
+    <div class="sec-head">
+      <div class="label rv">Experience</div>
+      <h2 class="rv">Education, athletics and leadership.</h2>
+    </div>
+    <ul class="exp">
+      <li class="rv">
+        <div class="when label">2025 – Present</div>
+        <div><h3>B.E. Mechanical Engineering</h3><p class="org">Stevens Institute of Technology · Hoboken, NJ</p><p class="d">Foundational coursework in engineering statics, thermodynamics, differential equations, multivariable calculus, and a two-semester engineering design sequence.</p></div>
+      </li>
+      <li class="rv">
+        <div class="when label">2025 – Present</div>
+        <div><h3>Varsity Sprinter</h3><p class="org">Stevens Track &amp; Field · NCAA Division III</p><p class="d">Recognized as the team's Sprinter of the Year for the 2025–26 season. Maintain roughly 12 hours per week of training and competition alongside a full engineering course load.</p></div>
+      </li>
+      <li class="rv">
+        <div class="when label">Summer 2026</div>
+        <div><h3>Camp Counselor</h3><p class="org">OakCrest · Somerset, NJ</p><p class="d">Shared responsibility for a group of approximately 30 teenagers across an eight-week program with off-site excursions, overseeing their safety and daily logistics. Selected as Superstar Counselor in the first week of the program.</p></div>
+      </li>
+      <li class="rv">
+        <div class="when label">2023 – 2025</div>
+        <div><h3>Robotics Team Member</h3><p class="org">FRC Team 75 · Hillsborough High School</p><p class="d">Contributed to the mechanical design and assembly of competition robots and supported the organization of team events, including Robocon 2024.</p></div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="work">
+    <div class="sec-head">
+      <div class="label rv">Selected work</div>
+      <h2 class="rv">Selected engineering work.</h2>
+    </div>
+
+    <div class="work">
+      <article class="proj">
+        <div class="media rv" data-gallery>
+          <button class="shot" type="button" aria-label="View photo full size"><img src="robot-final.jpg" alt="Finished self-driving robot"></button>
+          <div class="cap">
+            <div class="thumbs">
+              <button type="button" aria-current="true" data-src="robot-final.jpg" data-cap="Final build"><img src="robot-final.jpg" alt="Finished robot"></button>
+              <button type="button" data-src="robot-cad.jpg" data-cap="SolidWorks assembly"><img src="robot-cad.jpg" alt="SolidWorks render"></button>
+              <button type="button" data-src="robot-top.jpg" data-cap="Electronics bay"><img src="robot-top.jpg" alt="Electronics bay"></button>
+              <button type="button" data-src="robot-drawing.jpg" data-cap="Exploded drawing"><img src="robot-drawing.jpg" alt="Exploded drawing"></button>
+            </div>
+            <span class="cur-cap">Final build</span>
+          </div>
+        </div>
+        <div class="text">
+          <div class="label rv">ENGR 122 · Team of 3</div>
+          <h3 class="rv">Self-Driving Robot Tour Guide</h3>
+          <p class="rv">An autonomous tracked platform designed to navigate a course to four waypoints. Three ultrasonic sensors provide obstacle detection, while an overhead ArUco-marker vision system streams the robot's position over MQTT for localization.</p>
+          <dl class="specs rv">
+            <div><dt class="label">Course time</dt><dd>1:25 / 3:00</dd></div>
+            <div><dt class="label">Print time</dt><dd>4h 55m</dd></div>
+            <div><dt class="label">Rank</dt><dd>Top 29%</dd></div>
+          </dl>
+          <ul class="rv">
+            <li>Developed the housing as a SolidWorks assembly and fabricated it through 3D printing, integrating the tracked chassis, sensor array, and WeMos D1 R2 controller.</li>
+            <li>Completed all printed parts in 4 h 55 min, within the 5-hour fabrication constraint.</li>
+            <li>Reached all four targets in 1:25 against a 3:00 limit, earning full marks and placing in the top 29% of teams.</li>
+          </ul>
+          <p class="mine rv"><b>My role:</b> Led the majority of the mechanical design and fabrication, contributed to the control code, and authored the introduction, objectives, and prototyping sections of the final report.</p>
+          <div class="tools rv">SolidWorks · 3D printing · C++ · MQTT</div>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="media rv" data-gallery>
+          <button class="shot" type="button" aria-label="View photo full size"><img src="plant-final.jpg" alt="Finished plant watering enclosure"></button>
+          <div class="cap">
+            <div class="thumbs">
+              <button type="button" aria-current="true" data-src="plant-final.jpg" data-cap="Deployed unit"><img src="plant-final.jpg" alt="Finished enclosure"></button>
+              <button type="button" data-src="plant-inside.jpg" data-cap="Pump and electronics"><img src="plant-inside.jpg" alt="Inside the enclosure"></button>
+              <button type="button" data-src="plant-cad.jpg" data-cap="CAD enclosure"><img src="plant-cad.jpg" alt="CAD enclosure"></button>
+              <button type="button" data-src="plant-light.jpg" data-cap="Light data, 5 days"><img src="plant-light.jpg" alt="Light data chart"></button>
+            </div>
+            <span class="cur-cap">Deployed unit</span>
+          </div>
+        </div>
+        <div class="text">
+          <div class="label rv">ENGR 111 · Dec 2025 · Team of 3</div>
+          <h3 class="rv">Automated Plant Watering System</h3>
+          <p class="rv">An ESP32-based monitoring and irrigation system that measures soil moisture, air temperature, humidity, and ambient light, publishes each reading to an MQTT server, and regulates watering autonomously.</p>
+          <dl class="specs rv">
+            <div><dt class="label">Log rate</dt><dd>10 min</dd></div>
+            <div><dt class="label">Daily dose</dt><dd>20 mL</dd></div>
+            <div><dt class="label">Trigger</dt><dd>&lt; 20%</dd></div>
+          </dl>
+          <ul class="rv">
+            <li>Delivers a scheduled 20 mL daily dose, with an override that waters immediately when soil moisture falls below 20%.</li>
+            <li>Operated unattended through a five-day deployment inside a three-piece 3D-printed enclosure.</li>
+            <li>Identified anomalous flat humidity readings during data analysis and traced them to a faulty DHT11 sensor.</li>
+          </ul>
+          <p class="mine rv"><b>My role:</b> Served as initial design lead and documentation coordinator, producing the concept sketches, supporting breadboard integration, and maintaining the project's record of progress and design deviations.</p>
+          <div class="tools rv">ESP32 · Sensors · MQTT · 3D printing</div>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="media rv" data-gallery>
+          <button class="shot cover" type="button" aria-label="View photo full size"><img src="bike-build.jpg" alt="Assembled electric dirt bike with blue battery pack in the frame"></button>
+          <div class="cap">
+            <div class="thumbs">
+              <button type="button" aria-current="true" data-src="bike-build.jpg" data-cap="Assembled bike"><img src="bike-build.jpg" alt="Assembled bike"></button>
+              <button type="button" data-src="bike-frame.jpg" data-cap="Frame and front fork"><img src="bike-frame.jpg" alt="Bare frame with front fork"></button>
+              <button type="button" data-src="bike-hub.jpg" data-cap="Hub motor and brake"><img src="bike-hub.jpg" alt="Rear hub motor with disc brake caliper"></button>
+              <button type="button" data-src="bike-parts.jpg" data-cap="Parts list"><img src="bike-parts.jpg" alt="Parts list for the electric dirt bike build"></button>
+            </div>
+            <span class="cur-cap">Assembled bike</span>
+          </div>
+        </div>
+        <div class="text">
+          <div class="label rv">Personal project · Solo</div>
+          <h3 class="rv">Electric Dirt Bike Build</h3>
+          <p class="rv">A ground-up electric dirt bike build using components sourced directly from international suppliers. Each component was specified against performance targets of 55 mph and 30 miles of range; the first full test reached 61 mph.</p>
+          <dl class="specs rv">
+            <div><dt class="label">Voltage</dt><dd>72 V</dd></div>
+            <div><dt class="label">Motor</dt><dd>8000 W</dd></div>
+            <div><dt class="label">Battery</dt><dd>32 Ah</dd></div>
+          </dl>
+          <ul class="rv">
+            <li>Selected a 3.5T hub-motor winding as a deliberate compromise between the top speed of a 3T winding and the torque of a 5T.</li>
+            <li>Validated the electrical system through voltmeter checks and powered drivetrain tests before final assembly.</li>
+            <li>Diagnosed a blown fuse caused by excess current from the 150 A controller and resolved it with a 100 A unit, trading top speed (53 mph) for reliability.</li>
+            <li>Engineered a custom wiring harness to resolve a controller-to-throttle incompatibility, learning to solder in the process.</li>
+          </ul>
+          <p class="mine rv"><b>My role:</b> Sole designer and builder, responsible for component selection, vendor communication, assembly, testing, and iterative repair.</p>
+          <div class="tools rv">Power electronics · Soldering · Bench testing</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="soon">
+    <div class="soon rv">
+      <div class="label">In progress</div>
+      <h2>Coming soon</h2>
+      <p>New projects are currently in development. Details to follow.</p>
+      <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="sec-head" style="margin-bottom:24px"><div class="label rv">Contact</div></div>
+    <p class="contact-line rv">Let's talk about what you're building.</p>
+    <div class="links rv">
+      <div class="link"><code id="email">chad.francis2029@gmail.com</code><button class="act" id="copy" type="button">Copy</button></div>
+      <div class="link"><code>linkedin.com/in/chad-francis-mech</code><a class="act" href="https://www.linkedin.com/in/chad-francis-mech" target="_blank" rel="noopener">Open ↗</a></div>
+    </div>
+    <footer><span class="label">© 2026 Chad Francis · Born to innovate</span><span class="label">Hoboken, NJ</span></footer>
+  </section>
+</main>
+
+<dialog id="lb" aria-label="Photo viewer">
+  <img id="lb-img" alt="">
+  <div class="bar"><span class="label" id="lb-cap"></span><button id="lb-close" type="button">Close</button></div>
+</dialog>
+
+<script>
+(function(){
+document.documentElement.classList.add('js');
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15,rootMargin:'0px 0px -5% 0px'});
+document.querySelectorAll('.rv').forEach(el=>{
+  if(el.getBoundingClientRect().top<innerHeight) requestAnimationFrame(()=>el.classList.add('in')); else io.observe(el);
+});
+
+const nav=document.getElementById('nav'),links=[...nav.querySelectorAll('a[data-s]')];
+function onScroll(){
+  nav.classList.toggle('scrolled',scrollY>20);
+  let cur=-1;links.forEach((a,i)=>{const s=document.getElementById(a.dataset.s);if(s.getBoundingClientRect().top<innerHeight*.4)cur=i});
+  links.forEach((a,i)=>a.classList.toggle('on',i===cur));
+}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+const lb=document.getElementById('lb');
+document.querySelectorAll('[data-gallery]').forEach(g=>{
+  const shot=g.querySelector('.shot'),img=shot.querySelector('img'),cap=g.querySelector('.cur-cap'),th=[...g.querySelectorAll('.thumbs button')];
+  th.forEach(b=>b.addEventListener('click',()=>{th.forEach(z=>z.setAttribute('aria-current',z===b));img.style.opacity=0;
+    setTimeout(()=>{img.src=b.dataset.src;img.alt=b.querySelector('img').alt;cap.textContent=b.dataset.cap;img.style.opacity=1},180)}));
+  shot.addEventListener('click',()=>{document.getElementById('lb-img').src=img.src;document.getElementById('lb-img').alt=img.alt;document.getElementById('lb-cap').textContent=cap.textContent;try{lb.showModal()}catch(e){}});
+});
+document.getElementById('lb-close').addEventListener('click',()=>lb.close());
+lb.addEventListener('click',e=>{if(e.target===lb)lb.close()});
+
+document.getElementById('copy').addEventListener('click',e=>{const b=e.currentTarget,t=document.getElementById('email').textContent;
+  navigator.clipboard.writeText(t).then(()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1500)})
+  .catch(()=>{const r=document.createRange();r.selectNodeContents(document.getElementById('email'));const s=getSelection();s.removeAllRanges();s.addRange(r)})});
+})();
+</script>
+
+</body>
+</html>

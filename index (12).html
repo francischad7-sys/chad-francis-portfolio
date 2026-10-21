@@ -1,0 +1,2154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Chad J. Francis, mechanical engineering student at Stevens Institute of Technology. Born to innovate.">
+<title>Chad J. Francis Engineering</title>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://chadjfrancis.com/">
+<meta property="og:title" content="Chad J. Francis | Engineering Portfolio">
+<meta property="og:description" content="Mechanical engineering student at Stevens. Electric dirt bike built from the frame up, with an interactive 3D model, plus a self-driving robot and an automated plant watering system.">
+<meta property="og:image" content="https://chadjfrancis.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta name="twitter:card" content="summary_large_image">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,700;1,800;1,900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: dark, precise, single column of generous space. A floating glass nav, a portrait-led hero over a faint engineering grid, then about, experience, work cards with galleries, and contact. One cool accent, hairline borders, motion only on entry and hover. */
+:root{
+  color-scheme:dark;
+  --bg:#0a0b0d;
+  --surface:#111316;
+  --surface-2:#16191d;
+  --text:#eceef0;
+  --dim:#9a9fa6;
+  --faint:#686d74;
+  --line:#22252a;
+  --line-2:#2e3238;
+  --accent:#a8c4ff;
+  --accent-soft:rgba(168,196,255,.12);
+  --ok:#7fd1a0;
+  --sans:"Geist","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --ease:cubic-bezier(.22,.8,.26,1);
+  --r:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.7 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));padding-block:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+img{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1120px;margin:0 auto}
+.label{font:500 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.skip{position:absolute;left:-999px;top:12px;z-index:100;background:var(--text);color:var(--bg);padding:10px 14px;border-radius:8px;text-decoration:none}
+.skip:focus{left:20px}
+
+/* backdrop: faint grid fading out from the hero */
+.backdrop{position:absolute;inset:0 0 auto;height:min(1100px,130vh);pointer-events:none;z-index:0;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:56px 56px;opacity:.45;
+  -webkit-mask-image:radial-gradient(ellipse 60% 55% at 50% 30%,#000 10%,transparent 75%);mask-image:radial-gradient(ellipse 60% 55% at 50% 30%,#000 10%,transparent 75%)}
+.glow{position:absolute;left:50%;top:-220px;width:900px;max-width:140vw;height:600px;transform:translateX(-50%);pointer-events:none;z-index:0;
+  background:radial-gradient(closest-side,rgba(168,196,255,.13),transparent);filter:blur(10px)}
+
+/* nav */
+.nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 14px);left:0;right:0;z-index:50;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.nav-in{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 8px 8px 16px;border:1px solid transparent;border-radius:999px;transition:background .35s var(--ease),border-color .35s var(--ease),backdrop-filter .35s}
+.nav.solid .nav-in{background:rgba(17,19,22,.72);border-color:var(--line);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:500 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;min-height:44px}
+.mark{width:26px;height:26px;flex:none}
+.links{display:flex;gap:2px;list-style:none;margin:0;padding:0}
+.links a{display:flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;font-size:14px;color:var(--dim);text-decoration:none;transition:color .2s,background .2s}
+.links a:hover{color:var(--text);background:var(--surface-2)}
+.links a.on{color:var(--text);background:var(--surface-2)}
+.cta-sm{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;background:var(--text);color:var(--bg);font-size:14px;font-weight:500;text-decoration:none;transition:transform .25s var(--ease),opacity .2s}
+.cta-sm:hover{opacity:.9}
+@media (max-width:760px){.links{display:none}}
+
+/* hero */
+.hero{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(40px,6vw,88px);align-items:center;padding-block:clamp(140px,18vw,190px) clamp(64px,8vw,104px)}
+@media (max-width:860px){.hero{grid-template-columns:1fr;padding-top:120px}.portrait-wrap{order:-1;justify-self:start}}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:8px 14px 8px 12px;border:1px solid var(--line-2);border-radius:999px;background:rgba(17,19,22,.6);font-size:13px;color:var(--dim)}
+.pill i{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(127,209,160,.15)}
+h1{font:300 clamp(56px,9vw,112px)/.95 var(--sans);letter-spacing:-.05em;margin:24px 0 0;text-wrap:balance}
+.slogan{font:400 clamp(22px,2.6vw,30px)/1.3 var(--sans);letter-spacing:-.02em;margin:18px 0 0;
+  background:linear-gradient(90deg,var(--text) 0%,var(--accent) 60%,#d9e4ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.intro{color:var(--dim);font-size:clamp(17px,1.5vw,19px);max-width:46ch;margin:22px 0 0}
+.ctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:34px}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border-radius:999px;font-size:15px;font-weight:500;text-decoration:none;border:1px solid var(--line-2);background:transparent;cursor:pointer;transition:transform .3s var(--ease),background .2s,border-color .2s}
+.btn:hover{border-color:var(--faint);transform:translateY(-1px)}
+.btn.primary{background:var(--text);color:var(--bg);border-color:var(--text)}
+.btn.primary:hover{background:#fff}
+.btn svg{width:16px;height:16px;transition:transform .3s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+
+.portrait-wrap{position:relative;justify-self:center;width:min(100%,400px)}
+.portrait{position:relative;aspect-ratio:1;border-radius:50%;padding:8px;background:conic-gradient(from 210deg,var(--line-2),var(--accent) 25%,var(--line-2) 45%,var(--line-2));}
+.portrait::after{content:"";position:absolute;inset:-28px;border:1px dashed var(--line-2);border-radius:50%;pointer-events:none}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;border-radius:50%;border:6px solid var(--bg)}
+.chip{position:absolute;display:flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid var(--line-2);border-radius:12px;background:rgba(17,19,22,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-size:13px;line-height:1.25;white-space:nowrap}
+.chip b{display:block;font-weight:500;color:var(--text)}
+.chip span{color:var(--faint);font:400 11px/1.3 var(--mono);letter-spacing:.04em;text-transform:uppercase}
+.chip.c1{left:-8%;bottom:14%}
+.chip.c2{right:-6%;top:10%}
+@media (max-width:860px){.portrait-wrap{width:min(78%,300px)}.chip.c1{left:-4%}.chip.c2{right:-10%}}
+@media (max-width:420px){.chip{display:none}}
+
+/* facts bar */
+.facts{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:var(--r);background:rgba(17,19,22,.5)}
+.facts div{padding:20px 22px;min-width:0}
+.facts div+div{border-left:1px solid var(--line)}
+.facts dt{margin-bottom:8px}
+.facts dd{margin:0;font-size:15px;font-weight:500}
+.facts dd small{display:block;color:var(--faint);font-weight:400;font-size:13px}
+@media (max-width:820px){.facts{grid-template-columns:1fr 1fr}.facts div:nth-child(3){border-left:0}.facts div:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+@media (max-width:440px){.facts{grid-template-columns:1fr}.facts div+div{border-left:0;border-top:1px solid var(--line)}.facts div:nth-child(-n+2){border-bottom:0}}
+
+/* sections */
+section{position:relative;z-index:1;padding-block:clamp(88px,11vw,140px)}
+.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.2fr);gap:24px;margin-bottom:clamp(40px,6vw,64px);align-items:baseline}
+@media (max-width:820px){.head{grid-template-columns:1fr;gap:14px}}
+.head .num{color:var(--accent)}
+h2{font:400 clamp(32px,4.4vw,52px)/1.05 var(--sans);letter-spacing:-.035em;margin:0;text-wrap:balance;max-width:20ch}
+h2 em{font-style:normal;color:var(--faint)}
+
+/* about */
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.2fr);gap:24px}
+@media (max-width:820px){.about{grid-template-columns:1fr}}
+.about .bio p{margin:0 0 22px;color:var(--dim);max-width:62ch}
+.about .bio p:first-child{color:var(--text);font-size:clamp(19px,1.7vw,22px);line-height:1.6}
+.values{display:grid;gap:10px;align-content:start}
+.values div{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--dim)}
+.values svg{width:18px;height:18px;flex:none;color:var(--accent)}
+
+/* experience */
+.exp{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.exp li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.2fr);gap:24px;padding:28px 0;border-bottom:1px solid var(--line);position:relative;transition:background .3s}
+.exp li::before{content:"";position:absolute;left:-20px;right:-20px;top:0;bottom:0;border-radius:var(--r);background:var(--surface);opacity:0;transition:opacity .3s var(--ease);z-index:-1}
+.exp li:hover::before{opacity:1}
+@media (max-width:820px){.exp li{grid-template-columns:1fr;gap:8px}}
+.exp .when{padding-top:6px}
+.exp h3{font:500 19px/1.35 var(--sans);letter-spacing:-.01em;margin:0}
+.exp .org{color:var(--faint);font-size:15px;margin:4px 0 10px}
+.exp p.d{margin:0;color:var(--dim);font-size:16px;max-width:60ch}
+.badge{display:inline-flex;align-items:center;gap:6px;margin-left:10px;padding:3px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font:500 11px/1.4 var(--mono);letter-spacing:.04em;vertical-align:3px}
+
+/* work */
+.work{display:grid;gap:24px}
+.proj{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);border:1px solid var(--line);border-radius:22px;background:var(--surface);overflow:hidden;isolation:isolate}
+.proj::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0;transition:opacity .4s;background:radial-gradient(520px circle at var(--mx,50%) var(--my,50%),rgba(168,196,255,.07),transparent 45%)}
+.proj:hover::after{opacity:1}
+.proj:nth-child(even) .media{order:2}
+@media (max-width:900px){.proj{grid-template-columns:1fr}.proj:nth-child(even) .media{order:0}}
+.media{padding:14px;min-width:0;display:flex;flex-direction:column;gap:10px}
+.shot{position:relative;display:block;width:100%;padding:0;border:0;border-radius:14px;overflow:hidden;background:#efefed;aspect-ratio:4/3.2;cursor:zoom-in}
+.shot img{width:100%;height:100%;object-fit:contain;transition:opacity .35s var(--ease),transform 1.2s var(--ease)}
+.shot.cover img{object-fit:cover}
+.shot:hover img{transform:scale(1.03)}
+.shot .tag{position:absolute;left:12px;bottom:12px;padding:6px 10px;border-radius:999px;background:rgba(10,11,13,.78);color:#eceef0;font:500 11px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;backdrop-filter:blur(6px)}
+.shot .zoom{position:absolute;right:12px;top:12px;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:rgba(10,11,13,.7);color:#eceef0;opacity:0;transition:opacity .25s}
+.shot:hover .zoom,.shot:focus-visible .zoom{opacity:1}
+.shot .zoom svg{width:15px;height:15px}
+.thumbs{display:flex;gap:8px;flex-wrap:wrap}
+.thumbs button{width:56px;height:56px;padding:0;border:1px solid var(--line-2);border-radius:10px;overflow:hidden;background:#efefed;cursor:pointer;opacity:.5;transition:opacity .2s,border-color .2s,transform .2s var(--ease)}
+.thumbs button img{width:100%;height:100%;object-fit:cover}
+.thumbs button:hover{opacity:.85;transform:translateY(-1px)}
+.thumbs button[aria-current="true"]{opacity:1;border-color:var(--accent)}
+
+.info{padding:clamp(24px,3.4vw,40px);min-width:0;display:flex;flex-direction:column}
+.info h3{font:400 clamp(26px,2.8vw,34px)/1.12 var(--sans);letter-spacing:-.03em;margin:14px 0 14px;text-wrap:balance}
+.info > p{color:var(--dim);margin:0 0 24px;max-width:56ch}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 24px}
+.stats div{padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);min-width:0}
+.stats dt{margin-bottom:8px;font-size:11px}
+.stats dd{margin:0;font:500 clamp(17px,1.6vw,20px)/1.1 var(--sans);letter-spacing:-.02em;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+@media (max-width:560px){.stats{gap:6px}.stats div{padding:11px 10px}.stats dd{font-size:15px}.stats dt{font-size:10px;letter-spacing:.06em}}
+.info ul{margin:0 0 24px;padding:0;list-style:none;display:grid;gap:12px;max-width:58ch}
+.info li{position:relative;padding-left:22px;color:var(--dim);font-size:16px;line-height:1.6}
+.info li::before{content:"";position:absolute;left:2px;top:.72em;width:7px;height:7px;border-radius:2px;border:1.5px solid var(--accent);transform:rotate(45deg)}
+.role{margin:auto 0 0;padding-top:18px;border-top:1px solid var(--line);font-size:15px;color:var(--dim)}
+.role b{color:var(--text);font-weight:500}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.tags span{padding:6px 11px;border-radius:999px;border:1px solid var(--line-2);font:400 12px/1 var(--mono);color:var(--dim)}
+
+
+/* 3D viewer */
+.seg{display:inline-flex;gap:4px;padding:4px;border:1px solid var(--line-2);border-radius:999px;background:var(--bg);align-self:flex-start}
+.seg button{min-height:36px;padding:0 16px;border:0;border-radius:999px;background:transparent;color:var(--dim);font-size:13px;font-weight:500;cursor:pointer;transition:background .25s var(--ease),color .2s}
+.seg button[aria-selected="true"]{background:var(--surface-2);color:var(--text);box-shadow:inset 0 0 0 1px var(--line-2)}
+.viewer3d{position:relative;aspect-ratio:4/3.2;border-radius:14px;overflow:hidden;background:radial-gradient(70% 60% at 50% 42%,#262b33 0%,#15181c 60%,#0e1013 100%);border:1px solid var(--line)}
+.viewer3d::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:32px 32px;-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 70%,#000,transparent 75%);mask-image:radial-gradient(ellipse 70% 60% at 50% 70%,#000,transparent 75%)}
+model-viewer{position:absolute;inset:0;width:100%;height:100%;background:transparent;--poster-color:transparent;--progress-bar-color:var(--accent);cursor:grab}
+model-viewer:active{cursor:grabbing}
+.mv-progress{position:absolute;left:50%;top:50%;width:140px;height:2px;transform:translate(-50%,-50%);border-radius:2px;background:var(--line-2);overflow:hidden}
+.mv-progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
+.viewer3d .tag{position:absolute;left:12px;bottom:12px;padding:6px 10px;border-radius:999px;background:rgba(10,11,13,.78);color:#eceef0;font:500 11px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;pointer-events:none}
+.hint{position:absolute;right:12px;top:12px;display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border-radius:999px;background:rgba(10,11,13,.7);color:var(--dim);font-size:12px;pointer-events:none;transition:opacity .4s}
+.hint svg{width:14px;height:14px}
+.viewer3d.touched .hint{opacity:0}
+.panel-photos{display:flex;flex-direction:column;gap:10px}
+.panel-photos[hidden]{display:none!important}
+.feat{display:inline-block;margin-right:10px;padding:3px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent);letter-spacing:.06em}
+.proj-feature{border-color:var(--line-2)}
+
+
+/* amazon-style bike gallery: stage + vertical rail on the right */
+.amz{display:grid;grid-template-columns:minmax(0,1fr) 64px;gap:10px;align-items:start}
+.stage{position:relative;min-width:0}
+.stage > *{width:100%}
+.stage .viewer3d,.stage .stage-photo,.stage-video{aspect-ratio:4/3.2}
+.stage-video{position:relative;border-radius:14px;overflow:hidden;background:#000}
+.stage-video video{width:100%;height:100%;object-fit:contain;display:block;background:#000}
+.stage-video .tag{position:absolute;left:12px;top:12px;padding:6px 10px;border-radius:999px;background:rgba(10,11,13,.78);color:#eceef0;font:500 11px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;pointer-events:none}
+.stage [hidden]{display:none!important}
+.rail{display:flex;flex-direction:column;gap:8px;max-height:100%;overflow-y:auto;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.rail .t{position:relative;width:64px;height:64px;flex:none;padding:0;border:1px solid var(--line-2);border-radius:10px;overflow:hidden;background:#efefed;cursor:pointer;opacity:.55;transition:opacity .2s,border-color .2s,transform .2s var(--ease)}
+.rail .t img{width:100%;height:100%;object-fit:cover}
+.rail .t:hover{opacity:.9}
+.rail .t[aria-current="true"]{opacity:1;border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.rail .t-3d{background:#15181c}
+.badge3d,.badgeplay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;min-width:28px;height:22px;padding:0 6px;border-radius:999px;background:rgba(10,11,13,.8);color:#fff;font:600 10px/1 var(--mono);letter-spacing:.06em}
+.badgeplay{width:28px;height:28px;padding:0;border-radius:50%}
+.badgeplay svg{width:12px;height:12px;margin-left:2px}
+@media (max-width:560px){.amz{grid-template-columns:1fr}.rail{flex-direction:row;overflow-x:auto;max-height:none}.rail .t{width:58px;height:58px}}
+
+
+/* part hotspots */
+.hs{position:relative;width:26px;height:26px;padding:0;border:0;background:none;cursor:pointer;--o:1;transition:opacity .3s}
+.hs:not([data-visible]){opacity:.18}
+.hs .dot{position:absolute;inset:0;display:grid;place-items:center;border-radius:50%;background:rgba(10,11,13,.85);border:1.5px solid var(--accent);color:#fff;font:600 11px/1 var(--mono);box-shadow:0 0 0 0 rgba(168,196,255,.5);animation:ping 2.6s var(--ease) infinite}
+.hs:hover .dot,.hs:focus-visible .dot,.hs.open .dot{background:var(--accent);color:#0a0b0d}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(168,196,255,.45)}70%{box-shadow:0 0 0 10px rgba(168,196,255,0)}100%{box-shadow:0 0 0 0 rgba(168,196,255,0)}}
+.hs-card{position:absolute;left:34px;width:max-content;max-width:min(200px,55vw);top:50%;transform:translateY(-50%) translateX(-4px);display:grid;gap:2px;min-width:max-content;max-width:220px;padding:9px 12px;border:1px solid var(--line-2);border-radius:10px;background:rgba(17,19,22,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);text-align:left;opacity:0;pointer-events:none;transition:opacity .2s,transform .25s var(--ease);z-index:2}
+.hs-card b{font:500 13px/1.3 var(--sans);color:var(--text)}
+.hs-card small{font:400 12px/1.35 var(--sans);color:var(--dim);white-space:normal}
+.hs:hover .hs-card,.hs:focus-visible .hs-card,.hs.open .hs-card{opacity:1;transform:translateY(-50%)}
+.hs[data-visible]:hover,.hs.open{z-index:5}
+.no-parts .hs{display:none}
+.lift .hs{opacity:0!important;pointer-events:none}
+.hs{transition:opacity .3s}
+/* why I built it: comment bubble from Chad */
+.why{position:absolute;right:12px;bottom:12px;z-index:6;display:flex;align-items:flex-end;gap:8px;max-width:min(250px,calc(100% - 24px))}
+.why .av{flex:none;width:34px;height:34px;padding:0;border:2px solid var(--accent);border-radius:50%;overflow:hidden;background:var(--bg);cursor:pointer}
+.why .av img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.why .bubble{position:relative;order:-1;padding:11px 30px 11px 13px;border:1px solid var(--line-2);border-radius:14px 14px 4px 14px;background:rgba(17,19,22,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 10px 30px rgba(0,0,0,.35);transform-origin:100% 100%;transition:opacity .25s,transform .3s var(--ease)}
+.why .bubble b{display:block;font:500 12px/1.2 var(--sans);color:var(--text);margin-bottom:4px}
+.why .bubble b span{color:var(--faint);font-weight:400}
+.why .bubble p{margin:0;font-size:12px;line-height:1.45;color:var(--dim)}
+.why .x{position:absolute;right:6px;top:6px;width:22px;height:22px;display:grid;place-items:center;padding:0;border:0;border-radius:50%;background:transparent;color:var(--faint);cursor:pointer}
+.why .x:hover{color:var(--text);background:var(--surface-2)}
+.why.closed .bubble{opacity:0;transform:scale(.85) translateY(6px);pointer-events:none}
+@media (max-width:560px){.why{max-width:calc(100% - 24px)}.why .bubble p{font-size:12px}}
+.parts-toggle{position:absolute;left:12px;top:12px;display:inline-flex;align-items:center;gap:8px;min-height:32px;padding:0 12px 0 8px;border:1px solid var(--line-2);border-radius:999px;background:rgba(10,11,13,.78);color:var(--dim);font-size:12px;cursor:pointer}
+.parts-toggle .sw{width:26px;height:16px;border-radius:999px;background:var(--line-2);position:relative;transition:background .2s}
+.parts-toggle .sw::after{content:"";position:absolute;left:2px;top:2px;width:12px;height:12px;border-radius:50%;background:#eceef0;transition:transform .25s var(--ease)}
+.parts-toggle[aria-pressed="true"]{color:var(--text)}
+.parts-toggle[aria-pressed="true"] .sw{background:var(--accent)}
+.parts-toggle[aria-pressed="true"] .sw::after{transform:translateX(10px);background:#0a0b0d}
+@media (prefers-reduced-motion:reduce){.hs .dot{animation:none}}
+
+
+/* responsive polish */
+.glow{max-width:100%}
+.rail{min-width:0}
+.amz > *{min-width:0}
+html,body{overflow-x:clip}
+.viewer3d{contain:paint}
+.hs-card{min-width:0}
+.hs.flip .hs-card{left:auto;right:34px}
+.hs-card small{display:block}
+@media (min-width:901px){.proj .media{position:sticky;top:96px;align-self:start}}
+.proj-feature{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+@media (max-width:900px){.proj-feature{grid-template-columns:1fr}}
+@media (max-width:560px){
+  .viewer3d .hint{display:none}
+  .parts-toggle{min-height:30px;font-size:11.5px}
+  .why .av{width:32px;height:32px}
+  .hero{padding-top:104px}
+  h1{font-size:clamp(46px,13vw,64px)}
+  .label .feat{display:inline-block;margin-bottom:6px}
+  .row{flex-wrap:wrap}
+  .row div{flex:1 1 100%}
+  .row code{font-size:14px;overflow-wrap:normal;word-break:normal}
+  .row .act{min-height:38px}
+  .contact{padding:28px 20px}
+  .proj .info{padding:22px 18px}
+  .media{padding:10px}
+  .exp li::before{left:-10px;right:-10px}
+}
+
+
+/* resume + experience photos */
+.nav-ctas{display:flex;align-items:center;gap:6px}
+.nav-resume{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 14px;border-radius:999px;color:var(--dim);font-size:14px;text-decoration:none;border:1px solid var(--line-2);transition:color .2s,border-color .2s}
+.nav-resume:hover{color:var(--text);border-color:var(--faint)}
+.nav-resume svg,.btn.resume-link svg{width:15px;height:15px}
+.btn.resume-link:hover svg{transform:translateY(2px)}
+.resume-off .resume-link{display:none!important}
+.rows{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.exp-photo{display:block;margin-top:16px;padding:0;border:1px solid var(--line-2);border-radius:12px;overflow:hidden;background:var(--surface);cursor:zoom-in;width:min(100%,360px);aspect-ratio:4/3}
+.exp-photo.portrait-photo{width:min(100%,220px);aspect-ratio:3/4}
+.exp-photo img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.exp-photo.portrait-photo img{object-position:50% 25%}
+.exp-photo:hover img{transform:scale(1.04)}
+@media (max-width:560px){.nav-resume{padding:0 11px;font-size:13px}.nav-resume svg{display:none}.brand{font-size:11.5px;letter-spacing:.1em;gap:8px}.brand span{white-space:nowrap}}
+
+.exp-circle{float:right;width:118px;height:118px;margin:0 0 10px 18px;padding:3px;border:1px solid var(--line-2);border-radius:50%;background:var(--bg);cursor:zoom-in;transition:border-color .2s,transform .3s var(--ease)}
+.exp-circle img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+.exp-circle:hover{border-color:var(--accent);transform:scale(1.05)}
+@media (max-width:560px){.exp-circle{width:90px;height:90px}}
+.with-photo{display:grid;grid-template-columns:minmax(0,1fr) 220px;grid-template-rows:auto auto 1fr;column-gap:36px;align-items:start}
+.with-photo > *:not(.exp-square){grid-column:1}
+.with-photo .exp-square{grid-column:2;grid-row:1 / span 3}
+.exp-square{display:block;width:100%;aspect-ratio:1;padding:0;border:1px solid var(--line-2);border-radius:18px;overflow:hidden;background:var(--surface);cursor:zoom-in}
+.exp-square img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.exp-square:hover img{transform:scale(1.05)}
+@media (max-width:820px){.with-photo{grid-template-columns:minmax(0,1fr) 170px;column-gap:22px}}
+@media (max-width:560px){.with-photo{grid-template-columns:1fr;grid-template-rows:none}.with-photo .exp-square{grid-column:1;grid-row:auto;margin-top:16px;width:min(100%,260px)}}
+
+/* Pushoff teaser (revealed from the Coming soon card) */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.po-reveal{position:relative;display:grid;place-items:center;width:88px;height:88px;margin-top:28px;padding:0;border:1px solid var(--line-2);border-radius:22px;background:#0E0E10;cursor:pointer;transition:transform .35s var(--ease),border-color .25s}
+.po-reveal svg{width:52px;height:52px;transition:transform .45s var(--ease)}
+.po-reveal:hover{border-color:#FF5A1F;transform:translateY(-2px)}
+.po-reveal:hover svg{transform:translateX(3px) skewX(-6deg)}
+.po-reveal[aria-expanded="true"]{border-color:#FF5A1F}
+.po-ring{position:absolute;inset:-1px;border-radius:22px;border:1.5px solid #FF5A1F;opacity:0;animation:poPing 2.4s var(--ease) infinite}
+.po-reveal[aria-expanded="true"] .po-ring{animation:none}
+@keyframes poPing{0%{opacity:.7;transform:scale(1)}80%,100%{opacity:0;transform:scale(1.35)}}
+.po-hint{margin-top:14px;font:400 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.pushoff{--po-accent:#FF5A1F;margin-top:16px;scroll-margin-top:96px;border-radius:22px;border:1px solid #26262B;background:#0E0E10;color:#F5F3EE;font-family:Inter,var(--sans);padding:clamp(36px,7vw,88px) clamp(20px,6vw,80px);display:flex;flex-direction:column;gap:clamp(28px,5vw,52px);overflow:hidden}
+.pushoff[hidden]{display:none}
+.pushoff *{box-sizing:border-box}
+.po-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.po-brand{display:flex;align-items:center;gap:14px}
+.po-brand svg{width:clamp(44px,6vw,72px);height:auto}
+.po-word,.po-head,.po-tag{font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-style:italic;text-transform:uppercase}
+.po-word{font-weight:900;font-size:clamp(40px,6vw,64px);line-height:.9}
+.po-word span,.pushoff .po-head .po-set{color:var(--po-accent)}
+.po-badge{border:2px solid var(--po-accent);color:var(--po-accent);border-radius:999px;padding:10px 22px;font-size:clamp(13px,1.6vw,18px);font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.pushoff .po-head{font-weight:900;font-size:clamp(64px,13vw,168px);line-height:.86;margin:0;letter-spacing:0;max-width:none;color:#F5F3EE}
+.po-copy{display:flex;flex-direction:column;gap:22px;max-width:840px}
+.po-copy p{margin:0;font-size:clamp(19px,2.5vw,30px);line-height:1.4;font-weight:500;color:#F5F3EE}
+.po-copy p+p{color:#CFCCD4}
+.po-foot{border-top:2px solid #26262B;padding-top:26px}
+.po-tag{font-weight:800;font-size:clamp(28px,4vw,44px);letter-spacing:.04em}
+@media (prefers-reduced-motion:reduce){.po-ring{animation:none}}
+
+/* coming soon */
+.soon{position:relative;overflow:hidden;border:1px dashed var(--line-2);border-radius:22px;padding:clamp(48px,8vw,88px) 24px;text-align:center;display:grid;justify-items:center}
+.soon h2{max-width:none;margin:14px 0 12px}
+.soon p{margin:0;color:var(--dim);max-width:44ch}
+.bar{width:min(280px,70%);height:2px;margin-top:30px;border-radius:2px;background:var(--line-2);overflow:hidden}
+.bar i{display:block;height:100%;width:40%;background:linear-gradient(90deg,transparent,var(--accent),transparent);animation:scan 2.4s var(--ease) infinite}
+@keyframes scan{from{transform:translateX(-100%)}to{transform:translateX(260%)}}
+
+/* contact */
+.contact{border:1px solid var(--line);border-radius:28px;padding:clamp(32px,6vw,72px);background:radial-gradient(600px 300px at 85% 0%,rgba(168,196,255,.1),transparent 70%),var(--surface)}
+.contact h2{font-size:clamp(38px,6vw,76px);max-width:14ch;letter-spacing:-.045em;font-weight:300}
+.contact p{color:var(--dim);margin:20px 0 36px;max-width:50ch}
+.rows{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:700px){.rows{grid-template-columns:1fr}}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 14px 14px 20px;border:1px solid var(--line-2);border-radius:16px;background:var(--bg);min-width:0}
+.row div{min-width:0}
+.row code{display:block;font:400 15px/1.35 var(--sans);overflow-wrap:anywhere;user-select:all}
+.row .act{flex:none;display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line-2);background:transparent;font-size:13px;color:var(--text);cursor:pointer;text-decoration:none;transition:background .2s,border-color .2s}
+.row .act:hover{background:var(--surface-2);border-color:var(--faint)}
+footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-block:32px 48px;color:var(--faint);font-size:13px}
+footer .brand{min-height:auto;color:var(--dim);font-size:12px}
+
+/* lightbox */
+dialog{border:0;padding:0;background:transparent;max-width:min(1100px,94vw);max-height:92vh;color:var(--text)}
+dialog::backdrop{background:rgba(5,6,7,.9);backdrop-filter:blur(6px)}
+dialog img{max-height:82vh;width:auto;margin:0 auto;border-radius:12px;background:#efefed}
+dialog .bar2{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px}
+dialog .act{min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);cursor:pointer;font-size:13px}
+
+/* motion: visible at rest; JS adds .js then reveals ease up as they enter */
+@media (prefers-reduced-motion:no-preference){
+  .js .rv{opacity:.001;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
+  .js .rv.in{opacity:1;transform:none}
+  .portrait{animation:spin 30s linear infinite}
+  .portrait img{animation:spin 30s linear infinite reverse}
+  @keyframes spin{to{rotate:360deg}}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bar i{animation:none;width:100%}}
+/* scroll progress */
+#progress{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:2px;z-index:70;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--accent),#e3ebff)}
+/* when Motion drives the page, CSS reveal transitions step aside */
+.mo .rv{transition:none!important}
+.mo .portrait,.mo .portrait img{animation:none}
+
+/* Track & Field view: a separate page reached at #track */
+.tv{display:none;position:relative;z-index:1;padding-top:calc(env(safe-area-inset-top,0px) + 120px);padding-bottom:96px}
+html[data-route="track"] #track-view,html[data-route="robot"] #robot-view{display:block}
+html.route-on #main,html.route-on .nav .links,html.route-on .backdrop{display:none}
+.tv-back{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 18px 0 14px;border:1px solid var(--line-2);border-radius:999px;background:var(--surface);color:var(--text);font:500 14px/1 var(--sans);cursor:pointer;transition:border-color .25s,transform .3s var(--ease)}
+.tv-back svg{width:16px;height:16px;transition:transform .3s var(--ease)}
+.tv-back:hover{border-color:var(--accent)}.tv-back:hover svg{transform:translateX(-3px)}
+.tv-head{margin-top:44px;display:grid;gap:18px}
+.tv-head h1{font:400 clamp(40px,6.4vw,76px)/1 var(--sans);letter-spacing:-.045em;margin:0}
+.tv-head h1 em{font-style:normal;color:var(--faint)}
+.tv-head p{margin:0;color:var(--dim);max-width:60ch}
+.tv-tags{display:flex;flex-wrap:wrap;gap:8px}
+.tv-tags span{padding:6px 12px;border:1px solid var(--line-2);border-radius:999px;font:500 12px/1 var(--mono);letter-spacing:.04em;color:var(--dim)}
+.tv-tags span.on{border-color:transparent;background:var(--accent-soft);color:var(--accent)}
+.tv-sec{margin-top:72px}
+.tv-sec > .label{display:block;margin-bottom:10px}
+.tv-sec h2{font-size:clamp(26px,3.2vw,38px);max-width:none}
+.tv-sec .sub{margin:10px 0 0;color:var(--dim);font-size:15px}
+.tv-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:28px}
+.tv-card{min-width:0;border:1px solid var(--line);border-radius:20px;background:var(--surface);padding:26px}
+.tv-card .ev{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.tv-card .ev b{font:500 13px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.tv-card .rank{font:400 clamp(52px,7vw,80px)/.9 var(--sans);letter-spacing:-.05em;margin-top:18px}
+.tv-card .rank sup{font-size:.36em;letter-spacing:0;color:var(--accent);margin-left:4px;vertical-align:1.3em}
+.tv-card .mark{font:500 22px/1 var(--mono);margin-top:10px;color:var(--text)}
+.tv-card .meta{font-size:14px;color:var(--faint);margin-top:6px}
+.ladder{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(10,1fr);gap:5px}
+.ladder li{position:relative;height:40px;border-radius:7px;background:var(--surface-2);border:1px solid var(--line);display:grid;place-items:end center;padding-bottom:5px;font:500 10px/1 var(--mono);color:var(--faint)}
+.ladder li.me{background:var(--accent);border-color:var(--accent);color:#0a0b0d;font-weight:600}
+.ladder-cap{display:flex;justify-content:space-between;margin-top:8px;font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.climb{display:flex;align-items:center;gap:8px;margin-top:18px;flex-wrap:wrap;font:500 13px/1 var(--mono);color:var(--dim)}
+.climb i{font-style:normal;padding:6px 10px;border-radius:999px;border:1px solid var(--line-2)}
+.climb i.now{border-color:var(--accent);color:var(--accent)}
+.cmp{margin-top:28px;border:1px solid var(--line);border-radius:20px;background:var(--surface);overflow:hidden}
+.cmp-row{display:grid;grid-template-columns:90px minmax(0,1fr) minmax(0,1fr) 120px;align-items:center;gap:16px;padding:20px 26px;border-top:1px solid var(--line)}
+.cmp-row:first-child{border-top:0}
+.cmp-row.h{padding-block:14px;background:var(--surface-2)}
+.cmp-row.h span{font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.cmp-row .e{font:500 15px/1 var(--mono)}
+.cmp-row .t{font:500 20px/1 var(--mono)}
+.cmp-row .t small{display:block;margin-top:6px;font:400 12px/1.2 var(--sans);color:var(--faint)}
+.cmp-row .t.prev{color:var(--dim)}
+.delta{justify-self:end;text-align:right;font:600 18px/1 var(--mono);color:var(--ok)}
+.delta small{display:block;margin-top:6px;font:400 12px/1 var(--sans);color:var(--faint)}
+.delta.na{color:var(--faint);font-weight:500;font-size:14px}
+.chart{margin-top:28px;border:1px solid var(--line);border-radius:20px;background:var(--surface);padding:22px 22px 14px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart .ax{stroke:var(--line);stroke-width:1}
+.chart .ln{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.chart .ar{fill:url(#tvfill)}
+.chart .pt{fill:var(--bg);stroke:var(--accent);stroke-width:2.5}
+.chart .pt.first{stroke:var(--faint)}
+.chart text{font:500 12px var(--mono);fill:var(--dim)}
+.chart text.v{fill:var(--text);font-size:13px}
+.chart text.x{fill:var(--faint);font-size:11px}
+.prs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:28px}
+.prs div{border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:18px}
+.prs b{display:block;font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.prs span{display:block;margin-top:12px;font:500 22px/1 var(--mono)}
+.prs small{display:block;margin-top:8px;font-size:12px;color:var(--faint);line-height:1.3}
+.tv-src{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);font-size:13px;color:var(--faint)}
+.tv-src ul{margin:10px 0 0;padding-left:18px}
+.tv-src a{color:var(--dim)}
+.tv-src a:hover{color:var(--accent)}
+.tv-foot{margin-top:40px}
+.track-go{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:16px;padding:0 18px;border:1px solid var(--line-2);border-radius:999px;background:transparent;color:var(--text);text-decoration:none;font:500 14px/1 var(--sans);transition:border-color .25s,background .25s}
+.track-go:hover{border-color:var(--accent);background:var(--accent-soft)}
+.track-go svg{width:14px;height:14px;transition:transform .3s var(--ease)}
+.track-go:hover svg{transform:translateX(3px)}
+@media (max-width:860px){.prs{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:640px){
+  .tv{padding-top:calc(env(safe-area-inset-top,0px) + 96px)}
+  .tv-grid{grid-template-columns:1fr}
+  .tv-card{padding:22px}
+  .prs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cmp-row{grid-template-columns:64px minmax(0,1fr) minmax(0,1fr);gap:12px;padding:18px}
+  .cmp-row .delta{grid-column:2 / -1;justify-self:start;text-align:left;display:flex;gap:10px;align-items:baseline}
+  .cmp-row .delta small{margin:0}
+  .cmp-row.h span:last-child{display:none}
+  .cmp-row .t{font-size:17px}
+}
+
+/* Robot project page (#robot) */
+.rp-hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:28px;margin-top:40px;align-items:stretch}
+.rp-hero figure{margin:0;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--surface);min-height:320px}
+.rp-hero figure img{width:100%;height:100%;object-fit:cover}
+.rp-side{display:grid;gap:16px;align-content:start}
+.rp-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.rp-stats div{border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:18px}
+.rp-stats b{display:block;font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.rp-stats span{display:block;margin-top:12px;font:500 26px/1 var(--mono)}
+.rp-stats span small{font-size:14px;color:var(--faint)}
+.rp-role{border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:18px 20px;font-size:15px;color:var(--dim)}
+.rp-role b{color:var(--text);font-weight:500}
+.loop{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:28px;position:relative}
+.loop div{position:relative;border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:18px}
+.loop div:not(:last-child)::after{content:"";position:absolute;right:-12px;top:50%;width:12px;height:1px;background:var(--line-2)}
+.loop i{font:500 11px/1 var(--mono);font-style:normal;color:var(--accent)}
+.loop b{display:block;margin-top:10px;font-weight:500}
+.loop p{margin:6px 0 0;font-size:14px;color:var(--faint);line-height:1.5}
+.loop-note{margin-top:10px;font:500 12px/1.4 var(--mono);color:var(--faint)}
+/* expandable sections */
+.acc{margin-top:28px;display:grid;gap:12px}
+.dd{border:1px solid var(--line);border-radius:20px;background:var(--surface);overflow:hidden;transition:border-color .25s}
+.dd[open]{border-color:var(--line-2)}
+.dd > summary{list-style:none;display:flex;align-items:center;gap:16px;min-height:72px;padding:18px 22px;cursor:pointer;user-select:none}
+.dd > summary::-webkit-details-marker{display:none}
+.dd > summary .n{font:500 12px/1 var(--mono);color:var(--faint);width:22px}
+.dd > summary .t{flex:1;min-width:0}
+.dd > summary .t b{display:block;font-weight:500;font-size:18px;letter-spacing:-.01em}
+.dd > summary .t small{display:block;margin-top:3px;font-size:14px;color:var(--faint)}
+.dd > summary .pm{flex:none;width:34px;height:34px;border:1px solid var(--line-2);border-radius:50%;display:grid;place-items:center;transition:transform .35s var(--ease),background .25s,border-color .25s}
+.dd > summary .pm svg{width:14px;height:14px}
+.dd > summary:hover .pm{border-color:var(--accent)}
+.dd[open] > summary .pm{transform:rotate(45deg);background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.dd-body{padding:4px 22px 26px 60px}
+.dd-body > p{color:var(--dim);margin:0 0 14px;max-width:72ch}
+.dd-body h4{margin:26px 0 10px;font:500 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+/* thought process timeline */
+.tl{list-style:none;margin:8px 0 0;padding:0;position:relative}
+.tl::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:var(--line-2)}
+.tl li{position:relative;padding:0 0 22px 30px}
+.tl li::before{content:"";position:absolute;left:0;top:7px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.tl li b{display:block;font-weight:500}
+.tl li span{display:block;font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.tl li p{margin:4px 0 0;color:var(--dim);font-size:15px;max-width:68ch}
+.iters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:6px}
+.iters div{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--surface-2)}
+.iters i{font:500 11px/1 var(--mono);font-style:normal;color:var(--faint)}
+.iters div:last-child{border-color:var(--accent)}
+.iters div:last-child i{color:var(--accent)}
+.iters p{margin:8px 0 0;font-size:13.5px;color:var(--dim);line-height:1.45}
+/* sequence tree */
+.tree{margin-top:6px;display:grid;gap:0}
+.tree-root{display:inline-flex;align-self:start;justify-self:start;gap:10px;align-items:center;padding:12px 16px;border:1px solid var(--accent);border-radius:12px;background:var(--accent-soft);font:500 13px/1.3 var(--mono);color:var(--accent)}
+.tree ol{list-style:none;margin:0;padding:0 0 0 22px;border-left:1px dashed var(--line-2);margin-left:18px}
+.tree li{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:center;padding:14px 0 0 0}
+.tree li::before{content:"";position:absolute;left:-22px;top:calc(14px + 21px);width:18px;height:1px;background:var(--line-2)}
+.tree .q{position:relative;border:1px solid var(--line-2);border-radius:12px;padding:10px 14px;background:var(--surface-2);font:500 13px/1.4 var(--mono)}
+.tree .q em{font-style:normal;color:var(--faint);margin-right:8px}
+.tree .a{position:relative;padding:10px 14px;border-radius:12px;border:1px solid var(--line);font-size:14px;color:var(--dim);line-height:1.45}
+.tree .a::before{content:"yes \2192";position:absolute;left:-12px;top:50%;transform:translate(-100%,-50%);font:500 10px/1 var(--mono);color:var(--ok);display:none}
+.tree .a b{color:var(--text);font-weight:500}
+.tree .grp{grid-column:1 / -1;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);padding-top:12px}
+.tree .grp::before{display:none}
+.tree li.grp::before{display:none}
+.tree li.end .q{border-color:var(--ok);color:var(--ok)}
+.tree-legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:18px;font:500 12px/1.4 var(--mono);color:var(--faint)}
+.sub-tree{margin-top:22px;border:1px solid var(--line);border-radius:16px;padding:16px 18px;background:var(--surface-2)}
+.sub-tree table{width:100%;border-collapse:collapse;font:500 13px/1.4 var(--mono)}
+.sub-tree th{text-align:left;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:6px 8px;border-bottom:1px solid var(--line)}
+.sub-tree td{padding:8px;border-bottom:1px solid var(--line);color:var(--dim)}
+.sub-tree tr:last-child td{border-bottom:0}
+.sub-tree td:first-child{color:var(--text)}
+.sw{overflow-x:auto}
+/* mechanical + wiring */
+.prints{margin-top:8px;display:grid;gap:10px}
+.prints .pr{display:grid;grid-template-columns:150px minmax(0,1fr) 70px;gap:14px;align-items:center;font-size:14px}
+.prints .pbar{height:10px;border-radius:99px;background:var(--surface-2);overflow:hidden}
+.prints .pbar i{display:block;height:100%;border-radius:99px;background:var(--accent)}
+.prints .pr span:last-child{font:500 13px/1 var(--mono);text-align:right}
+.prints .tot{border-top:1px solid var(--line);padding-top:10px;color:var(--faint)}
+.pins{width:100%;border-collapse:collapse;font-size:14px;margin-top:4px}
+.pins th{text-align:left;font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:8px 10px;border-bottom:1px solid var(--line)}
+.pins td{padding:10px;border-bottom:1px solid var(--line);color:var(--dim)}
+.pins td:first-child{color:var(--text)}
+.pins code{font:500 13px var(--mono);color:var(--accent)}
+.rp-imgs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:6px}
+.rp-imgs button{padding:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface-2);aspect-ratio:4/3;cursor:zoom-in}
+.rp-imgs img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.rp-imgs button:hover img{transform:scale(1.04)}
+/* code */
+.snip{margin-top:6px;display:grid;gap:14px}
+.snip > div{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#0c0d10}
+.snip p{margin:0;padding:12px 16px;font-size:14px;color:var(--dim);border-bottom:1px solid var(--line);background:var(--surface-2)}
+.snip p b{color:var(--text);font-weight:500}
+.code{margin:0;padding:16px;overflow:auto;font:400 13px/1.65 var(--mono);color:#cfd6e0;tab-size:2;max-height:none}
+.code.full{max-height:520px}
+.files{margin-top:10px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#0c0d10}
+.files-bar{display:flex;align-items:center;gap:6px;padding:8px;border-bottom:1px solid var(--line);background:var(--surface-2);flex-wrap:wrap}
+.files-bar button.ft{min-height:36px;padding:0 14px;border:1px solid transparent;border-radius:999px;background:none;font:500 13px/1 var(--mono);color:var(--faint);cursor:pointer}
+.files-bar button.ft[aria-selected="true"]{border-color:var(--line-2);background:var(--surface);color:var(--text)}
+.files-bar .cp{margin-left:auto;min-height:36px;padding:0 14px;border:1px solid var(--line-2);border-radius:999px;background:none;font:500 13px/1 var(--sans);color:var(--dim);cursor:pointer}
+.files-bar .cp:hover{border-color:var(--accent);color:var(--text)}
+.files-note{padding:10px 16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--faint)}
+.tok-c{color:#6b7380;font-style:italic}.tok-s{color:#9fd8b5}.tok-n{color:#f2c58c}.tok-k{color:#a8c4ff}.tok-p{color:#d7a8ff}.tok-f{color:#eceef0}
+.res{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:6px}
+.res div{border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--surface-2)}
+.res b{display:block;font-weight:500}
+.res p{margin:6px 0 0;font-size:14px;color:var(--dim);line-height:1.5}
+.proj-go{margin-top:18px}
+@media (max-width:860px){
+  .rp-hero{grid-template-columns:1fr}.rp-hero figure{max-height:440px}
+  .loop{grid-template-columns:repeat(2,minmax(0,1fr))}.loop div:nth-child(2)::after{display:none}
+  .iters{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .res{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .dd > summary{padding:16px;gap:12px}.dd > summary .n{display:none}
+  .dd-body{padding:0 16px 22px}
+  .tree ol{margin-left:8px;padding-left:14px}
+  .tree li{grid-template-columns:1fr;gap:6px}
+  .tree li::before{left:-14px;width:10px}
+  .prints .pr{grid-template-columns:110px minmax(0,1fr) 56px;gap:10px;font-size:13px}
+  .rp-imgs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pins td,.pins th{padding:8px 6px}
+}
+
+/* arena replay */
+.arena{margin-top:28px;border:1px solid var(--line);border-radius:22px;background:var(--surface);padding:22px}
+.arena-top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.arena-read{display:flex;gap:22px;flex-wrap:wrap}
+.arena-read div b{display:block;font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.arena-read div span{display:block;margin-top:8px;font:500 24px/1 var(--mono);font-variant-numeric:tabular-nums}
+.arena-read div span small{font-size:13px;color:var(--faint)}
+.play{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:1px solid var(--line-2);border-radius:999px;background:transparent;color:var(--text);font:500 14px/1 var(--sans);cursor:pointer;transition:border-color .25s,background .25s}
+.play:hover{border-color:var(--accent);background:var(--accent-soft)}
+.play svg{width:14px;height:14px;flex:none}
+#arena-svg{display:block;width:100%;height:auto}
+.ar-wall{fill:#0c0d10;stroke:var(--line-2);stroke-width:4}
+.ar-bld{fill:var(--surface-2);stroke:#3a3f47;stroke-width:2}
+.ar-route{fill:none;stroke:#2e3238;stroke-width:5;stroke-linecap:round;stroke-dasharray:2 10}
+.ar-trail{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+.ar-stop circle{fill:#0c0d10;stroke:#4a505a;stroke-width:2.5;transition:fill .3s,stroke .3s}
+.ar-stop text{font:600 14px var(--mono);fill:var(--dim);text-anchor:middle;dominant-baseline:central}
+.ar-stop.hit circle{fill:var(--accent);stroke:var(--accent)}
+.ar-stop.hit text{fill:#0a0b0d}
+.ar-start ellipse{fill:rgba(168,196,255,.18);stroke:var(--accent);stroke-width:2}
+.ar-start text,.ar-lbl{font:500 11px var(--mono);fill:var(--faint);letter-spacing:.08em}
+.ar-bot rect{fill:var(--text)}
+.ar-bot path{fill:#0a0b0d}
+.arena-cap{display:flex;flex-wrap:wrap;gap:18px;margin-top:14px;font:500 12px/1.4 var(--mono);color:var(--faint)}
+.arena-cap i{display:inline-block;width:18px;height:3px;border-radius:2px;vertical-align:middle;margin-right:8px;background:var(--accent)}
+.arena-cap i.d{background:repeating-linear-gradient(90deg,#4a505a 0 3px,transparent 3px 8px)}
+.arena-cap i.b{height:10px;width:10px;background:var(--surface-2);border:1px solid #3a3f47}
+/* photo strips */
+.rp-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:10px;margin-top:14px;max-width:620px}
+.rp-strip .rp-shot,.rp-grid .rp-shot{position:relative;padding:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;aspect-ratio:3/4;cursor:zoom-in}
+.rp-strip img,.rp-grid img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.rp-shot:hover img{transform:scale(1.04)}
+.rp-strip .rp-shot span,.rp-grid .rp-shot span{position:absolute;left:6px;right:6px;bottom:6px;padding:5px 8px;border-radius:8px;background:rgba(10,11,13,.78);color:#eceef0;font:500 11px/1.25 var(--sans);text-align:left;backdrop-filter:blur(6px)}
+.rp-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:6px}
+.rp-grid.renders .rp-shot{aspect-ratio:1;background:#fff}
+.rp-grid.renders img{object-fit:contain;padding:6px}
+.rp-wide{display:block;width:100%;padding:0;margin-top:14px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#f6f6f6;cursor:zoom-in;position:relative}
+.rp-wide img{width:100%;height:auto}
+.tl .rp-wide{max-width:560px}
+.rp-wide span{position:absolute;left:8px;bottom:8px;padding:5px 9px;border-radius:8px;background:rgba(10,11,13,.78);color:#eceef0;font:500 11px/1.25 var(--sans)}
+.tl li .rp-shot span{display:block;margin:0;text-transform:none;letter-spacing:0;font:500 11px/1.25 var(--sans);color:#eceef0}
+.rp-flow{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:18px;align-items:center;margin-top:22px;border:1px solid var(--line);border-radius:16px;padding:14px;background:var(--surface-2)}
+.rp-flow .rp-shot{position:relative;padding:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;aspect-ratio:2/3;cursor:zoom-in}
+.rp-flow .rp-shot img{width:100%;height:100%;object-fit:cover;object-position:top}
+.rp-flow .rp-shot span{display:none}
+.rp-flow p{margin:0;font-size:15px;color:var(--dim)}
+.rp-flow p b{color:var(--text);font-weight:500}
+@media (max-width:640px){
+  .arena{padding:14px}.arena-read{gap:16px}.arena-read div span{font-size:20px}
+  .rp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rp-flow{grid-template-columns:110px minmax(0,1fr)}
+  .rp-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* robot card: route window */
+.shot-wrap{position:relative}
+.route-stage{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;border-radius:14px;overflow:hidden;background:#0c0d10;border:1px solid var(--line)}
+.route-stage[hidden]{display:none}
+.rs-hud{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 12px 0}
+.rs-clock{font:500 18px/1 var(--mono);font-variant-numeric:tabular-nums;color:var(--text)}
+.rs-clock small{font-size:12px;color:var(--faint)}
+.rs-replay{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 14px;border:1px solid var(--line-2);border-radius:999px;background:rgba(17,19,22,.8);color:var(--text);font:500 13px/1 var(--sans);cursor:pointer}
+.rs-replay:hover{border-color:var(--accent)}
+.rs-replay svg{width:12px;height:12px;flex:none}
+.rs-map{flex:1;display:grid;place-items:center;padding:8px 10px;min-height:0}
+.mini-arena{width:100%;height:auto;max-height:100%}
+.mini-arena .ar-wall{fill:#0a0b0d}
+.rs-tag{position:absolute;left:12px;bottom:12px;padding:6px 10px;border-radius:999px;background:rgba(10,11,13,.78);color:#eceef0;font:500 11px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;text-decoration:none;border:1px solid var(--line-2);transition:border-color .2s}
+.rs-tag:hover{border-color:var(--accent)}
+.thumbs .t-route{background:#0c0d10}
+.thumbs .t-route svg{display:block;width:100%;height:100%}
+
+/* robot card: 3D model + run reconstruction */
+.r3d{overflow:clip!important;position:absolute;inset:0;z-index:3;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;border-radius:14px;overflow:hidden;background:#121418;border:1px solid var(--line);isolation:isolate}
+.r3d[hidden]{display:none}
+.r3d-canvas{position:absolute;inset:0;cursor:grab}
+.r3d-canvas:active{cursor:grabbing}
+.r3d-canvas canvas{display:block;width:100%!important;height:100%!important}
+.r3d-load{pointer-events:none;position:absolute;left:50%;top:50%;width:120px;height:2px;margin-left:-60px;border-radius:2px;background:var(--line-2);overflow:hidden;transition:opacity .4s}
+.r3d-load i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
+.r3d.ready .r3d-load{opacity:0}
+.r3d-ui{position:absolute;inset:0;pointer-events:none;transition:opacity .35s var(--ease)}
+.r3d-ui > *{pointer-events:auto}
+.r3d-close{opacity:1}.r3d-run{opacity:0;visibility:hidden}
+.r3d.run .r3d-close{opacity:0;visibility:hidden}.r3d.run .r3d-run{opacity:1;visibility:visible}
+.r3d.run .r3d-canvas{cursor:default}
+.r3d-tag{position:absolute;left:12px;top:12px;padding:6px 10px;border-radius:999px;background:rgba(10,11,13,.72);color:#eceef0;font:500 11px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;pointer-events:none;backdrop-filter:blur(6px)}
+.r3d-hint{color:var(--faint);transition:opacity .4s}
+.r3d.touched .r3d-hint{opacity:0}
+.r3d-go{position:absolute;left:50%;bottom:14px;transform:translate(-50%,8px);display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:0 18px;border:1px solid rgba(168,196,255,.45);border-radius:999px;background:rgba(10,11,13,.78);color:#eceef0;font:500 14px/1 var(--sans);white-space:nowrap;cursor:pointer;opacity:0;transition:opacity .4s,transform .4s var(--ease),background .25s,border-color .25s;backdrop-filter:blur(8px)}
+.r3d.ready .r3d-go{opacity:1;transform:translate(-50%,0)}
+.r3d-go:hover{background:rgba(168,196,255,.16);border-color:var(--accent)}
+.r3d-go svg{width:12px;height:12px;flex:none;color:var(--accent)}
+.r3d.busy .r3d-go{opacity:.6;pointer-events:none}
+.r3d-top{position:absolute;left:10px;right:10px;top:10px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:8px;pointer-events:none}
+.r3d-top > *{pointer-events:auto}
+.r3d-read{display:grid;gap:5px;padding:9px 12px;border-radius:12px;background:rgba(10,11,13,.72);backdrop-filter:blur(6px)}
+.r3d-clock{white-space:nowrap;font:500 18px/1 var(--mono);font-variant-numeric:tabular-nums;color:#eceef0}
+.r3d-clock small{font-size:12px;color:var(--faint)}
+.r3d-meta{white-space:nowrap;font:500 11px/1 var(--mono);color:var(--faint);letter-spacing:.03em}
+.r3d-meta b{font-weight:500;color:var(--dim)}
+.r3d-cam{display:flex;gap:2px;padding:3px;border-radius:999px;background:rgba(10,11,13,.72);backdrop-filter:blur(6px)}
+.r3d-cam button{min-height:30px;padding:0 10px;border:0;border-radius:999px;background:none;color:var(--faint);font:500 12px/1 var(--sans);cursor:pointer}
+.r3d-cam button[aria-pressed="true"]{background:rgba(168,196,255,.18);color:#eceef0}
+.r3d-bottom{position:absolute;left:10px;right:10px;bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.r3d-bottom button{display:inline-flex;align-items:center;gap:7px;min-height:38px;padding:0 14px;border:1px solid var(--line-2);border-radius:999px;background:rgba(10,11,13,.78);color:#eceef0;font:500 13px/1 var(--sans);cursor:pointer;backdrop-filter:blur(6px);transition:border-color .2s}
+.r3d-bottom button:hover{border-color:var(--accent)}
+.r3d-bottom svg{width:14px;height:14px;flex:none}
+.r3d-replay{opacity:.75}.r3d.done .r3d-replay{opacity:1;border-color:var(--accent)}
+.r3d-label{font:500 11px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:rgba(236,238,240,.7);text-shadow:0 1px 6px #000}
+.r3d-fade{position:absolute;inset:0;background:#0b0c0f;opacity:0;pointer-events:none;transition:opacity .26s ease}
+.r3d-fade.on{opacity:1}
+.r3d.failed .r3d-load,.r3d.failed .r3d-ui{display:none}
+@media (max-width:560px){
+  .r3d-go{font-size:13px;padding:0 14px;min-height:40px;bottom:10px}
+  .r3d-cam button{padding:0 8px;font-size:11px;min-height:28px}
+  .r3d-clock{font-size:15px}.r3d-read{padding:7px 9px}
+  .r3d-label{display:none}
+  .r3d-top{left:8px;right:8px;top:8px;gap:6px}.r3d-meta .r3d-stat,.r3d-meta .sep{display:none}.r3d-cam{margin-left:auto}
+  .r3d-bottom button{min-height:34px;padding:0 11px;font-size:12px}
+}
+
+/* run HUD: live 2D map */
+.r3d-mini{position:absolute;right:10px;bottom:58px;width:150px;padding:6px 6px 5px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(10,11,13,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);cursor:zoom-in;opacity:0;transform:translateY(6px) scale(.97);transform-origin:100% 100%;transition:opacity .5s var(--ease) .5s,transform .5s var(--ease) .5s,width .35s var(--ease),border-color .2s}
+.r3d.run .r3d-mini{opacity:.92;transform:none}
+.r3d-mini:hover{border-color:rgba(168,196,255,.35)}
+.r3d-mini[aria-pressed="true"]{width:min(300px,70%);cursor:zoom-out}
+.r3d-mini svg{display:block;width:100%;height:auto}
+.r3d-mini-lbl{display:block;margin:0 2px 4px;text-align:left;font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#8a9099}
+.r3d-mini .ar-wall{fill:rgba(12,13,16,.55);stroke:#3a3f47;stroke-width:6}
+.r3d-mini .ar-bld{fill:#22262c;stroke:#3a3f47;stroke-width:3}
+.r3d-mini .ar-route{stroke:#3a3f47;stroke-width:7;stroke-dasharray:none}
+.r3d-mini .ar-trail{stroke-width:9}
+.r3d-mini .ar-stop circle{stroke-width:5}
+.r3d-mini .ar-stop text{font-size:30px}
+.r3d-mini .ar-start text{display:none}
+.r3d-mini .ar-start ellipse{stroke-width:4}
+@media (max-width:560px){.r3d-mini{width:112px;bottom:50px;right:8px;padding:5px 5px 4px}.r3d-mini-lbl{font-size:8px;margin-bottom:3px}.r3d-mini[aria-pressed="true"]{width:min(240px,74%)}}
+@media (prefers-reduced-motion:reduce){.r3d-mini{transition:none}}
+
+/* What I learned */
+.learned{margin-top:14px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.015);transition:border-color .25s,background .25s}
+.learned[open]{border-color:var(--line-2);background:rgba(168,196,255,.03)}
+.learned > summary{list-style:none;display:flex;align-items:center;gap:10px;min-height:48px;padding:0 14px;cursor:pointer;user-select:none;font-size:15px;font-weight:500}
+.learned > summary::-webkit-details-marker{display:none}
+.learned > summary small{font:500 11px/1 var(--mono);letter-spacing:.06em;color:var(--faint);margin-left:2px}
+.learned .lr-ic{width:16px;height:16px;color:var(--accent);flex:none}
+.learned .lr-chev{width:16px;height:16px;margin-left:auto;color:var(--faint);transition:transform .35s var(--ease)}
+.learned[open] .lr-chev{transform:rotate(180deg)}
+.learned > summary:hover .lr-chev{color:var(--text)}
+.learned-body{overflow:hidden}
+.learned ol{list-style:none;margin:0;padding:0 14px 14px;display:grid;gap:12px;counter-reset:lr}
+.info .learned li{position:relative;padding-left:30px;margin:0;counter-increment:lr}
+.info .learned li::before{content:counter(lr,decimal-leading-zero);width:auto;height:auto;border:0;border-radius:0;transform:none;position:absolute;left:0;top:2px;font:500 11px/1.4 var(--mono);color:var(--accent)}
+.learned li b{display:block;font-weight:500;font-size:14.5px;color:var(--text)}
+.learned li span{display:block;margin-top:3px;font-size:14px;line-height:1.55;color:var(--dim)}
+.lr-page{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:28px}
+.lr-page > div{background:var(--surface)}
+</style>
+</head>
+<body>
+
+
+<script>document.documentElement.classList.add('resume-off')</script>
+<a class="skip" href="#main">Skip to content</a>
+<div id="progress" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top" aria-label="Chad J. Francis, back to top">
+      <svg class="mark" viewBox="222 150 256 260" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="18" stroke-linecap="square" stroke-linejoin="round"><path d="M420 162 L304 162 Q234 162 234 240 Q234 318 304 318 L376 318"/><path d="M466 224 L446 348 Q438 396 392 396 L282 396"/></g></svg>
+      <span>Chad J. Francis</span>
+    </a>
+    <ul class="links">
+      <li><a href="#about" data-s="about">About</a></li>
+      <li><a href="#experience" data-s="experience">Experience</a></li>
+      <li><a href="#work" data-s="work">Work</a></li>
+      <li><a href="#soon" data-s="soon">Coming soon</a></li>
+      <li><a href="#track">Track</a></li>
+    </ul>
+    <div class="nav-ctas"><a class="resume-link nav-resume" href="resume.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Resume</a><a class="cta-sm" href="#contact">Contact</a></div>
+  </div>
+</header>
+
+<div class="backdrop" aria-hidden="true"></div>
+<div class="glow" aria-hidden="true"></div>
+
+<main class="wrap" id="main">
+  <div class="hero" id="top">
+    <div>
+      <div class="pill rv"><i></i>Open to engineering internships</div>
+      <h1 class="rv" style="--d:.06s">Chad J. Francis</h1>
+      <p class="slogan rv" style="--d:.12s">Born to innovate.</p>
+      <p class="intro rv" style="--d:.18s">Mechanical engineering student at Stevens Institute of Technology and varsity track and field athlete, focused on design, prototyping and testing.</p>
+      <div class="ctas rv" style="--d:.24s">
+        <a class="btn primary" href="#work">View my work <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="btn" href="#contact">Get in touch</a>
+        <a class="btn resume-link" href="resume.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Resume</a>
+      </div>
+    </div>
+    <div class="portrait-wrap rv" style="--d:.2s">
+      <div class="portrait"><img src="headshot.jpg" alt="Portrait of Chad J. Francis" width="400" height="400"></div>
+      <div class="chip c2"><div><b>Mechanical Engineering</b><span>Stevens · Class of 2029</span></div></div>
+      <div class="chip c1"><div><b>Varsity Track &amp; Field</b><span>NCAA D-III · MAC</span></div></div>
+    </div>
+  </div>
+
+  <dl class="facts rv">
+    <div><dt class="label">Education</dt><dd>Stevens Institute of Technology<small>B.E. Mechanical Engineering, 2029</small></dd></div>
+    <div><dt class="label">Athletics</dt><dd>Varsity Track &amp; Field Athlete<small>Sprinter of the Year, 2025–26</small></dd></div>
+    <div><dt class="label">Tools</dt><dd>SolidWorks · AutoCAD<small>3D printing · C++ · soldering</small></dd></div>
+    <div><dt class="label">Based in</dt><dd>Hoboken &amp; Hillsborough, NJ<small>Open to internships</small></dd></div>
+  </dl>
+
+  <section id="about">
+    <div class="head">
+      <div class="label rv"><span class="num">01</span> &nbsp;About</div>
+      <h2 class="rv">Where analysis meets <em>physical reality.</em></h2>
+    </div>
+    <div class="about">
+      <div class="values">
+        <div class="rv"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Design</div>
+        <div class="rv" style="--d:.06s"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Build</div>
+        <div class="rv" style="--d:.12s"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Compete</div>
+      </div>
+      <div class="bio">
+        <p class="rv">I am a mechanical engineering student at Stevens Institute of Technology, Class of 2029, with a particular interest in the point where analysis meets physical reality. My work moves from concept sketches and CAD models to fabricated prototypes, and I treat testing as the stage where a design either proves itself or reveals what still needs to change.</p>
+        <p class="rv">I also compete as an athlete on the Stevens varsity track and field team. Sustaining an NCAA training schedule alongside a demanding engineering curriculum has required disciplined planning and consistent performance under pressure. My experience on a competitive robotics team and as a counselor responsible for a group of thirty has strengthened my ability to communicate clearly and coordinate people toward a shared objective.</p>
+        <p class="rv">I am driven by a conviction that the most meaningful engineering produces something genuinely new, whether that is a better product, a more reliable system, or a smarter way to build it. I am most engaged when ideas are being validated, refined through iteration, and turned into hardware that solves real problems, and I want to contribute across that full cycle, from early concept through prototyping, testing, and production, while continually questioning how a design could perform better.</p>
+        <p class="rv">I am seeking a mechanical engineering internship, whether in design, R&amp;D, manufacturing, testing, or product development, where I can contribute to real projects, learn from experienced engineers, and keep building.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" style="padding-top:0">
+    <div class="head">
+      <div class="label rv"><span class="num">02</span> &nbsp;Experience</div>
+      <h2 class="rv">Education, athletics and leadership.</h2>
+    </div>
+    <ul class="exp">
+      <li class="rv">
+        <div class="when label">2025 – Present</div>
+        <div><h3>B.E. Mechanical Engineering</h3><p class="org">Stevens Institute of Technology · Hoboken, NJ</p><p class="d">Foundational coursework in engineering statics, thermodynamics, differential equations, multivariable calculus, and a two-semester engineering design sequence.</p></div>
+      </li>
+      <li class="rv">
+        <div class="when label">2025 – Present</div>
+        <div class="with-photo"><h3>Varsity Track &amp; Field Athlete <span class="badge">Sprinter of the Year</span></h3><p class="org">Stevens Track &amp; Field · NCAA Division III</p><p class="d">Recognized as the team's Sprinter of the Year for the 2025–26 season. Maintain roughly 12 hours per week of training and competition alongside a full engineering course load.</p><a class="track-go" href="#track">See my times &amp; standings<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4l-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a><button type="button" class="exp-square" data-full="track.jpg" data-cap="Stevens Track &amp; Field, block starts" aria-label="View track photo"><img src="track-square.jpg" alt="Chad in lane 5 of the starting blocks at Stevens" width="600" height="600" loading="lazy"></button></div>
+      </li>
+      <li class="rv">
+        <div class="when label">Summer 2026</div>
+        <div><h3>Camp Counselor <span class="badge">Superstar Counselor</span></h3><p class="org">OakCrest · Somerset, NJ</p><p class="d">Shared responsibility for a group of approximately 30 teenagers across an eight-week program with off-site excursions, overseeing their safety and daily logistics. Selected as Superstar Counselor in the first week of the program.</p></div>
+      </li>
+      <li class="rv">
+        <div class="when label">2023 – 2025</div>
+        <div><h3>Robotics Team Member</h3><p class="org">FRC Team 75 · Hillsborough High School</p><p class="d">Contributed to the mechanical design and assembly of competition robots and supported the organization of team events, including Robocon 2024.</p></div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="work" style="padding-top:0">
+    <div class="head">
+      <div class="label rv"><span class="num">03</span> &nbsp;Selected work</div>
+      <h2 class="rv">Designed, built and <em>tested.</em></h2>
+    </div>
+
+    <div class="work">
+      <article class="proj proj-feature rv">
+        <div class="media amz" id="bike-gallery">
+          <div class="stage">
+            <div class="viewer3d" id="pane-3d">
+              <model-viewer data-src="bike-3d.glb" alt="Rotatable 3D model of the electric dirt bike" camera-controls auto-rotate auto-rotate-delay="1500" rotation-per-second="18deg" interaction-prompt="none" shadow-intensity="1.1" shadow-softness="0.9" exposure="0.95" environment-image="neutral" camera-orbit="25deg 78deg 88%" min-camera-orbit="auto auto 45%" max-camera-orbit="auto auto 180%" field-of-view="28deg" touch-action="pan-y" disable-pan>
+                <div slot="progress-bar" class="mv-progress"><i></i></div>
+                <button type="button" class="hs" data-visibility-attribute="visible" slot="hotspot-motor" data-position="0.5925m -0.3035m 0.0927m" data-normal="-0.2487m -0.0742m 0.9657m" aria-label="Hub motor: 8000 W hub motor, 3.5T winding"><span class="dot">1</span><span class="hs-card"><b>Hub motor</b><small>8000 W hub motor, 3.5T winding</small></span></button>
+                <button type="button" class="hs" data-visibility-attribute="visible" slot="hotspot-battery" data-position="-0.1261m 0.0557m 0.0401m" data-normal="0.0451m -0.0271m 0.9986m" aria-label="Battery pack: 72 V, 32 Ah lithium-ion"><span class="dot">2</span><span class="hs-card"><b>Battery pack</b><small>72 V, 32 Ah lithium-ion</small></span></button>
+                <button type="button" class="hs" data-visibility-attribute="visible" slot="hotspot-frame" data-position="-0.3404m 0.2284m 0.0485m" data-normal="-0.1555m 0.0280m 0.9874m" aria-label="Frame: Stealth Bomber-style e-bike frame, adjustable dropouts"><span class="dot">3</span><span class="hs-card"><b>Frame</b><small>Stealth Bomber-style e-bike frame, adjustable dropouts</small></span></button>
+                <button type="button" class="hs" data-visibility-attribute="visible" slot="hotspot-controller" data-position="-0.0292m 0.0919m -0.0855m" data-normal="-0.4607m -0.2592m 0.8488m" aria-label="Motor controller: Sabvoton, 150 A → 100 A"><span class="dot">8</span><span class="hs-card"><b>Motor controller</b><small>Sabvoton, 150 A → 100 A</small></span></button>
+                <button type="button" class="hs" data-visibility-attribute="visible" slot="hotspot-fork" data-position="-0.5147m 0.1796m 0.0820m" data-normal="-0.8198m 0.2285m 0.5251m" aria-label="Front fork: DH680 downhill suspension fork"><span class="dot">4</span><span class="hs-card"><b>Front fork</b><small>DH680 downhill suspension fork</small></span></button>
+                <button type="button" class="hs" data-visibility-attribute="visible" slot="hotspot-shock" data-position="0.1556m -0.0909m -0.0229m" data-normal="0.2924m -0.0826m 0.9527m" aria-label="Rear shock: DNM RCP2S coil-over shock"><span class="dot">5</span><span class="hs-card"><b>Rear shock</b><small>DNM RCP2S coil-over shock</small></span></button>
+                <button type="button" class="hs" data-visibility-attribute="visible" slot="hotspot-brake" data-position="-0.6595m -0.3187m 0.0754m" data-normal="0.1827m -0.0103m 0.9831m" aria-label="Disc brakes: 203 mm rotors, hydraulic e-brake cut-off"><span class="dot">6</span><span class="hs-card"><b>Disc brakes</b><small>203 mm rotors, hydraulic e-brake cut-off</small></span></button>
+                <button type="button" class="hs" data-visibility-attribute="visible" slot="hotspot-throttle" data-position="-0.3758m 0.5113m 0.1485m" data-normal="-0.7331m -0.6063m 0.3080m" aria-label="Throttle & harness: Custom spliced wiring harness"><span class="dot">7</span><span class="hs-card"><b>Throttle & harness</b><small>Custom spliced wiring harness</small></span></button>
+              </model-viewer>
+              <span class="tag">AI-generated 3D model</span>
+              <button type="button" class="parts-toggle" aria-pressed="true"><span class="sw" aria-hidden="true"></span>Part labels</button>
+              <div class="why" id="why">
+                <div class="bubble" id="why-bubble" role="note">
+                  <b>Why I built it <span>· Chad</span></b>
+                  <p>My first major build, before engineering school. I specced, sourced, wired and debugged every part myself. It hit 61 mph on its first test. Bonus: it came in handy whenever I missed the school bus 😂</p>
+                  <button type="button" class="x" id="why-close" aria-label="Hide note"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 1l8 8M9 1L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                </div>
+                <button type="button" class="av" id="why-av" aria-label="Show note from Chad" aria-expanded="true" aria-controls="why-bubble"><img src="headshot.jpg" alt="" width="34" height="34"></button>
+              </div>
+              <span class="hint" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M2.5 8a5.5 5.5 0 0 1 9.9-3.3M13.5 8a5.5 5.5 0 0 1-9.9 3.3M12.6 1.8v3h-3M3.4 14.2v-3h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Drag to rotate · Scroll to zoom</span>
+            </div>
+            <button class="shot stage-photo" type="button" aria-label="View photo full size" hidden><img src="bike-outdoor.jpg" alt="" width="1256" height="927"><span class="tag">Photo</span><span class="zoom" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M6 2H2v4M10 2h4v4M6 14H2v-4M10 14h4v-4" stroke="currentColor" stroke-width="1.5"/></svg></span></button>
+            <div class="stage-video" hidden><video id="bike-video" controls playsinline preload="metadata"></video><span class="tag">Test ride</span></div>
+          </div>
+          <div class="rail" role="group" aria-label="Dirt bike media">
+              <button type="button" class="t t-3d" data-kind="3d" data-src="bike-3d.glb" data-cap="3D model" aria-current="true" aria-label="3D model"><img src="bike-3d-thumb.jpg" alt="" loading="lazy"><span class="badge3d">3D</span></button>
+              <button type="button" class="t t-photo" data-kind="photo" data-src="bike-outdoor.jpg" data-cap="Finished bike, outdoors" data-fit="cover" aria-label="Finished bike, outdoors"><img src="bike-outdoor.jpg" alt="" loading="lazy"></button>
+              <button type="button" class="t t-photo" data-kind="photo" data-src="bike-build.jpg" data-cap="Assembly in progress" data-fit="cover" aria-label="Assembly in progress"><img src="bike-build.jpg" alt="" loading="lazy"></button>
+              <button type="button" class="t t-photo" data-kind="photo" data-src="bike-frame.jpg" data-cap="Frame and front fork" aria-label="Frame and front fork"><img src="bike-frame.jpg" alt="" loading="lazy"></button>
+              <button type="button" class="t t-photo" data-kind="photo" data-src="bike-hub.jpg" data-cap="Hub motor and brake" data-fit="cover" aria-label="Hub motor and brake"><img src="bike-hub.jpg" alt="" loading="lazy"></button>
+              <button type="button" class="t t-photo" data-kind="photo" data-src="bike-parts.jpg" data-cap="Parts list" aria-label="Parts list"><img src="bike-parts.jpg" alt="" loading="lazy"></button>
+          </div>
+        </div>
+        <div class="info">
+          <div class="label"><span class="feat">Featured</span>Personal project · Solo · 2023</div>
+          <h3>Electric Dirt Bike Build</h3>
+          <p>A ground-up electric dirt bike build using components sourced directly from international suppliers. Each component was specified against performance targets of 55 mph and 30 miles of range; the first full test reached 61 mph.</p>
+          <dl class="stats">
+            <div><dt class="label">Top speed</dt><dd>61 mph</dd></div>
+            <div><dt class="label">Voltage</dt><dd>72 V</dd></div>
+            <div><dt class="label">Motor</dt><dd>8000 W</dd></div>
+          </dl>
+          <ul>
+            <li>Selected a 3.5T hub-motor winding as a deliberate compromise between the top speed of a 3T winding and the torque of a 5T.</li>
+            <li>Validated the electrical system through voltmeter checks and powered drivetrain tests before final assembly.</li>
+            <li>Diagnosed a blown fuse caused by excess current from the 150 A controller and resolved it with a 100 A unit, trading top speed (53 mph) for reliability.</li>
+            <li>Engineered a custom wiring harness to resolve a controller-to-throttle incompatibility, learning to solder in the process.</li>
+          </ul>
+          <p class="role"><b>My role:</b> Sole designer and builder, responsible for component selection, vendor communication, assembly, testing, and iterative repair.</p>
+          <details class="learned"><summary><svg class="lr-ic" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 12.5h4M6.5 14.5h3M8 1.5a4.5 4.5 0 0 0-2.6 8.2c.4.3.6.7.6 1.1v.2h4v-.2c0-.4.2-.8.6-1.1A4.5 4.5 0 0 0 8 1.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg><span>What I learned</span><small>4 takeaways</small><svg class="lr-chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="learned-body"><ol><li><b>Peak numbers aren't the goal.</b><span>The 150 A controller hit 61 mph but blew a fuse. Dropping to 100 A cost 8 mph and made the bike dependable, and that trade was the right one.</span></li><li><b>Range depends on how you use the energy.</b><span>Running the pack hard gave about 10 miles instead of 30 and wore the cells down early. Discharge rate matters as much as capacity.</span></li><li><b>Design for vibration from day one.</b><span>An enclosure with no damping let rough terrain damage the electronics inside. I went back and insulated the battery, and an unbalanced tire taught me the same lesson.</span></li><li><b>Integration is where builds break.</b><span>Parts from different vendors don't always talk to each other. A throttle-to-controller mismatch is how I learned to solder and build a custom harness, and why I now test each subsystem before final assembly.</span></li></ol></div></details>
+          <div class="tags"><span>Power electronics</span><span>Soldering</span><span>Bench testing</span></div>
+        </div>
+      </article>
+
+      <article class="proj rv">
+        <div class="media" data-gallery>
+          <div class="shot-wrap">
+          <div class="r3d stage-layer" id="r3d" data-kind="3d" data-hi="robot-3d.glb" data-lo="robot-run.glb" aria-label="Interactive 3D model of the robot">
+            <div class="r3d-canvas"></div>
+            <div class="r3d-load" aria-hidden="true"><i></i></div>
+            <div class="r3d-ui r3d-close">
+              <span class="r3d-tag">3D model<span class="r3d-hint"> · drag to look around</span></span>
+              <button type="button" class="r3d-go"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 3.5v9l7-4.5z" fill="currentColor"/></svg><span>See the final run reconstruction</span></button>
+            </div>
+            <div class="r3d-ui r3d-run">
+              <div class="r3d-top">
+                <div class="r3d-read"><span class="r3d-clock">0:00 <small>/ 3:00</small></span><span class="r3d-meta">Next stop <b class="r3d-next">1</b><span class="sep"> · </span><b class="r3d-stat">Ready</b></span></div>
+                <div class="r3d-cam" role="group" aria-label="Camera view"><button type="button" data-cam="spectator" aria-pressed="true">Spectator</button><button type="button" data-cam="chase" aria-pressed="false">Chase</button><button type="button" data-cam="top" aria-pressed="false">Overhead</button></div>
+              </div>
+              <button type="button" class="r3d-mini" aria-label="Live 2D map of the run. Tap to enlarge" aria-pressed="false"><span class="r3d-mini-lbl">Live map</span></button>
+              <div class="r3d-bottom"><button type="button" class="r3d-back"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3m0 0l4-4M3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>3D model</span></button><span class="r3d-label">Final run reconstruction</span><button type="button" class="r3d-replay"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8a5 5 0 1 1-1.5-3.6M13 2.5v2.4h-2.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Replay</span></button></div>
+            </div>
+            <div class="r3d-fade" aria-hidden="true"></div>
+          </div>
+          <div class="route-stage stage-layer" id="route-stage" data-kind="route" hidden>
+            <div class="rs-hud"><span class="rs-clock">0:00 <small>/ 3:00</small></span><button type="button" class="rs-replay"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 3.5v9l7-4.5z" fill="currentColor"/></svg><span>Play run</span></button></div>
+            <div class="rs-map"></div>
+            <a class="rs-tag" href="#robot">Final run route · see full project →</a>
+          </div>
+          <button class="shot" type="button" aria-label="View photo full size"><img src="robot-final.jpg" alt="Finished self-driving robot" width="1050" height="1400" loading="lazy"><span class="tag">Final build</span><span class="zoom" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M6 2H2v4M10 2h4v4M6 14H2v-4M10 14h4v-4" stroke="currentColor" stroke-width="1.5"/></svg></span></button>
+          </div>
+          <div class="thumbs" role="group" aria-label="Robot photos">
+            <button type="button" class="t-3d" aria-current="true" data-kind="3d" data-cap="3D model" aria-label="3D model"><img src="robot-3d-thumb.jpg" alt="" loading="lazy"><span class="badge3d">3D</span></button>
+            <button type="button" class="t-route" aria-current="false" data-kind="route" data-cap="Route" aria-label="Route of the final run"><svg viewBox="0 0 56 56" aria-hidden="true"><rect width="56" height="56" fill="#0c0d10"/><path d="M48 34C40 30 36 34 33 44C26 42 20 40 19 20C14 16 6 18 6 30S10 44 18 44S38 40 36 24S26 14 22 16S34 26 48 22" fill="none" stroke="#a8c4ff" stroke-width="2.5" stroke-linecap="round"/><circle cx="48" cy="34" r="3.5" fill="#a8c4ff"/></svg></button>
+            <button type="button" aria-current="false" data-src="robot-final.jpg" data-cap="Final build" aria-label="Final build"><img src="robot-final.jpg" alt="" loading="lazy"></button>
+            <button type="button" data-src="robot-cad.jpg" data-cap="SolidWorks assembly" aria-label="SolidWorks assembly"><img src="robot-cad.jpg" alt="" loading="lazy"></button>
+            <button type="button" data-src="robot-top.jpg" data-cap="Electronics bay" aria-label="Electronics bay"><img src="robot-top.jpg" alt="" loading="lazy"></button>
+            <button type="button" data-src="robot-drawing.jpg" data-cap="Exploded drawing" aria-label="Exploded drawing"><img src="robot-drawing.jpg" alt="" loading="lazy"></button>
+          </div>
+        </div>
+        <div class="info">
+          <div class="label">ENGR 122 · Team of 3</div>
+          <h3>Self-Driving Robot Tour Guide</h3>
+          <p>An autonomous tracked platform designed to navigate a course to four waypoints. Three ultrasonic sensors provide obstacle detection, while an overhead ArUco-marker vision system streams the robot's position over MQTT for localization.</p>
+          <dl class="stats">
+            <div><dt class="label">Course time</dt><dd>1:25 / 3:00</dd></div>
+            <div><dt class="label">Print time</dt><dd>4h 55m</dd></div>
+            <div><dt class="label">Rank</dt><dd>Top 29%</dd></div>
+          </dl>
+          <ul>
+            <li>Developed the housing as a SolidWorks assembly and fabricated it through 3D printing, integrating the tracked chassis, sensor array, and WeMos D1 R2 controller.</li>
+            <li>Completed all printed parts in 4 h 55 min, within the 5-hour fabrication constraint.</li>
+            <li>Reached all four targets in 1:25 against a 3:00 limit, earning full marks and placing in the top 29% of teams.</li>
+          </ul>
+          <p class="role"><b>My role:</b> Led the majority of the mechanical design and fabrication, contributed to the control code, and authored the introduction, objectives, and prototyping sections of the final report.</p>
+          <details class="learned"><summary><svg class="lr-ic" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 12.5h4M6.5 14.5h3M8 1.5a4.5 4.5 0 0 0-2.6 8.2c.4.3.6.7.6 1.1v.2h4v-.2c0-.4.2-.8.6-1.1A4.5 4.5 0 0 0 8 1.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg><span>What I learned</span><small>4 takeaways</small><svg class="lr-chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="learned-body"><ol><li><b>Sensing is partly a mechanical problem.</b><span>The code was fine, but the sensors were mounted above the wall tops and couldn't see them. Lowering the hanger fixed it.</span></li><li><b>Get it right slowly, then make it fast.</b><span>We fixed collisions by slowing down and widening the safety margins, then tightened them and added speed back step by step.</span></li><li><b>In a control loop, the order is the design.</b><span>Deciding what the robot checks first, like arriving, then safety, then steering, removed most of the erratic behavior.</span></li><li><b>Check the hardware before the code.</b><span>Swapped motor wires and occupied TX/RX pins looked like software bugs. Soldered connections stopped the intermittent failures.</span></li></ol></div></details>
+          <a class="track-go proj-go" href="#robot">Open the full project<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4l-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <div class="tags"><span>SolidWorks</span><span>3D printing</span><span>C++</span><span>MQTT</span></div>
+        </div>
+      </article>
+
+      <article class="proj rv">
+        <div class="media" data-gallery>
+          <button class="shot" type="button" aria-label="View photo full size"><img src="plant-final.jpg" alt="Finished plant watering enclosure" width="1050" height="1400" loading="lazy"><span class="tag">Deployed unit</span><span class="zoom" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M6 2H2v4M10 2h4v4M6 14H2v-4M10 14h4v-4" stroke="currentColor" stroke-width="1.5"/></svg></span></button>
+          <div class="thumbs" role="group" aria-label="Plant watering system photos">
+            <button type="button" aria-current="true" data-src="plant-final.jpg" data-cap="Deployed unit" aria-label="Deployed unit"><img src="plant-final.jpg" alt="" loading="lazy"></button>
+            <button type="button" data-src="plant-inside.jpg" data-cap="Pump and electronics" aria-label="Pump and electronics"><img src="plant-inside.jpg" alt="" loading="lazy"></button>
+            <button type="button" data-src="plant-cad.jpg" data-cap="CAD enclosure" aria-label="CAD enclosure"><img src="plant-cad.jpg" alt="" loading="lazy"></button>
+            <button type="button" data-src="plant-light.jpg" data-cap="Light data, 5 days" aria-label="Light data, 5 days"><img src="plant-light.jpg" alt="" loading="lazy"></button>
+          </div>
+        </div>
+        <div class="info">
+          <div class="label">ENGR 111 · Dec 2025 · Team of 3</div>
+          <h3>Automated Plant Watering System</h3>
+          <p>An ESP32-based monitoring and irrigation system that measures soil moisture, air temperature, humidity, and ambient light, publishes each reading to an MQTT server, and regulates watering autonomously.</p>
+          <dl class="stats">
+            <div><dt class="label">Log rate</dt><dd>10 min</dd></div>
+            <div><dt class="label">Daily dose</dt><dd>20 mL</dd></div>
+            <div><dt class="label">Trigger</dt><dd>&lt; 20%</dd></div>
+          </dl>
+          <ul>
+            <li>Delivers a scheduled 20 mL daily dose, with an override that waters immediately when soil moisture falls below 20%.</li>
+            <li>Operated unattended through a five-day deployment inside a three-piece 3D-printed enclosure.</li>
+            <li>Identified anomalous flat humidity readings during data analysis and traced them to a faulty DHT11 sensor.</li>
+          </ul>
+          <p class="role"><b>My role:</b> Served as initial design lead and documentation coordinator, producing the concept sketches, supporting breadboard integration, and maintaining the project's record of progress and design deviations.</p>
+          <div class="tags"><span>ESP32</span><span>Sensors</span><span>MQTT</span><span>3D printing</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="soon" style="padding-top:0">
+    <div class="soon rv">
+      <div class="label">In progress</div>
+      <h2>Coming soon</h2>
+      <p>New projects are currently in development. Here is a first look.</p>
+      <button type="button" class="po-reveal" id="po-reveal" aria-expanded="false" aria-controls="pushoff">
+        <span class="po-ring" aria-hidden="true"></span>
+        <svg viewBox="0 0 120 120" aria-hidden="true"><polygon points="10,98 36,98 66,28 40,28" fill="#FF5A1F"/><polygon points="46,98 72,98 102,28 76,28" fill="#F5F3EE"/></svg>
+        <span class="sr">Reveal the Pushoff project</span>
+      </button>
+      <span class="po-hint" id="po-hint">Tap the logo for a sneak peek</span>
+    </div>
+    <div class="pushoff" id="pushoff" role="region" aria-labelledby="pushoff-title" hidden>
+      <div class="po-top">
+        <div class="po-brand">
+          <svg viewBox="0 0 120 120" aria-hidden="true"><polygon points="10,98 36,98 66,28 40,28" fill="#FF5A1F"/><polygon points="46,98 72,98 102,28 76,28" fill="#F5F3EE"/></svg>
+          <div class="po-word" id="pushoff-title">Push<span>off</span></div>
+        </div>
+        <div class="po-badge">Coming soon</div>
+      </div>
+      <h3 class="po-head">On your<br>marks.<br><span class="po-set">Get set.</span></h3>
+      <div class="po-copy">
+        <p>Races are won and lost in the first half second. Until now, nobody could see it.</p>
+        <p>Built by a collegiate sprinter, for sprinters and coaches at every level.</p>
+      </div>
+      <div class="po-foot"><div class="po-tag">Own the first step.</div></div>
+    </div>
+  </section>
+
+  <section id="contact" style="padding-top:0">
+    <div class="contact rv">
+      <div class="label"><span style="color:var(--accent)">04</span> &nbsp;Contact</div>
+      <h2 style="margin-top:20px">Let's build something new.</h2>
+      <p>I'm open to mechanical engineering internships and opportunities across design, R&amp;D, manufacturing and testing. The fastest way to reach me is email.</p>
+      <div class="rows">
+        <div class="row"><div><span class="label">Email</span><code id="email" style="margin-top:8px">chad.francis2029@gmail.com</code></div><button class="act" id="copy" type="button">Copy</button></div>
+        <div class="row"><div><span class="label">LinkedIn</span><code style="margin-top:8px">linkedin.com/in/chad-francis-mech</code></div><a class="act" href="https://www.linkedin.com/in/chad-francis-mech" target="_blank" rel="noopener">Open ↗</a></div>
+        <div class="row resume-link resume-row"><div><span class="label">Resume</span><code style="margin-top:8px">Chad J. Francis · PDF</code></div><a class="act" href="resume.pdf" target="_blank" rel="noopener">Download ↓</a></div>
+      </div>
+    </div>
+    <footer>
+      <span class="brand"><svg class="mark" style="width:18px;height:18px" viewBox="222 150 256 260" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="square" stroke-linejoin="round"><path d="M420 162 L304 162 Q234 162 234 240 Q234 318 304 318 L376 318"/><path d="M466 224 L446 348 Q438 396 392 396 L282 396"/></g></svg>Chad J. Francis</span>
+      <span>© 2026 · Born to innovate · Hoboken &amp; Hillsborough, NJ</span>
+    </footer>
+  </section>
+</main>
+
+<div class="tv wrap" id="track-view" aria-labelledby="tv-title" tabindex="-1">
+  <button type="button" class="tv-back" data-back><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3m0 0l4-4M3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to portfolio</button>
+  <div class="tv-head tv-in">
+    <span class="label">Track &amp; Field · 2025–26</span>
+    <h1 id="tv-title">On the track. <em>First year.</em></h1>
+    <p>Sprinter for the Stevens Ducks, NCAA Division III in the MAC Freedom. In my first college season I moved into the program's all-time top 10 in both the 100 and 200 meters.</p>
+    <div class="tv-tags"><span class="on">Sprinter of the Year</span><span>100m · 200m</span><span>Hillsborough HS '25</span></div>
+  </div>
+
+  <section class="tv-sec" style="padding:0">
+    <span class="label">Current standing</span>
+    <h2>Stevens all-time top 10.</h2>
+    <div class="tv-grid">
+      <div class="tv-card tv-in">
+        <div class="ev"><b>100 meters</b><span class="label">Outdoor</span></div>
+        <div class="rank">5<sup>th</sup></div>
+        <div class="mark">11.01</div>
+        <div class="meta">TCNJ Multi &amp; Invite · April 2026</div>
+        <ol class="ladder" aria-label="Stevens all-time top 10, Chad at 5"><li>1</li><li>2</li><li>3</li><li>4</li><li class="me">5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li></ol><div class="ladder-cap"><span>#1 all-time</span><span>#10</span></div>
+      </div>
+      <div class="tv-card tv-in">
+        <div class="ev"><b>200 meters</b><span class="label">Outdoor</span></div>
+        <div class="rank">6<sup>th</sup></div>
+        <div class="mark">22.35</div>
+        <div class="meta">Tied 6th · Coach P Invitational · April 2026</div>
+        <ol class="ladder" aria-label="Stevens all-time top 10, Chad at T6"><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li class="me">T6</li><li>7</li><li>8</li><li>9</li><li>10</li></ol><div class="ladder-cap"><span>#1 all-time</span><span>#10</span></div>
+        <div class="climb" aria-label="200m all-time rank across the season"><span>Climb</span><i>8th</i>→<i>7th</i>→<i class="now">T6</i></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tv-sec" style="padding:0">
+    <span class="label">High school → college</span>
+    <h2>The difference one year made.</h2>
+    <p class="sub">My Hillsborough High School senior marks next to my first season at Stevens.</p>
+    <div class="cmp tv-in" role="table" aria-label="High school versus college times">
+      <div class="cmp-row h" role="row"><span role="columnheader">Event</span><span role="columnheader">High school</span><span role="columnheader">Stevens</span><span role="columnheader" style="text-align:right">Change</span></div>
+      <div class="cmp-row" role="row"><span class="e" role="cell">100m</span><span class="t prev" role="cell">11.37<small>May 2025</small></span><span class="t" role="cell">11.01<small>April 2026</small></span><span class="delta" role="cell">−0.36s<small>3.2% faster</small></span></div>
+      <div class="cmp-row" role="row"><span class="e" role="cell">200m</span><span class="t prev" role="cell">23.20<small>May 2025</small></span><span class="t" role="cell">22.35<small>April 2026</small></span><span class="delta" role="cell">−0.85s<small>3.7% faster</small></span></div>
+      <div class="cmp-row" role="row"><span class="e" role="cell">400m</span><span class="t prev" role="cell">55.37<small>May 2024</small></span><span class="t" role="cell" style="color:var(--faint)">—<small>Not run yet</small></span><span class="delta na" role="cell">HS best</span></div>
+    </div>
+
+    <div class="chart tv-in">
+      <span class="label">200m progression</span>
+      <svg id="tv-chart" viewBox="0 0 640 240" role="img" aria-label="200 meter times: 23.20 in May 2025, 22.71 in March 2026, 22.64 in April 2026, 22.35 in April 2026"></svg>
+    </div>
+  </section>
+
+  <section class="tv-sec" style="padding:0">
+    <span class="label">Personal records</span>
+    <h2>Stevens PRs.</h2>
+    <div class="prs">
+      <div class="tv-in"><b>60m</b><span>7.23</span><small>Indoor · Jan 2026</small></div>
+      <div class="tv-in"><b>100m</b><span>11.01</span><small>Outdoor · Apr 2026</small></div>
+      <div class="tv-in"><b>200m</b><span>22.35</span><small>Outdoor · Apr 2026</small></div>
+      <div class="tv-in"><b>200m</b><span>23.79</span><small>Indoor · Jan 2026</small></div>
+      <div class="tv-in"><b>300m</b><span>37.21</span><small>Indoor · Dec 2025</small></div>
+    </div>
+  </section>
+
+  <div class="tv-src">
+    Marks and rankings as reported by Stevens Athletics and MileSplit, through April 2026.
+    <ul>
+      <li><a href="https://stevensducks.com/news/2026/3/28/mens-track-field-mens-track-concludes-danny-curran-invitational.aspx" target="_blank" rel="noopener">Danny Curran Invitational recap</a></li>
+      <li><a href="https://stevensducks.com/news/2026/4/11/mens-track-field-mens-track-and-field-wrap-tcnj-multi-and-invite-with-several-program-top-marks.aspx" target="_blank" rel="noopener">TCNJ Multi &amp; Invite recap</a></li>
+      <li><a href="https://stevensducks.com/news/2026/4/18/mens-track-field-mordi-breaks-45-year-old-triple-jump-record-as-mens-track-and-field-wraps-coach-pollard-and-paul-donahue-invitationals.aspx" target="_blank" rel="noopener">Coach P &amp; Paul Donahue Invitationals recap</a></li>
+      <li><a href="https://nj.milesplit.com/athletes/13474186-chad-francis" target="_blank" rel="noopener">MileSplit athlete profile</a></li>
+      <li><a href="https://stevensducks.com/sports/mens-track-and-field/roster/chad-francis/18516" target="_blank" rel="noopener">Stevens roster page</a></li>
+    </ul>
+  </div>
+  <div class="tv-foot"><button type="button" class="tv-back" data-back><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3m0 0l4-4M3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to portfolio</button></div>
+</div>
+
+<div class="tv wrap" id="robot-view" aria-labelledby="rp-title" tabindex="-1">
+  <button type="button" class="tv-back" data-back><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3m0 0l4-4M3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to portfolio</button>
+  <div class="tv-head tv-in">
+    <span class="label">ENGR 122 · Team of 3 · Stevens</span>
+    <h1 id="rp-title">Self-Driving Robot <em>Tour Guide.</em></h1>
+    <p>An autonomous robot that tours a table-sized model of campus: four stops, in order, no human input, under three minutes. It knows where it is from overhead cameras, sees walls with three ultrasonic sensors, and lives in a 3D-printed body we designed in SolidWorks.</p>
+    <div class="tv-tags"><span class="on">Full marks</span><span>SolidWorks</span><span>3D printing</span><span>C++</span><span>MQTT</span></div>
+  </div>
+  <div class="rp-hero">
+    <figure class="tv-in"><img src="robot-final.jpg" alt="Finished self-driving robot" loading="lazy"></figure>
+    <div class="rp-side">
+      <div class="rp-stats">
+        <div class="tv-in"><b>Course time</b><span>1:25 <small>/ 3:00</small></span></div>
+        <div class="tv-in"><b>Print time</b><span>4h 55m <small>/ 5h</small></span></div>
+        <div class="tv-in"><b>Stops reached</b><span>4 <small>/ 4</small></span></div>
+        <div class="tv-in"><b>Class rank</b><span>Top 29%</span></div>
+      </div>
+      <div class="rp-role tv-in"><b>My role.</b> Led most of the mechanical design and fabrication of the enclosure, helped tune the control code during testing, and wrote the introduction, objectives and prototyping sections of the final report.</div>
+    </div>
+  </div>
+
+  <section class="tv-sec" style="padding:0">
+    <span class="label">How it works</span>
+    <h2>One loop, many times a second.</h2>
+    <div class="loop">
+      <div class="tv-in"><i>01</i><b>Locate</b><p>Overhead cameras read the ArUco marker and send x, y and heading over MQTT.</p></div>
+      <div class="tv-in"><i>02</i><b>Sense</b><p>Front, left and right ultrasonic sensors measure distance to walls.</p></div>
+      <div class="tv-in"><i>03</i><b>Decide</b><p>The sequence tree picks one move from distance, heading error and obstacles.</p></div>
+      <div class="tv-in"><i>04</i><b>Drive</b><p>PWM sets each motor's speed; turning comes from running them at different speeds.</p></div>
+    </div>
+  </section>
+
+
+  <section class="tv-sec" style="padding:0">
+    <span class="label">The course</span>
+    <h2>The arena and the winning run.</h2>
+    <p class="sub" style="max-width:68ch">A table-sized model of campus with four buildings. The robot starts at the purple pad and has to visit stops 1 → 2 → 3 → 4 in order. This replays the route from our final run, sped up.</p>
+    <div class="arena tv-in">
+      <div class="arena-top">
+        <div class="arena-read" aria-live="polite">
+          <div><b>Run clock</b><span id="ar-clock">0:00 <small>/ 3:00</small></span></div>
+          <div><b>Next stop</b><span id="ar-next">1</span></div>
+          <div><b>Status</b><span id="ar-stat" style="font-size:15px;margin-top:12px">Ready</span></div>
+        </div>
+        <button type="button" class="play" id="ar-play"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 3.5v9l7-4.5z" fill="currentColor"/></svg><span>Play run</span></button>
+      </div>
+      <svg id="arena-svg" viewBox="0 0 790 330" role="img" aria-label="Arena map: start pad on the right, buildings in each quadrant and a diamond in the center, with the robot's route through stops 1, 2, 3 and 4">
+        <rect class="ar-wall" x="4" y="4" width="782" height="322" rx="6"/>
+        <path class="ar-bld" d="M516 8H648V120H556V72H516Z"/>
+        <rect class="ar-bld" x="550" y="238" width="98" height="84"/>
+        <rect class="ar-bld" x="72" y="134" width="100" height="86"/>
+        <path class="ar-bld" d="M283 183L366 152L449 183L366 214Z"/>
+        <path class="ar-route"/>
+        <path class="ar-trail"/>
+        <g class="ar-start"><ellipse cx="710" cy="208" rx="25" ry="18"/><text x="710" y="244" text-anchor="middle">START</text></g>
+        <g class="ar-stop" data-i="0"><circle cx="487" cy="285" r="17"/><text x="487" y="285">1</text></g>
+        <g class="ar-stop" data-i="1"><circle cx="257" cy="88" r="17"/><text x="257" y="88">2</text></g>
+        <g class="ar-stop" data-i="2"><circle cx="70" cy="270" r="17"/><text x="70" y="270">3</text></g>
+        <g class="ar-stop" data-i="3"><circle cx="720" cy="75" r="17"/><text x="720" y="75">4</text></g>
+        <g class="ar-bot" transform="translate(710 208)"><rect x="-13" y="-10" width="26" height="20" rx="5"/><path d="M5 -5L12 0L5 5Z"/></g>
+      </svg>
+      <div class="arena-cap"><span><i></i>Driven route</span><span><i class="d"></i>Full route</span><span><i class="b"></i>Buildings (obstacles)</span><span>Final result: 1:25, one wall bump</span></div>
+    </div>
+  </section>
+
+  <section class="tv-sec" style="padding:0">
+    <span class="label">Deep dive</span>
+    <h2>Open any section.</h2>
+    <div class="acc">
+      <details class="dd" id="rp-thought"><summary><span class="n">01</span><span class="t"><b>Thought process</b><small>How the design and tuning decisions evolved</small></span><span class="pm" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></summary><div class="dd-body">
+<p>The brief was simple to say and hard to do: drive to four stops in order, touch nothing, finish under three minutes. We treated it as three problems that had to agree with each other: where the robot is, what is around it, and how it moves.</p>
+<h4>How the thinking evolved</h4>
+<ol class="tl">
+<li><span>01 · Frame it</span><b>Know where you are, see what's around you, then move</b><p>Position comes from the arena's overhead cameras reading an ArUco marker on the robot and publishing x, y and heading over MQTT. Three ultrasonic sensors cover front, left and right. The WeMos D1 R2 was chosen for its built-in Wi-Fi.</p></li>
+<li><span>02 · First structure</span><b>Two tiers on pillars, clipped to the chassis</b><p>The first concept stacked two plates on four pillars and clamped the base on with printed clips. The clips didn't hold the way we expected, so the base moved to nuts and bolts, and the pillars gave way to walls the top tier slides onto, which made the whole body stiffer and easier to assemble.</p><div class="rp-strip"><button type="button" class="rp-shot" data-full="robot-v1-clip.jpg" data-cap="Printed clip, first concept"><img src="robot-v1-clip.jpg" alt="Printed clip, first concept" loading="lazy"><span>Printed clip, first concept</span></button><button type="button" class="rp-shot" data-full="robot-v1-plate.jpg" data-cap="Original base plate"><img src="robot-v1-plate.jpg" alt="Original base plate" loading="lazy"><span>Original base plate</span></button></div></li>
+<li><span>03 · Design around the parts</span><b>Every component gets a home</b><p>The top tier became angular to match the sensor angles, with a cut-out for wiring. As the build grew, we added a slot for the power switch, branches that the motor driver snaps onto, a window for the OLED and holes for the wire lug, until nothing was loose.</p><div class="rp-strip"><button type="button" class="rp-shot" data-full="robot-v3-top.jpg" data-cap="Revised top tier"><img src="robot-v3-top.jpg" alt="Revised top tier" loading="lazy"><span>Revised top tier</span></button><button type="button" class="rp-shot" data-full="robot-wiring.jpg" data-cap="Fitting the circuit"><img src="robot-wiring.jpg" alt="Fitting the circuit" loading="lazy"><span>Fitting the circuit</span></button></div></li>
+<li><span>04 · Make the sensors see</span><b>Four versions of the sensor hanger</b><p>The detail that mattered most was height. Earlier hangers held the sensors above the arena's building walls, so the robot couldn't see what it was about to hit. The final hanger drops the sensor closer to the ground.</p><button type="button" class="rp-shot rp-wide" data-full="robot-sensor-height.jpg" data-cap="Sensor height: too high misses the wall, lowered sees it"><img src="robot-sensor-height.jpg" alt="Diagram: a sensor mounted too high looks over the wall; lowered, it sees the wall" loading="lazy"><span>Too high misses the wall · lowered sees it</span></button><div class="rp-strip"><button type="button" class="rp-shot" data-full="robot-v2-holder.jpg" data-cap="Early sensor holder"><img src="robot-v2-holder.jpg" alt="Early sensor holder" loading="lazy"><span>Early sensor holder</span></button><button type="button" class="rp-shot" data-full="robot-v3-hanger.jpg" data-cap="Hanging sensor holder"><img src="robot-v3-hanger.jpg" alt="Hanging sensor holder" loading="lazy"><span>Hanging sensor holder</span></button></div>
+<div class="iters"><div><i>V1</i><p>Slide-in holder, built for the pillar design</p></div><div><i>V2</i><p>Hook branches to hang from the top-tier pegs</p></div><div><i>V3</i><p>Longer branches so three sensors fit side by side; rear-loaded sensor</p></div><div><i>V4 · final</i><p>Front extended downward so sensors sit below the wall tops</p></div></div></li>
+<li><span>05 · Tune the behavior</span><b>Slow it down, then earn the speed back</b><p>Early runs hit walls because the robot was moving too fast to stop in time. We slowed it right down and widened the obstacle margin, which fixed the collisions but made stop 4, tucked into a tight nook, unreachable. We then narrowed the wall tolerance step by step until it could turn in, and only after that raised motor speed back up for a competitive time.</p></li>
+<li><span>06 · Debug the boring stuff</span><b>Most "software" bugs were wiring</b><p>Spinning in circles and turning the wrong way usually traced back to swapped motor wires or left/right speeds assigned to the wrong side. The sensors and OLED also misbehaved when Serial was used or the TX/RX pins were left connected during upload.</p></li>
+</ol>
+<h4>What I'd do differently</h4>
+<div class="res">
+<div><b>Plan the routing</b><p>The robot sometimes hesitated between paths or didn't take the shortest one. Smarter path selection would cut the time further.</p></div>
+<div><b>Solder early</b><p>Jumper wires kept unplugging during testing. Trimming and soldering them saved space and stopped intermittent failures.</p></div>
+<div><b>Measure before printing</b><p>Some reprints were unavoidable, like adding the power switch late, but others could have been avoided by measuring every part up front.</p></div>
+</div>
+</div></details>
+      <details class="dd" id="rp-tree"><summary><span class="n">02</span><span class="t"><b>Robot sequence tree</b><small>The decision order the robot runs every loop</small></span><span class="pm" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></summary><div class="dd-body">
+<p>Every loop the robot reads its position and all three sensors, computes the distance and heading error to the current stop, then walks down this list from the top. The <b style="color:var(--text);font-weight:500">first check that's true decides the move</b>, and the loop starts again. Order is the whole design: reaching a stop beats everything, and safety beats steering.</p>
+<div class="tree">
+<div class="tree-root">loop() · read MQTT x, y, θ · read front / left / right · compute dist, err</div>
+<ol>
+<li class="grp">Arrive</li>
+<li class=""><div class="q"><em>1</em>dist &lt; reach radius?</div><div class="a"><b>Stop for 2 s</b>, advance to the next stop, clear all timers. Radius is 150, or 115 for the tight stop 4.</div></li>
+<li class="grp">Committed actions (timers)</li>
+<li class=""><div class="q"><em>2</em>just started and front clear?</div><div class="a"><b>Startup glide</b>: drive forward at adaptive speed.</div></li><li class=""><div class="q"><em>3</em>reverse timer running?</div><div class="a"><b>Reverse</b> until it expires.</div></li><li class=""><div class="q"><em>4</em>turn timer running?</div><div class="a"><b>Turn</b> toward the chosen side (left or right).</div></li><li class=""><div class="q"><em>5</em>re-acquire window open?</div><div class="a">Still blocked → <b>re-avoid</b>. Else err &gt; 10° → <b>swerve left</b>, err &lt; −10° → <b>swerve right</b>, else <b>drive</b>.</div></li>
+<li class="grp">Obstacles</li>
+<li class=""><div class="q"><em>6</em>front &lt; 11 cm?</div><div class="a"><b>Emergency</b>: reverse 85 ms, turn 115 ms toward the open side, then re-acquire.</div></li><li class=""><div class="q"><em>7</em>front &lt; 27 cm (31 at stop 4)?</div><div class="a"><b>Turn away</b> for 90 ms toward the side with more room, then re-acquire.</div></li><li class=""><div class="q"><em>8</em>left or right &lt; 8 cm (6 at stop 4)?</div><div class="a"><b>Turn away</b> from that wall for 75 ms, then re-acquire.</div></li>
+<li class="grp">Steering to the target</li>
+<li class=""><div class="q"><em>9</em>steered &lt; 125 ms ago?</div><div class="a"><b>Soft swerve</b> toward the target, or drive straight if aligned.</div></li><li class=""><div class="q"><em>10</em>|err| &gt; 28° (38° at stop 4)?</div><div class="a"><b>Swerve</b> hard toward the target. Curving instead of spinning in place.</div></li><li class=""><div class="q"><em>11</em>|err| &gt; 10°?</div><div class="a"><b>Swerve</b> toward the target.</div></li><li class="end"><div class="q"><em>12</em>otherwise</div><div class="a"><b>Drive forward</b> at adaptive speed.</div></li>
+</ol>
+</div>
+<div class="tree-legend"><span>θ = heading from the overhead camera</span><span>err = bearing to target − θ, wrapped to ±180°</span></div><div class="rp-flow"><button type="button" class="rp-shot" data-full="robot-flowchart.jpg" data-cap="Original flowchart from our presentation"><img src="robot-flowchart.jpg" alt="Software flowchart from the final presentation" loading="lazy"><span>Original flowchart from our presentation</span></button><p><b>Where it started.</b> This was our flowchart for the presentation: one obstacle check, then steer toward the target. Testing kept adding layers, like timed turns, a re-acquire window and separate tuning for stop 4, until it became the twelve-step order above. Tap to enlarge.</p></div>
+<div class="sub-tree"><h4 style="margin-top:0">Adaptive speed branch</h4><div class="sw"><table>
+<tr><th>Condition</th><th>Stops 1–3</th><th>Stop 4</th></tr>
+<tr><td>Close to target</td><td>dist &lt; 220 → slow</td><td>dist &lt; 145 → creep</td></tr>
+<tr><td>Approaching / wall ahead</td><td>front &lt; 36 → slow</td><td>dist &lt; 255 or front &lt; 42 → slow</td></tr>
+<tr><td>Open space</td><td>front &gt; 100 → fast</td><td>front &gt; 105 → fast</td></tr>
+<tr><td>Otherwise</td><td>normal</td><td>normal</td></tr>
+</table></div></div>
+</div></details>
+      <details class="dd" id="rp-code"><summary><span class="n">03</span><span class="t"><b>Code</b><small>Key functions explained, plus the full firmware</small></span><span class="pm" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></summary><div class="dd-body">
+<p>Written in C++ in the Arduino IDE for the WeMos D1 R2. Our software lead wrote most of the firmware; I helped test and tune it on the course. The highlights first, then the full files.</p>
+<h4>Key pieces</h4>
+<div class="snip"><div><p><b>Heading error, wrapped so the robot always turns the short way.</b></p><pre class="code"><code class="hl">float angleErr(float dx, float dy) {
+  float a = atan2(dy, dx) * 180.0 / PI - z_ang_robot;
+  while (a &gt; 180) a -= 360;
+  while (a &lt; -180) a += 360;
+  return a;
+}</code></pre></div><div><p><b>Cleaning sensor noise.</b> Ultrasonics sometimes return 0 or huge values, so those become "nothing close."</p><pre class="code"><code class="hl">int clean(int d) {
+  if (d &lt;= 0 || d &gt; 400) return 999;
+  return d;
+}</code></pre></div><div><p><b>Choosing a side and committing to it, so the robot doesn't flip back and forth.</b></p><pre class="code"><code class="hl">void chooseAvoidDir(int l, int r) {
+  if (l &gt; r + 5) avoidDir = 1;        // more room on the left
+  else if (r &gt; l + 5) avoidDir = -1;  // more room on the right
+  else avoidDir = 1;                  // tie: default left
+}</code></pre></div></div>
+<h4>Full source</h4>
+<div class="files">
+<div class="files-bar" role="tablist"><button type="button" class="ft" role="tab" aria-selected="true" data-file="f-ino">robot.ino</button><button type="button" class="ft" role="tab" aria-selected="false" data-file="f-mqtt">MQTT.h</button><button type="button" class="cp" id="rp-copy">Copy</button></div>
+<pre class="code full" id="f-ino"><code class="hl">#include &lt;Wire.h&gt;
+#include &lt;Servo.h&gt;
+#include &lt;Ultrasonic.h&gt;
+#include "MQTT.h"
+
+Servo motorLeft;
+Servo motorRight;
+
+Ultrasonic ultrasonicFront(D5, D8);
+Ultrasonic ultrasonicRight(D4, D7);
+Ultrasonic ultrasonicLeft(TX, D0);
+
+// the four tour stops, in arena coordinates
+int targets[][2] = {
+  {750, 730},
+  {1650, 150},
+  {2220, 650},
+  {150, 150}
+};
+
+const int numTargets = 4;
+int targetIndex = 0;
+
+// -------- MOTOR VALUES --------
+const int stopMotor = 90;
+
+// fast but smooth
+void forwardFast()  { motorLeft.write(123); motorRight.write(123); }
+void forward()      { motorLeft.write(119); motorRight.write(119); }
+void forwardSlow()  { motorLeft.write(114); motorRight.write(114); }
+void forwardCreep() { motorLeft.write(109); motorRight.write(109); }
+
+// smoother steering
+void swerve_left_soft()  { motorLeft.write(121); motorRight.write(115); }
+void swerve_right_soft() { motorLeft.write(115); motorRight.write(121); }
+
+void swerve_left()  { motorLeft.write(122); motorRight.write(113); }
+void swerve_right() { motorLeft.write(113); motorRight.write(122); }
+
+// short turns only when truly needed
+void turn_left()  { motorLeft.write(122); motorRight.write(97); }
+void turn_right() { motorLeft.write(97);  motorRight.write(122); }
+
+void reverse_drive() { motorLeft.write(70); motorRight.write(70); }
+void stopDrive()     { motorLeft.write(stopMotor); motorRight.write(stopMotor); }
+
+// -------- thresholds --------
+const int frontEmergency   = 11;
+const int frontBlockNormal = 27;
+const int frontBlockFourth = 31;
+
+const int sideBlockNormal = 8;
+const int sideBlockFourth = 6;
+
+const int targetReachDistNormal = 150;
+const int targetReachDistFourth = 115;
+
+// angle thresholds
+const int bigAngleNormal = 28;
+const int bigAngleFourth = 38;
+const int smallAngle     = 10;
+
+// timing
+const unsigned long targetActionDelay = 125;
+unsigned long lastTargetActionTime = 0;
+
+unsigned long reverseUntil   = 0;
+unsigned long turnUntil      = 0;
+unsigned long startupUntil   = 0;
+unsigned long reacquireUntil = 0;
+
+int avoidDir = 1; // 1 = left, -1 = right
+
+int clean(int d) {
+  if (d &lt;= 0 || d &gt; 400) return 999;
+  return d;
+}
+
+float angleErr(float dx, float dy) {
+  float a = atan2(dy, dx) * 180.0 / PI - z_ang_robot;
+  while (a &gt; 180) a -= 360;
+  while (a &lt; -180) a += 360;
+  return a;
+}
+
+float distToTarget(float dx, float dy) {
+  return sqrt(dx * dx + dy * dy);
+}
+
+void nextTarget() {
+  targetIndex = (targetIndex + 1) % numTargets;
+}
+
+void chooseAvoidDir(int l, int r) {
+  if (l &gt; r + 5) avoidDir = 1;
+  else if (r &gt; l + 5) avoidDir = -1;
+  else avoidDir = 1;
+}
+
+void driveForwardAdaptive(bool goingToFourth, float dist, int f) {
+  if (goingToFourth) {
+    if (dist &lt; 145)                 forwardCreep();
+    else if (dist &lt; 255 || f &lt; 42)  forwardSlow();
+    else if (f &gt; 105)               forwardFast();
+    else                            forward();
+  } else {
+    if (dist &lt; 220)      forwardSlow();
+    else if (f &lt; 36)     forwardSlow();
+    else if (f &gt; 100)    forwardFast();
+    else                 forward();
+  }
+}
+
+void startReacquire(unsigned long now) {
+  reacquireUntil = now + 220; // brief target re-lock after avoidance
+}
+
+void setup() {
+  motorLeft.attach(D6);
+  motorRight.attach(D3);
+  stopDrive();
+  wifi_mqtt_init();
+  startupUntil = millis() + 450;
+}
+
+void loop() {
+  mqtt_rebound();
+  client.loop();
+
+  int f = clean(ultrasonicFront.read(CM));
+  int l = clean(ultrasonicLeft.read(CM));
+  int r = clean(ultrasonicRight.read(CM));
+
+  float dx   = targets[targetIndex][0] - x_robot;
+  float dy   = targets[targetIndex][1] - y_robot;
+  float dist = distToTarget(dx, dy);
+  float err  = angleErr(dx, dy);
+
+  bool goingToFourth  = (targetIndex == 3);
+  int sideBlock       = goingToFourth ? sideBlockFourth : sideBlockNormal;
+  int frontBlock      = goingToFourth ? frontBlockFourth : frontBlockNormal;
+  int targetReachDist = goingToFourth ? targetReachDistFourth : targetReachDistNormal;
+  int bigAngle        = goingToFourth ? bigAngleFourth : bigAngleNormal;
+  unsigned long now   = millis();
+
+  // -------- target reached --------
+  if (dist &lt; targetReachDist) {
+    stopDrive();
+    delay(2000);
+    nextTarget();
+    reverseUntil = 0;
+    turnUntil = 0;
+    reacquireUntil = 0;
+    startupUntil = millis() + 280;
+    return;
+  }
+
+  // -------- startup glide --------
+  if (now &lt; startupUntil &amp;&amp; f &gt; frontBlock + 8) {
+    driveForwardAdaptive(goingToFourth, dist, f);
+    return;
+  }
+
+  // -------- committed obstacle actions --------
+  if (now &lt; reverseUntil) {
+    reverse_drive();
+    return;
+  }
+
+  if (now &lt; turnUntil) {
+    if (avoidDir == 1) turn_left();
+    else turn_right();
+    return;
+  }
+
+  // -------- immediate target reacquire after avoidance --------
+  // After turning away from a wall, do not keep wandering.
+  // Smoothly bend back toward the target.
+  if (now &lt; reacquireUntil) {
+    if (f &lt; frontBlock - 2) {
+      chooseAvoidDir(l, r);
+      turnUntil = now + 80;
+      reacquireUntil = 0;
+      return;
+    }
+    if (err &gt; smallAngle)  { swerve_left();  return; }
+    if (err &lt; -smallAngle) { swerve_right(); return; }
+    driveForwardAdaptive(goingToFourth, dist, f);
+    return;
+  }
+
+  // -------- obstacle avoidance --------
+  if (f &lt; frontEmergency) {
+    chooseAvoidDir(l, r);
+    reverseUntil = now + 85;
+    turnUntil = reverseUntil + 115;
+    startReacquire(turnUntil);
+    return;
+  }
+
+  if (f &lt; frontBlock) {
+    chooseAvoidDir(l, r);
+    turnUntil = now + 90;
+    startReacquire(turnUntil);
+    return;
+  }
+
+  if (l &lt; sideBlock) {
+    avoidDir = -1;
+    turnUntil = now + 75;
+    startReacquire(turnUntil);
+    return;
+  }
+
+  if (r &lt; sideBlock) {
+    avoidDir = 1;
+    turnUntil = now + 75;
+    startReacquire(turnUntil);
+    return;
+  }
+
+  // -------- smooth target steering --------
+  if (now - lastTargetActionTime &lt; targetActionDelay) {
+    if (err &gt; smallAngle)       swerve_left_soft();
+    else if (err &lt; -smallAngle) swerve_right_soft();
+    else                        driveForwardAdaptive(goingToFourth, dist, f);
+    return;
+  }
+
+  // large heading error: curve back instead of spinning in place
+  if (err &gt; bigAngle)  { swerve_left();  lastTargetActionTime = now; return; }
+  if (err &lt; -bigAngle) { swerve_right(); lastTargetActionTime = now; return; }
+
+  if (err &gt; smallAngle)  { swerve_left();  lastTargetActionTime = now; return; }
+  if (err &lt; -smallAngle) { swerve_right(); lastTargetActionTime = now; return; }
+
+  driveForwardAdaptive(goingToFourth, dist, f);
+  lastTargetActionTime = now;
+}
+</code></pre>
+<pre class="code full" id="f-mqtt" hidden><code class="hl">#ifndef MQTT_h
+#define MQTT_h
+
+#include &lt;ESP8266WiFi.h&gt;
+#include &lt;PubSubClient.h&gt;
+
+// ===== WIFI + MQTT SETTINGS (credentials removed) =====
+const char* mqtt_server   = "ARENA_BROKER_IP";
+const char* mqtt_username = "MQTT_USER";
+const char* mqtt_password = "MQTT_PASSWORD";
+const int   mqtt_port     = 1883;
+
+const String topic = "EAS011_South";
+
+const char* ssid     = "WIFI_SSID";
+const char* password = "WIFI_PASSWORD";
+
+// ===== ROBOT POSITION (from overhead ArUco cameras) =====
+float x_robot     = 0;
+float y_robot     = 0;
+float z_ang_robot = 0;
+
+// ===== MQTT CLIENT =====
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+// ===== CALLBACK: parse "x,y,angle" =====
+void callback(char* topicName, byte* payload, unsigned int length) {
+  String message = "";
+  for (unsigned int i = 0; i &lt; length; i++) {
+    message += (char)payload[i];
+  }
+  float x, y, ang;
+  sscanf(message.c_str(), "%f,%f,%f", &amp;x, &amp;y, &amp;ang);
+  x_robot     = x;
+  y_robot     = y;
+  z_ang_robot = ang;
+}
+
+// ===== INIT =====
+void wifi_mqtt_init() {
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+  }
+  client.setServer(mqtt_server, mqtt_port);
+  client.setCallback(callback);
+}
+
+// ===== RECONNECT =====
+void mqtt_rebound() {
+  while (!client.connected()) {
+    if (client.connect("ESP8266Client", mqtt_username, mqtt_password)) {
+      client.subscribe(topic.c_str());
+    } else {
+      delay(2000);
+    }
+  }
+}
+
+#endif
+</code></pre>
+<div class="files-note">Network names and passwords have been replaced with placeholders.</div>
+</div>
+</div></details>
+      <details class="dd" id="rp-mech"><summary><span class="n">04</span><span class="t"><b>Mechanical design</b><small>Enclosure parts, iterations and print budget</small></span><span class="pm" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></summary><div class="dd-body">
+<p>A SolidWorks enclosure, printed in PLA, that holds every part of the circuit. The base bolts to the chassis; everything above it is friction-fit so it can come apart for debugging.</p>
+<h4 style="margin-top:6px">Final SolidWorks assembly</h4><div class="rp-grid renders"><button type="button" class="rp-shot" data-full="robot-r-front.jpg" data-cap="Front view"><img src="robot-r-front.jpg" alt="SolidWorks render, front view" loading="lazy"><span>Front view</span></button><button type="button" class="rp-shot" data-full="robot-r-left.jpg" data-cap="Left view"><img src="robot-r-left.jpg" alt="SolidWorks render, left view" loading="lazy"><span>Left view</span></button><button type="button" class="rp-shot" data-full="robot-r-back.jpg" data-cap="Back view"><img src="robot-r-back.jpg" alt="SolidWorks render, back view" loading="lazy"><span>Back view</span></button><button type="button" class="rp-shot" data-full="robot-r-top.jpg" data-cap="Top view"><img src="robot-r-top.jpg" alt="SolidWorks render, top view" loading="lazy"><span>Top view</span></button></div><h4>The build</h4><div class="rp-grid"><button type="button" class="rp-shot" data-full="robot-iso.jpg" data-cap="Isometric"><img src="robot-iso.jpg" alt="Isometric" loading="lazy"><span>Isometric</span></button><button type="button" class="rp-shot" data-full="robot-back.jpg" data-cap="Back, wiring bay"><img src="robot-back.jpg" alt="Back, wiring bay" loading="lazy"><span>Back, wiring bay</span></button><button type="button" class="rp-shot" data-full="robot-topview.jpg" data-cap="Top, motor driver"><img src="robot-topview.jpg" alt="Top, motor driver" loading="lazy"><span>Top, motor driver</span></button><button type="button" class="rp-shot" data-full="robot-drawing.jpg" data-cap="Exploded drawing and BOM"><img src="robot-drawing.jpg" alt="Exploded drawing and bill of materials" loading="lazy"><span>Exploded drawing</span></button></div>
+<h4>Parts</h4>
+<table class="pins"><tr><th>Part</th><th>What it does</th></tr>
+<tr><td>Design base</td><td>Bolts to the chassis. The WeMos board slides under an inner lip; OLED window on the left wall, wire lug on the right.</td></tr>
+<tr><td>Design top</td><td>Slides onto the base walls. Pegs hang the sensor holders and carry the ArUco tray; slots hold the power switch; branches snap the motor driver in place.</td></tr>
+<tr><td>Sensor holders</td><td>Hang from the top-tier pegs and drop each ultrasonic sensor low enough to see the arena walls.</td></tr>
+<tr><td>ArUco code tray</td><td>Sits above the sensors so the overhead cameras always see the marker.</td></tr></table>
+<h4>Print time · 5-hour budget</h4>
+<div class="prints"><div class="pr"><span>Design base</span><span class="pbar"><i style="width:100.0%"></i></span><span>2h 49m</span></div><div class="pr"><span>Design top</span><span class="pbar"><i style="width:24.3%"></i></span><span>41m</span></div><div class="pr"><span>Sensor holders ×3</span><span class="pbar"><i style="width:37.3%"></i></span><span>1h 03m</span></div><div class="pr"><span>ArUco code tray</span><span class="pbar"><i style="width:13.0%"></i></span><span>22m</span></div><div class="pr tot"><span>Total</span><span></span><span>4h 55m</span></div></div>
+</div></details>
+      <details class="dd" id="rp-wire"><summary><span class="n">05</span><span class="t"><b>Electrical and wiring</b><small>Pin map, signals and wiring scheme</small></span><span class="pm" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></summary><div class="dd-body">
+<p>A common-ground layout: the battery feeds the WeMos D1 R2, which powers the low-current parts. Wires were trimmed and soldered to length so the bay closes with nothing loose.</p><button type="button" class="rp-shot rp-wide" data-full="robot-circuit.jpg" data-cap="Circuit diagram"><img src="robot-circuit.jpg" alt="Circuit diagram: battery, switch, WeMos D1 R2, motor controller, three ultrasonic sensors and OLED" loading="lazy"><span>Circuit diagram</span></button>
+<div class="sw"><table class="pins">
+<tr><th>Component</th><th>Signal</th><th>Pins</th></tr>
+<tr><td>Left / right drive motors</td><td>PWM via Feetech 2-ch controller</td><td><code>D6</code> · <code>D3</code></td></tr>
+<tr><td>Front ultrasonic</td><td>Trig / Echo (GPIO)</td><td><code>D5</code> · <code>D8</code></td></tr>
+<tr><td>Right ultrasonic</td><td>Trig / Echo (GPIO)</td><td><code>D4</code> · <code>D7</code></td></tr>
+<tr><td>Left ultrasonic</td><td>Trig / Echo (GPIO)</td><td><code>TX</code> · <code>D0</code></td></tr>
+<tr><td>OLED display</td><td>I²C</td><td><code>SDA</code> · <code>SCL</code></td></tr>
+<tr><td>Position</td><td>Wi-Fi → MQTT</td><td>x, y, θ from overhead cameras</td></tr>
+</table></div>
+<h4>Color code</h4>
+<p style="font-size:15px">Red is power, black is ground. Blue carries trigger, S1 and SCL; green carries echo, S2 and SDA. Keeping one scheme across every part made debugging much faster.</p>
+</div></details>
+    </div>
+  </section>
+
+  <section class="tv-sec" style="padding:0">
+    <span class="label">Takeaways</span>
+    <h2>What I learned.</h2>
+    <div class="res lr-page"><div class="tv-in"><b>Sensing is partly a mechanical problem.</b><p>The code was fine, but the sensors were mounted above the wall tops and couldn't see them. Lowering the hanger fixed it.</p></div><div class="tv-in"><b>Get it right slowly, then make it fast.</b><p>We fixed collisions by slowing down and widening the safety margins, then tightened them and added speed back step by step.</p></div><div class="tv-in"><b>In a control loop, the order is the design.</b><p>Deciding what the robot checks first, like arriving, then safety, then steering, removed most of the erratic behavior.</p></div><div class="tv-in"><b>Check the hardware before the code.</b><p>Swapped motor wires and occupied TX/RX pins looked like software bugs. Soldered connections stopped the intermittent failures.</p></div><div class="tv-in"><b>Split by strengths, solve together.</b><p>We divided the CAD, code and wiring by strength, but the hardest problems got fixed when all three of us worked on them together.</p></div></div>
+  </section>
+
+  <section class="tv-sec" style="padding:0">
+    <span class="label">Result</span>
+    <h2>All four stops in 1:25.</h2>
+    <p class="sub" style="max-width:68ch">In the final run the robot reached every stop in less than half the time limit, with a single wall bump, and earned full marks for performance.</p>
+  </section>
+
+  <div class="tv-foot"><button type="button" class="tv-back" data-back><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3m0 0l4-4M3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to portfolio</button></div>
+</div>
+
+<dialog id="lb" aria-label="Photo viewer">
+  <img id="lb-img" alt="">
+  <div class="bar2"><span class="label" id="lb-cap"></span><button class="act" id="lb-close" type="button">Close</button></div>
+</dialog>
+
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motion@12.23.12/dist/motion.js"></script>
+<script>
+(function(){
+const M=window.Motion, reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const useMotion=!!(M&&M.animate&&M.inView)&&!reduce;
+const root=document.documentElement;
+const spring={type:'spring',visualDuration:.7,bounce:.18};
+
+if(useMotion){
+  root.classList.add('mo');
+  const {animate,inView,stagger,scroll}=M;
+  const $=s=>[...document.querySelectorAll(s)];
+
+  /* hero entrance: staggered spring */
+  const heroText=$('.hero .rv:not(.portrait-wrap)');
+  heroText.forEach(el=>{el.style.opacity=0;el.style.transform='translateY(28px)'});
+  animate(heroText,{opacity:1,transform:'translateY(0px)'},{...spring,delay:stagger(.08,{startDelay:.05})});
+  const pw=document.querySelector('.portrait-wrap');
+  pw.style.opacity=0;pw.style.transform='scale(.9)';
+  animate(pw,{opacity:1,transform:'scale(1)'},{type:'spring',visualDuration:.9,bounce:.3,delay:.2});
+  $('.chip').forEach((c,i)=>{c.style.opacity=0;animate(c,{opacity:1,transform:['translateY(14px)','translateY(0px)']},{...spring,delay:.55+i*.12}).then(()=>{
+    animate(c,{transform:['translateY(0px)','translateY(-6px)','translateY(0px)']},{duration:5+i,repeat:Infinity,ease:'easeInOut'});
+  })});
+  /* slow ring rotation, image stays upright */
+  animate('.portrait',{rotate:360},{duration:40,repeat:Infinity,ease:'linear'});
+  animate('.portrait img',{rotate:-360},{duration:40,repeat:Infinity,ease:'linear'});
+
+  /* scroll reveals: groups stagger their children */
+  const groups=[['.facts',':scope > div'],['.exp',':scope > li'],['.values',':scope > div'],['.bio',':scope > p'],['.work',':scope > .proj']];
+  const grouped=new Set();
+  groups.forEach(([g,c])=>{
+    const host=document.querySelector(g); if(!host) return;
+    const kids=[...host.querySelectorAll(c)]; kids.forEach(k=>grouped.add(k)); grouped.add(host);
+    if(host.getBoundingClientRect().top<innerHeight*.9 && g==='.facts'){
+      kids.forEach(k=>{k.style.opacity=0});
+      animate(kids,{opacity:1,transform:['translateY(18px)','translateY(0px)']},{...spring,delay:stagger(.07,{startDelay:.45})});
+      host.style.opacity=1;host.style.transform='none';return;
+    }
+    host.style.opacity=1;host.style.transform='none';
+    kids.forEach(k=>{k.style.opacity=0;k.style.transform='translateY(26px)'});
+    inView(host,()=>{animate(kids,{opacity:1,transform:'translateY(0px)'},{...spring,delay:stagger(g==='.work'?.12:.07)})},{amount:.08});
+  });
+  $('.rv').filter(el=>!grouped.has(el)&&!el.closest('.hero')).forEach(el=>{
+    el.style.opacity=0;el.style.transform='translateY(24px)';
+    inView(el,()=>{animate(el,{opacity:1,transform:'translateY(0px)'},spring)},{amount:.2});
+  });
+
+  /* scroll-linked: progress bar, drifting glow, gentle portrait parallax */
+  if(scroll){
+    scroll(animate('#progress',{transform:['scaleX(0)','scaleX(1)']},{ease:'linear'}));
+    scroll(animate('.glow',{transform:['translateX(-50%) translateY(0px)','translateX(-50%) translateY(240px)'],opacity:[1,.2]},{ease:'linear'}),{offset:['start start','1000px start']});
+    scroll(animate('.portrait-wrap',{y:[0,-60]},{ease:'linear'}),{target:document.querySelector('.hero'),offset:['start start','end start']});
+  }
+
+  /* springy press feedback on buttons */
+  $('.btn,.cta-sm,.act,.thumbs button').forEach(b=>{
+    b.addEventListener('pointerdown',()=>animate(b,{scale:.96},{type:'spring',visualDuration:.2,bounce:0}));
+    const up=()=>animate(b,{scale:1},{type:'spring',visualDuration:.35,bounce:.4});
+    b.addEventListener('pointerup',up);b.addEventListener('pointerleave',up);
+  });
+} else {
+  /* fallback: CSS reveal */
+  root.classList.add('js');
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('.rv').forEach(el=>{
+    if(el.getBoundingClientRect().top<innerHeight) requestAnimationFrame(()=>el.classList.add('in')); else io.observe(el);
+  });
+  if(!reduce){const p=document.getElementById('progress');addEventListener('scroll',()=>{const m=document.documentElement.scrollHeight-innerHeight;p.style.transform='scaleX('+(m>0?scrollY/m:0)+')'},{passive:true})}
+}
+
+/* nav state */
+const nav=document.getElementById('nav'),links=[...nav.querySelectorAll('a[data-s]')];
+function onScroll(){
+  nav.classList.toggle('solid',scrollY>30);
+  let cur=-1;links.forEach((a,i)=>{const s=document.getElementById(a.dataset.s);if(s&&s.getBoundingClientRect().top<innerHeight*.35)cur=i});
+  links.forEach((a,i)=>{a.classList.toggle('on',i===cur);if(i===cur)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});
+}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+/* card glow follows pointer */
+document.querySelectorAll('.proj').forEach(p=>p.addEventListener('pointermove',e=>{const r=p.getBoundingClientRect();p.style.setProperty('--mx',(e.clientX-r.left)+'px');p.style.setProperty('--my',(e.clientY-r.top)+'px')}));
+
+/* galleries + lightbox */
+const lb=document.getElementById('lb'),lbImg=document.getElementById('lb-img'),lbCap=document.getElementById('lb-cap');
+document.querySelectorAll('[data-gallery]').forEach(g=>{
+  const shot=g.querySelector('.shot'),img=shot.querySelector('img'),tag=shot.querySelector('.tag'),th=[...g.querySelectorAll('.thumbs button')];
+  const layers=[...g.querySelectorAll('.stage-layer')];
+  th.forEach(b=>b.addEventListener('click',()=>{
+    th.forEach(z=>z.setAttribute('aria-current',z===b));
+    if(layers.length){let hit=null;layers.forEach(L=>{const on=L.dataset.kind===b.dataset.kind;L.hidden=!on;if(on)hit=L});
+      if(window.R3D)(b.dataset.kind==='3d'?R3D.show():R3D.hide());
+      if(hit){if(hit.dataset.kind==='route'&&window.__routePlay)window.__routePlay();return}}
+    const swap=()=>{img.src=b.dataset.src;img.alt=b.dataset.cap;tag.textContent=b.dataset.cap;shot.classList.toggle('cover',b.dataset.fit==='cover')};
+    if(useMotion){
+      M.animate(img,{opacity:0,scale:.97,filter:'blur(6px)'},{duration:.18,ease:'easeIn'}).then(()=>{swap();
+        const done=()=>M.animate(img,{opacity:[0,1],scale:[1.03,1],filter:['blur(6px)','blur(0px)']},{type:'spring',visualDuration:.5,bounce:.15});
+        img.complete?done():img.addEventListener('load',done,{once:true});});
+      M.animate(tag,{opacity:[0,1],x:[-8,0]},{type:'spring',visualDuration:.4,bounce:.2,delay:.18});
+    } else {
+      img.style.opacity=0;
+      setTimeout(()=>{swap();img.style.opacity=1},200);
+    }
+  }));
+  shot.addEventListener('click',()=>{lbImg.src=img.src;lbImg.alt=img.alt;lbCap.textContent=tag.textContent;try{lb.showModal()}catch(e){}
+    if(useMotion)M.animate(lb,{opacity:[0,1],transform:['scale(.94)','scale(1)']},{type:'spring',visualDuration:.45,bounce:.2});});
+});
+document.getElementById('lb-close').addEventListener('click',()=>lb.close());
+document.addEventListener('r3dfail',e=>{const g=e.target.closest('[data-gallery]');if(!g)return;const t=g.querySelector('.t-3d');if(t)t.hidden=true;const r=g.querySelector('.t-route');if(r)r.click()});
+lb.addEventListener('click',e=>{if(e.target===lb)lb.close()});
+
+
+/* bike gallery: main stage + thumbnail rail (3D model, photos, video) */
+(function(){
+  const g=document.getElementById('bike-gallery'); if(!g)return;
+  const p3=document.getElementById('pane-3d'),ph=g.querySelector('.stage-photo'),phImg=ph.querySelector('img'),phTag=ph.querySelector('.tag'),
+        pv=g.querySelector('.stage-video'),vid=document.getElementById('bike-video'),rail=[...g.querySelectorAll('.rail .t')];
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, M=window.Motion;
+  const pop=el=>{if(M&&!reduce)M.animate(el,{opacity:[0,1],transform:['scale(.985)','scale(1)']},{type:'spring',visualDuration:.45,bounce:.12})};
+  function show(btn){
+    rail.forEach(b=>b.setAttribute('aria-current',b===btn));
+    const k=btn.dataset.kind;
+    p3.hidden=k!=='3d'; ph.hidden=k!=='photo'; pv.hidden=k!=='video';
+    if(k!=='video'&&!vid.paused)vid.pause();
+    if(k==='photo'){phImg.src=btn.dataset.src;phImg.alt=btn.dataset.cap;phTag.textContent=btn.dataset.cap;ph.classList.toggle('cover',btn.dataset.fit==='cover');pop(ph)}
+    if(k==='video'){if(vid.getAttribute('src')!==btn.dataset.src)vid.src=btn.dataset.src;pop(pv);vid.play().catch(()=>{})}
+    if(k==='3d')pop(p3);
+  }
+  rail.forEach((b,i)=>{
+    b.addEventListener('click',()=>show(b));
+    b.addEventListener('keydown',e=>{const d={ArrowDown:1,ArrowRight:1,ArrowUp:-1,ArrowLeft:-1}[e.key];if(!d)return;e.preventDefault();const n=rail[(i+d+rail.length)%rail.length];n.focus();show(n)});
+  });
+  ph.addEventListener('click',()=>{const lb=document.getElementById('lb');document.getElementById('lb-img').src=phImg.src;document.getElementById('lb-img').alt=phImg.alt;document.getElementById('lb-cap').textContent=phTag.textContent;try{lb.showModal()}catch(e){}});
+
+  const mv=p3.querySelector('model-viewer'),bar=p3.querySelector('.mv-progress i');
+  /* load the model once the project is near the viewport; fall back to a base64 copy where .glb files can't be served */
+  const glb=mv.dataset.src;
+  const toBlobUrl=b=>URL.createObjectURL(new Blob([b],{type:'model/gltf-binary'}));
+  const load=()=>fetch(glb).then(r=>{if(!r.ok||/html/.test(r.headers.get('content-type')||''))throw 0;return r.arrayBuffer()})
+    .then(b=>{mv.src=toBlobUrl(b)})
+    .catch(()=>fetch(glb.replace(/\.glb$/,'.txt')).then(r=>{if(!r.ok)throw 0;return r.text()}).then(t=>{const bin=atob(t.trim()),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);mv.src=toBlobUrl(u)}))
+    .catch(()=>{rail[0].hidden=true;show(rail[1])});
+  const io3=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io3.disconnect();load()}},{rootMargin:'600px'});io3.observe(g);
+  mv.addEventListener('progress',e=>{bar.style.width=(e.detail.totalProgress*100)+'%';if(e.detail.totalProgress>=1)bar.parentElement.style.opacity=0});
+  mv.addEventListener('pointerdown',()=>p3.classList.add('touched'),{once:true});
+  /* part labels: toggle, pause spin while reading a label, tap to pin on touch */
+  /* why bubble: hide with ×, reopen by tapping the avatar */
+  const why=document.getElementById('why'),whyAv=document.getElementById('why-av');
+  const setWhy=open=>{why.classList.toggle('closed',!open);whyAv.setAttribute('aria-expanded',open)};
+  if(matchMedia('(max-width:560px)').matches)setWhy(false);
+  document.getElementById('why-close').addEventListener('click',e=>{e.stopPropagation();setWhy(false)});
+  whyAv.addEventListener('click',e=>{e.stopPropagation();setWhy(why.classList.contains('closed'))});
+  /* tuck the note away once the visitor starts rotating the bike */
+  mv.addEventListener('pointerdown',()=>setWhy(false),{once:true});
+  const tog=p3.querySelector('.parts-toggle'),hsBtns=[...p3.querySelectorAll('.hs')];
+  tog.addEventListener('click',()=>{const on=tog.getAttribute('aria-pressed')!=='true';tog.setAttribute('aria-pressed',on);p3.classList.toggle('no-parts',!on)});
+  let resume;
+  const flip=h=>{const r=h.getBoundingClientRect(),v=p3.getBoundingClientRect();h.classList.toggle('flip',r.left-v.left>v.width*.5)};
+  /* idle wheelie: the model carries a looping 'Wheelie' animation; labels hide while the front wheel is up */
+  const anim=!matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const still=()=>{mv.autoRotate=false;mv.pause()}, go=()=>{mv.autoRotate=true;if(anim)mv.play()};
+  mv.addEventListener('load',()=>{if(anim&&mv.availableAnimations&&mv.availableAnimations.includes('Wheelie')){mv.animationName='Wheelie';mv.play()}});
+  (function tick(){if(mv.loaded&&anim){const t=mv.currentTime%10.5;p3.classList.toggle('lift',t>4.9&&t<9.3)}requestAnimationFrame(tick)})();
+  hsBtns.forEach(h=>{
+    ['pointerenter','focus','click'].forEach(ev=>h.addEventListener(ev,()=>flip(h)));
+    h.addEventListener('pointerenter',()=>{clearTimeout(resume);still()});
+    h.addEventListener('pointerleave',()=>{resume=setTimeout(()=>{if(!p3.querySelector('.hs.open'))go()},1200)});
+    h.addEventListener('click',e=>{e.stopPropagation();const was=h.classList.contains('open');hsBtns.forEach(x=>x.classList.remove('open'));if(!was){h.classList.add('open');still()}else{go()}});
+  });
+  mv.addEventListener('click',()=>{if(p3.querySelector('.hs.open')){hsBtns.forEach(x=>x.classList.remove('open'));go()}});
+  /* render at full resolution instead of letting the viewer drop to half resolution while it spins */
+  customElements.whenDefined('model-viewer').then(()=>{const MV=customElements.get('model-viewer');if(MV)MV.minimumRenderScale=1});
+})();
+
+
+/* resume: hide the buttons until a resume.pdf is actually uploaded */
+(function(){const a=document.querySelector('a.resume-link');if(!a)return;
+  fetch(a.getAttribute('href'),{method:'HEAD'}).then(r=>{const t=r.headers.get('content-type')||'';if(r.ok&&/pdf/i.test(t))document.documentElement.classList.remove('resume-off')}).catch(()=>{});
+})();
+/* experience photos open in the lightbox */
+document.querySelectorAll('.exp-photo,.exp-circle,.exp-square').forEach(b=>b.addEventListener('click',()=>{const im=b.querySelector('img'),lb=document.getElementById('lb');
+  document.getElementById('lb-img').src=b.dataset.full||im.src;document.getElementById('lb-img').alt=im.alt;document.getElementById('lb-cap').textContent=b.dataset.cap;try{lb.showModal()}catch(e){}}));
+
+
+/* Pushoff: tap the logo to reveal the teaser */
+(function(){const btn=document.getElementById('po-reveal'),sec=document.getElementById('pushoff'),hint=document.getElementById('po-hint');if(!btn)return;
+  const M=window.Motion,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  btn.addEventListener('click',()=>{
+    const open=btn.getAttribute('aria-expanded')!=='true';
+    btn.setAttribute('aria-expanded',open);hint.textContent=open?'Tap again to close':'Tap the logo for a sneak peek';
+    if(open){sec.hidden=false;
+      if(M&&!reduce){M.animate(sec,{opacity:[0,1],transform:['translateY(24px) scale(.98)','translateY(0px) scale(1)']},{type:'spring',visualDuration:.6,bounce:.15});
+        M.animate([...sec.querySelectorAll('.po-top,.po-head,.po-copy p,.po-foot')],{opacity:[0,1],transform:['translateX(-28px) skewX(-8deg)','translateX(0px) skewX(0deg)']},{type:'spring',visualDuration:.55,bounce:.12,delay:M.stagger(.08,{startDelay:.12})})}
+      setTimeout(()=>sec.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'}),reduce?0:180);
+    } else {
+      if(M&&!reduce){M.animate(sec,{opacity:0,transform:'translateY(16px) scale(.98)'},{duration:.25}).then(()=>{sec.hidden=true;sec.style.opacity='';sec.style.transform=''})}else sec.hidden=true;
+    }
+  });
+})();
+
+/* copy email */
+document.getElementById('copy').addEventListener('click',e=>{
+  const b=e.currentTarget,el=document.getElementById('email');
+  navigator.clipboard.writeText(el.textContent).then(()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1600)})
+  .catch(()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r)});
+});
+})();
+
+/* Separate pages: #track and #robot, each with a back button */
+(function(){
+  const html=document.documentElement,M=window.Motion,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const routes={'#track':'track','#robot':'robot'};
+  try{history.scrollRestoration='manual'}catch(e){}
+  let fromSite=false,savedY=0,drawn=false;
+function chart(){if(drawn)return;drawn=true;
+    const svg=document.getElementById('tv-chart'),d=[['HS \'25',23.20],['Mar 26',22.71],['Apr 26',22.64],['Apr 26',22.35]];
+    const cw=svg.parentNode.clientWidth-44,W=Math.round(Math.max(320,Math.min(640,cw||640))),H=W<480?220:240,L=8,R=8,T=34,B=36;svg.setAttribute('viewBox','0 0 '+W+' '+H);const _=0,lo=22.2,hi=23.4,x=i=>L+30+i*(W-L-R-60)/(d.length-1),y=t=>T+(t-lo)/(hi-lo)*(H-T-B);
+    let g='<defs><linearGradient id="tvfill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a8c4ff" stop-opacity=".22"/><stop offset="1" stop-color="#a8c4ff" stop-opacity="0"/></linearGradient></defs>';
+    g+=`<line class="ax" x1="${L}" x2="${W-R}" y1="${H-B}" y2="${H-B}"/>`;
+    const pts=d.map((p,i)=>[x(i),y(p[1])]),line=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+    g+=`<path class="ar" d="${line} L${pts[3][0]} ${H-B} L${pts[0][0]} ${H-B}Z"/><path class="ln" id="tv-ln" d="${line}"/>`;
+    d.forEach((p,i)=>{g+=`<circle class="pt${i?'':' first'}" cx="${pts[i][0]}" cy="${pts[i][1]}" r="5.5"/><text class="v" x="${pts[i][0]}" y="${pts[i][1]-14}" text-anchor="middle">${p[1].toFixed(2)}</text><text class="x" x="${pts[i][0]}" y="${H-B+22}" text-anchor="middle">${p[0]}</text>`});
+    svg.innerHTML=g;
+    if(M&&!reduce){const ln=document.getElementById('tv-ln'),len=ln.getTotalLength();ln.style.strokeDasharray=len;ln.style.strokeDashoffset=len;M.animate(ln,{strokeDashoffset:[len,0]},{duration:1.1,ease:[.22,.8,.26,1],delay:.35})}
+  }
+
+  function enter(name){
+    const view=document.getElementById(name+'-view');
+    html.dataset.route=name;html.classList.add('route-on');window.scrollTo({top:0,behavior:'instant'});
+    if(name==='track')chart();
+    try{view.focus({preventScroll:true})}catch(e){}
+    if(M&&!reduce){
+      M.animate([...view.querySelectorAll('.tv-in')],{opacity:[0,1],transform:['translateY(18px)','translateY(0px)']},{type:'spring',visualDuration:.55,bounce:.1,delay:M.stagger(.05)});
+      view.querySelectorAll('.ladder').forEach(o=>M.animate([...o.children],{opacity:[0,1],transform:['scaleY(.3)','scaleY(1)']},{duration:.4,delay:M.stagger(.035,{startDelay:.25})}));
+    }
+  }
+  function leave(){html.classList.remove('route-on');delete html.dataset.route;requestAnimationFrame(()=>window.scrollTo({top:savedY,behavior:'instant'}))}
+  function route(){const r=routes[location.hash];if(r)enter(r);else if(html.classList.contains('route-on'))leave()}
+  document.addEventListener('click',e=>{const a=e.target.closest('a[href]');if(!a)return;const h=a.getAttribute('href');if(!routes[h])return;e.preventDefault();
+    if(!html.classList.contains('route-on')){savedY=window.scrollY;fromSite=true}history.pushState(null,'',h);route()});
+  const back=()=>{if(fromSite){fromSite=false;history.back()}else{history.pushState(null,'',location.pathname+location.search);savedY=0;route()}};
+  document.querySelectorAll('[data-back]').forEach(b=>b.addEventListener('click',back));
+  window.addEventListener('popstate',()=>{if(!routes[location.hash])fromSite=false;route()});
+  window.addEventListener('hashchange',route);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&html.classList.contains('route-on')&&!document.querySelector('dialog[open]'))back()});
+  if(routes[location.hash])enter(routes[location.hash]);
+
+  /* expandable sections with a smooth open/close */
+  document.querySelectorAll('details.dd,details.learned').forEach(d=>{const sum=d.querySelector('summary'),body=d.querySelector('.dd-body,.learned-body');
+    sum.addEventListener('click',e=>{if(!M||reduce)return;e.preventDefault();
+      if(d.open){const h=body.offsetHeight;M.animate(body,{height:[h+'px','0px'],opacity:[1,0]},{duration:.3,ease:[.22,.8,.26,1]}).then(()=>{d.open=false;body.style.height='';body.style.opacity=''})}
+      else{d.open=true;const h=body.offsetHeight;M.animate(body,{height:['0px',h+'px'],opacity:[0,1]},{duration:.4,ease:[.22,.8,.26,1]}).then(()=>{body.style.height='';body.style.opacity=''})}
+    });
+  });
+
+  /* code: tiny C++ highlighter, file tabs, copy */
+  const KW=/\b(void|int|float|bool|const|unsigned|long|char|byte|return|if|else|while|for|true|false|String|Servo|Ultrasonic|WiFiClient|PubSubClient)\b/;
+  function hl(src){
+    const re=/(\/\/[^\n]*)|("(?:[^"\\]|\\.)*")|(#\w+)|\b(\d+(?:\.\d+)?)\b|\b(void|int|float|bool|const|unsigned|long|char|byte|return|if|else|while|for|true|false|String|Servo|Ultrasonic|WiFiClient|PubSubClient)\b|\b([A-Za-z_]\w*)(?=\s*\()/g;
+    const esc=t=>t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    let out='',last=0,m;
+    while((m=re.exec(src))){out+=esc(src.slice(last,m.index));const t=esc(m[0]);
+      out+=m[1]?'<span class="tok-c">'+t+'</span>':m[2]?'<span class="tok-s">'+t+'</span>':m[3]?'<span class="tok-p">'+t+'</span>':m[4]?'<span class="tok-n">'+t+'</span>':m[5]?'<span class="tok-k">'+t+'</span>':'<span class="tok-f">'+t+'</span>';
+      last=re.lastIndex}
+    return out+esc(src.slice(last));
+  }
+  document.querySelectorAll('code.hl').forEach(c=>{c.innerHTML=hl(c.textContent)});
+  const tabs=[...document.querySelectorAll('.files-bar .ft')];
+  tabs.forEach(t=>t.addEventListener('click',()=>{tabs.forEach(x=>{x.setAttribute('aria-selected',x===t);document.getElementById(x.dataset.file).hidden=x!==t})}));
+  const cp=document.getElementById('rp-copy');
+  if(cp)cp.addEventListener('click',()=>{const t=tabs.find(x=>x.getAttribute('aria-selected')==='true');const txt=document.getElementById(t.dataset.file).textContent;
+    navigator.clipboard.writeText(txt).then(()=>{cp.textContent='Copied';setTimeout(()=>cp.textContent='Copy',1500)}).catch(()=>{})});
+
+  /* robot page images open in the lightbox */
+  document.querySelectorAll('.rp-shot').forEach(b=>b.addEventListener('click',()=>{const im=b.querySelector('img'),lb=document.getElementById('lb');
+    document.getElementById('lb-img').src=b.dataset.full;document.getElementById('lb-img').alt=im.alt;document.getElementById('lb-cap').textContent=b.dataset.cap;try{lb.showModal()}catch(e){}}));
+})();
+
+/* arena replay: robot traces the final-run route (robot page + card window) */
+(function(){
+  const big=document.getElementById('arena-svg');if(!big)return;
+  const segs=[
+    [[710,208],[640,190],[560,190],[522,240],[487,285]],
+    [[487,285],[400,268],[305,240],[262,175],[257,88]],
+    [[257,88],[200,64],[115,60],[58,108],[46,200],[70,270]],
+    [[70,270],[200,272],[380,250],[495,208],[520,150],[470,98],[365,50],[305,56],[330,86],[450,116],[585,142],[692,134],[720,75]]
+  ];
+  function cr(pts){let d='';for(let i=0;i<pts.length-1;i++){const p0=pts[i-1]||pts[i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||p2;
+    const c1=[p1[0]+(p2[0]-p0[0])/6,p1[1]+(p2[1]-p0[1])/6],c2=[p2[0]-(p3[0]-p1[0])/6,p2[1]-(p3[1]-p1[1])/6];
+    d+=(i?'':'M'+p1.join(' '))+` C${c1.map(n=>n.toFixed(1)).join(' ')} ${c2.map(n=>n.toFixed(1)).join(' ')} ${p2.join(' ')}`}return d}
+  const full=segs.map((p,i)=>i?cr(p).replace(/^M[^C]*/,''):cr(p)).join(' ');
+  const fmt=t=>Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function make(svg,hud){
+    const route=svg.querySelector('.ar-route'),trail=svg.querySelector('.ar-trail'),bot=svg.querySelector('.ar-bot');
+    route.setAttribute('d',full);trail.setAttribute('d',full);
+    const tmp=document.createElementNS('http://www.w3.org/2000/svg','path');svg.appendChild(tmp);
+    const ends=[];let acc=0;segs.forEach(p=>{tmp.setAttribute('d',cr(p));acc+=tmp.getTotalLength();ends.push(acc)});tmp.remove();
+    const L=trail.getTotalLength()||acc;trail.style.strokeDasharray=L;trail.style.strokeDashoffset=L;
+    const stops=[...svg.querySelectorAll('.ar-stop')];
+    const DRIVE=10000,PAUSE=650,TOTAL=DRIVE+PAUSE*4,RUN=85;
+    const plan=[];let t=0,prev=0;ends.forEach((e,i)=>{const dur=DRIVE*(e-prev)/L;plan.push({t0:t,t1:t+dur,l0:prev,l1:e,stop:i});t+=dur+PAUSE;prev=e});
+    function place(len){const a=trail.getPointAtLength(Math.max(0,len)),b=trail.getPointAtLength(Math.min(L,len+2));const ang=Math.atan2(b.y-a.y,b.x-a.x)*180/Math.PI;bot.setAttribute('transform',`translate(${a.x.toFixed(1)} ${a.y.toFixed(1)}) rotate(${ang.toFixed(1)})`);trail.style.strokeDashoffset=L-len}
+    const setBtn=txt=>{if(hud.btn)hud.btn.querySelector('span').textContent=txt};
+    function show(el,len,hit,moving){place(len);stops.forEach((g,i)=>g.classList.toggle('hit',i<=hit));
+      if(hud.clock)hud.clock.innerHTML=fmt(Math.min(el,TOTAL)/TOTAL*RUN)+' <small>/ 3:00</small>';
+      if(hud.next)hud.next.textContent=hit>=3?'—':String(hit+2);
+      if(hud.stat)hud.stat.textContent=el>=TOTAL?'Done · all 4 stops':moving?'Driving':hit>=0?'Stopped at '+(hit+1):'Driving'}
+    let raf=0,start=0;
+    function frame(now){const el=now-start;let len=L,hit=-1,moving=false;
+      for(const s of plan){if(el<s.t0){len=s.l0;break}if(el<s.t1){const k=(el-s.t0)/(s.t1-s.t0),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;len=s.l0+(s.l1-s.l0)*e;moving=true;break}hit=s.stop;len=s.l1}
+      show(el,len,hit,moving);
+      if(el<TOTAL)raf=requestAnimationFrame(frame);else setBtn('Replay run')}
+    function finish(){cancelAnimationFrame(raf);show(TOTAL,L,3,false);setBtn('Replay run')}
+    function play(){if(reduce)return finish();cancelAnimationFrame(raf);setBtn('Replay run');start=performance.now();raf=requestAnimationFrame(frame)}
+    if(hud.btn)hud.btn.addEventListener('click',e=>{e.stopPropagation();play()});
+    place(0);if(reduce)finish();
+    return {play,finish};
+  }
+
+  // robot page
+  const A=make(big,{clock:document.getElementById('ar-clock'),next:document.getElementById('ar-next'),stat:document.getElementById('ar-stat'),btn:document.getElementById('ar-play')});
+  if(!reduce&&'IntersectionObserver' in window){let done=false;new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting&&!done&&document.documentElement.dataset.route==='robot'){done=true;o.disconnect();setTimeout(A.play,300)}})},{threshold:.5}).observe(big)}
+
+  // card window on the main page
+  const stage=document.getElementById('route-stage');if(!stage)return;
+  const mini=big.cloneNode(true);mini.removeAttribute('id');mini.classList.add('mini-arena');mini.setAttribute('aria-label','Map of the arena with the robot route through stops 1 to 4');
+  stage.querySelector('.rs-map').appendChild(mini);
+  const B=make(mini,{clock:stage.querySelector('.rs-clock'),btn:stage.querySelector('.rs-replay')});
+  let seen=false;
+  if('IntersectionObserver' in window){new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting&&!seen&&!stage.hidden){seen=true;setTimeout(B.play,250)}})},{threshold:.55}).observe(stage)}else B.finish();
+  window.__routePlay=()=>{seen=true;B.play()};
+})();
+</script>
+<script type="module">
+/* Robot 3D: close-up model (limited orbit) + final-run reconstruction in a 3D arena */
+const R3D=(()=>{
+const root=document.getElementById('r3d');if(!root)return null;
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $=s=>root.querySelector(s);
+const host=$('.r3d-canvas'),bar=$('.r3d-load i'),fade=$('.r3d-fade');
+let THREE,GLTFLoader,OrbitControls,RoomEnvironment,renderer,started=false,visible=false,active=true,mode='close';
+let closeScene,closeCam,controls,runScene,runCam,hiGLTF,loGLTF,robot,trailMesh,stops=[],beams=[],P=null,clock3;
+let camMode='spectator',runT=0,running=false,introT=-1,lastNow=0,finished=false;
+const ARENA={w:7.9,d:3.3};const toW=(x,y)=>[(x-395)/100,(y-165)/100];
+const SEGS=[
+ [[710,208],[640,190],[560,190],[522,240],[487,285]],
+ [[487,285],[400,268],[305,240],[262,175],[257,88]],
+ [[257,88],[200,64],[115,60],[58,108],[46,200],[70,270]],
+ [[70,270],[200,272],[380,250],[495,208],[520,150],[470,98],[365,50],[305,56],[330,86],[450,116],[585,142],[692,134],[720,75]]];
+const STOPS=[[487,285],[257,88],[70,270],[720,75]],START=[710,208];
+const DRIVE=15,PAUSE=0.9,RUN=85; // seconds of animation; clock maps to 85 s
+const fmt=t=>Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
+const ease=k=>k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+
+function fetchGLB(url){const tb=b=>URL.createObjectURL(new Blob([b],{type:'model/gltf-binary'}));
+  return fetch(url).then(r=>{if(!r.ok||/html/.test(r.headers.get('content-type')||''))throw 0;return r.arrayBuffer()}).then(tb)
+  .catch(()=>fetch(url.replace(/\.glb$/,'.txt')).then(r=>{if(!r.ok)throw 0;return r.text()}).then(t=>{const bin=atob(t.trim()),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return tb(u)}))}
+function loadGLB(url,onp){return fetchGLB(url).then(u=>new Promise((res,rej)=>new GLTFLoader().load(u,res,onp,rej)))}
+
+async function init(){
+  if(started)return;started=true;
+  try{
+    [THREE,{GLTFLoader},{OrbitControls},{RoomEnvironment}]=await Promise.all([import('three'),import('three/addons/loaders/GLTFLoader.js'),import('three/addons/controls/OrbitControls.js'),import('three/addons/environments/RoomEnvironment.js')]);
+    renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});
+  }catch(e){fail();return}
+  renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
+  renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  host.appendChild(renderer.domElement);
+  const pm=new THREE.PMREMGenerator(renderer),env=pm.fromScene(new RoomEnvironment(),0.04).texture;
+  // close-up scene
+  closeScene=new THREE.Scene();closeScene.background=new THREE.Color('#121418');closeScene.environment=env;
+  closeScene.add(new THREE.HemisphereLight(0xdfe8ff,0x1a1c20,0.6));
+  const key=new THREE.DirectionalLight(0xffffff,2.2);key.position.set(2.5,4,3.5);key.castShadow=true;key.shadow.mapSize.set(1024,1024);key.shadow.radius=6;
+  Object.assign(key.shadow.camera,{left:-2,right:2,top:2,bottom:-2,near:.5,far:12});closeScene.add(key);
+  const rim=new THREE.DirectionalLight(0xa8c4ff,1.4);rim.position.set(-3,2,-3);closeScene.add(rim);
+  const catcher=new THREE.Mesh(new THREE.PlaneGeometry(8,8),new THREE.ShadowMaterial({opacity:.38}));catcher.rotation.x=-Math.PI/2;catcher.receiveShadow=true;closeScene.add(catcher);
+  const gc=document.createElement('canvas');gc.width=gc.height=256;{const x=gc.getContext('2d'),gr=x.createRadialGradient(128,128,0,128,128,128);gr.addColorStop(0,'rgba(168,196,255,.22)');gr.addColorStop(1,'rgba(168,196,255,0)');x.fillStyle=gr;x.fillRect(0,0,256,256)}
+  const glow=new THREE.Mesh(new THREE.PlaneGeometry(4,4),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(gc),transparent:true,depthWrite:false}));glow.rotation.x=-Math.PI/2;glow.position.y=.002;closeScene.add(glow);
+  closeCam=new THREE.PerspectiveCamera(30,1,.05,60);closeCam.position.set(0,.95,4.9);
+  controls=new OrbitControls(closeCam,renderer.domElement);controls.target.set(0,.62,0);
+  controls.enableDamping=true;controls.dampingFactor=.08;controls.enableZoom=false;controls.enablePan=false;controls.rotateSpeed=.55;
+  const D=THREE.MathUtils.degToRad;controls.minAzimuthAngle=D(-20);controls.maxAzimuthAngle=D(20);controls.minPolarAngle=D(68);controls.maxPolarAngle=D(86);controls.update();
+  renderer.domElement.style.touchAction='pan-y';
+  controls.addEventListener('start',()=>root.classList.add('touched'));
+  resize();new ResizeObserver(resize).observe(host);
+  renderer.setAnimationLoop(loop);
+  try{
+    hiGLTF=await loadGLB(root.dataset.hi,e=>{if(e.total)bar.style.width=(e.loaded/e.total*100)+'%'});
+  }catch(e){fail();return}
+  const m=prep(hiGLTF.scene,true);m.scale.setScalar(.82);m.position.y=.74*.82;closeScene.add(m);
+  root.classList.add('ready');
+}
+function prep(o,shadow){o.traverse(c=>{if(c.isMesh){c.castShadow=shadow;c.receiveShadow=false;if(c.material){c.material.side=THREE.FrontSide}}});
+  const g=new THREE.Group();o.rotation.y=-Math.PI/2;g.add(o);return g} // model faces +X; rotate so it faces +Z
+function fail(){root.classList.add('failed');root.dispatchEvent(new CustomEvent('r3dfail',{bubbles:true}))}
+function resize(){if(!renderer)return;const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;
+  renderer.setPixelRatio(Math.min(devicePixelRatio,mode==='run'?1.5:2));renderer.setSize(w,h,false);
+  [closeCam,runCam].forEach(c=>{if(c){c.aspect=w/h;c.updateProjectionMatrix()}})}
+
+/* ---------- run reconstruction ---------- */
+function numTex(n){const c=document.createElement('canvas');c.width=c.height=128;const x=c.getContext('2d');
+  x.fillStyle='#0c0d10';x.beginPath();x.arc(64,64,54,0,7);x.fill();x.lineWidth=8;x.strokeStyle='#a8c4ff';x.stroke();
+  x.fillStyle='#eceef0';x.font='600 64px "Geist Mono",monospace';x.textAlign='center';x.textBaseline='middle';x.fillText(n,64,68);
+  const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t}
+function ribbon(pts,w,y,color,opacity){const pos=[],idx=[];for(let i=0;i<pts.length;i++){const a=pts[Math.max(0,i-1)],b=pts[Math.min(pts.length-1,i+1)];
+    let dx=b.x-a.x,dz=b.z-a.z;const l=Math.hypot(dx,dz)||1;dx/=l;dz/=l;const nx=-dz*w/2,nz=dx*w/2;const p=pts[i];
+    pos.push(p.x+nx,y,p.z+nz,p.x-nx,y,p.z-nz);if(i){const k=(i-1)*2;idx.push(k,k+1,k+2,k+1,k+3,k+2)}}
+  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setIndex(idx);
+  return new THREE.Mesh(g,new THREE.MeshBasicMaterial({color,transparent:true,opacity,depthWrite:false,side:THREE.DoubleSide}))}
+async function buildRun(){
+  if(runScene)return;
+  const s=runScene=new THREE.Scene();s.background=new THREE.Color('#0b0c0f');s.fog=new THREE.Fog('#0b0c0f',9,22);
+  s.environment=closeScene.environment;
+  s.add(new THREE.HemisphereLight(0xdfe8ff,0x15171b,.75));
+  const sun=new THREE.DirectionalLight(0xffffff,2.1);sun.position.set(3,7,4);sun.castShadow=true;sun.shadow.mapSize.set(2048,1024);sun.shadow.radius=4;
+  Object.assign(sun.shadow.camera,{left:-5.5,right:5.5,top:3.5,bottom:-3.5,near:1,far:20});s.add(sun);
+  const fill=new THREE.DirectionalLight(0xa8c4ff,.6);fill.position.set(-4,3,-3);s.add(fill);
+  // table + floor
+  const table=new THREE.Mesh(new THREE.BoxGeometry(ARENA.w+1.4,.3,ARENA.d+1.4),new THREE.MeshStandardMaterial({color:'#1a1c21',roughness:.9}));table.position.y=-.16;table.receiveShadow=true;s.add(table);
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(ARENA.w,ARENA.d),new THREE.MeshStandardMaterial({color:'#d4d7dc',roughness:.9}));floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;s.add(floor);
+  const grid=new THREE.GridHelper(ARENA.w,40,0xb9bdc4,0xc3c6cc);grid.scale.z=ARENA.d/ARENA.w;grid.position.y=.002;grid.material.transparent=true;grid.material.opacity=.5;s.add(grid);
+  // walls
+  const wallM=new THREE.MeshStandardMaterial({color:'#2a2e35',roughness:.6});const wh=.22,wt=.07;
+  [[0,-ARENA.d/2,ARENA.w+wt*2,wt],[0,ARENA.d/2,ARENA.w+wt*2,wt],[-ARENA.w/2,0,wt,ARENA.d],[ARENA.w/2,0,wt,ARENA.d]].forEach(([x,z,w,d])=>{const m=new THREE.Mesh(new THREE.BoxGeometry(w,wh,d),wallM);m.position.set(x,wh/2,z);m.castShadow=m.receiveShadow=true;s.add(m)});
+  // buildings (from the arena map)
+  const bM=new THREE.MeshStandardMaterial({color:'#4d545f',roughness:.7,metalness:.05}),eM=new THREE.LineBasicMaterial({color:0x50565f});
+  const shapes=[[[516,8],[648,8],[648,120],[556,120],[556,72],[516,72]],[[550,238],[648,238],[648,322],[550,322]],[[72,134],[172,134],[172,220],[72,220]],[[283,183],[366,152],[449,183],[366,214]]];
+  const H=[.62,.5,.55,.32];
+  shapes.forEach((pts,i)=>{const sh=new THREE.Shape(pts.map(([x,y])=>{const[a,b]=toW(x,y);return new THREE.Vector2(a,-b)}));
+    const g=new THREE.ExtrudeGeometry(sh,{depth:H[i],bevelEnabled:false});g.rotateX(-Math.PI/2);const m=new THREE.Mesh(g,bM);m.castShadow=m.receiveShadow=true;s.add(m);
+    const e=new THREE.LineSegments(new THREE.EdgesGeometry(g),eM);s.add(e)});
+  // path
+  const curves=SEGS.map(seg=>new THREE.CatmullRomCurve3(seg.map(([x,y])=>{const[a,b]=toW(x,y);return new THREE.Vector3(a,0,b)}),false,'centripetal'));
+  const lens=curves.map(c=>c.getLength()),total=lens.reduce((a,b)=>a+b,0);
+  const all=[];curves.forEach((c,i)=>{const n=Math.round(lens[i]*40);c.getSpacedPoints(n).forEach((p,j)=>{if(i===0||j>0)all.push(p)})});
+  s.add(ribbon(all,.05,.004,0x8a9099,.55));
+  trailMesh=ribbon(all,.075,.006,0xa8c4ff,.95);trailMesh.geometry.setDrawRange(0,0);s.add(trailMesh);
+  // plan: drive time per segment proportional to length
+  let t=0;P={curves,lens,total,all,plan:curves.map((c,i)=>{const d=DRIVE*lens[i]/total;const o={t0:t,t1:t+d,i};t+=d+PAUSE;return o})};P.end=t-PAUSE;
+  // start + stops
+  const[sx,sz]=toW(...START);const pad=new THREE.Mesh(new THREE.CircleGeometry(.28,48),new THREE.MeshBasicMaterial({color:0xb7a6ff,transparent:true,opacity:.55}));pad.rotation.x=-Math.PI/2;pad.scale.y=.75;pad.position.set(sx,.005,sz);s.add(pad);
+  STOPS.forEach(([x,y],i)=>{const[a,b]=toW(x,y);
+    const disc=new THREE.Mesh(new THREE.RingGeometry(.15,.2,48),new THREE.MeshBasicMaterial({color:0x6b7280,side:THREE.DoubleSide}));disc.rotation.x=-Math.PI/2;disc.position.set(a,.008,b);s.add(disc);
+    const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:numTex(i+1),depthTest:false}));sp.scale.setScalar(.26);sp.position.set(a,.9,b);sp.renderOrder=5;s.add(sp);
+    const beam=new THREE.Mesh(new THREE.CylinderGeometry(.17,.17,1.1,32,1,true),new THREE.MeshBasicMaterial({color:0xa8c4ff,transparent:true,opacity:0,depthWrite:false,side:THREE.DoubleSide}));beam.position.set(a,.55,b);s.add(beam);
+    stops.push(disc);beams.push(beam)});
+  // robot: LOD (detailed up close, light at distance)
+  try{loGLTF=await loadGLB(root.dataset.lo)}catch(e){loGLTF=null}
+  robot=new THREE.LOD();const RS=.2;
+  const hi=prep(hiGLTF.scene.clone(true),true);const lo=loGLTF?prep(loGLTF.scene,true):hi.clone(true);
+  [hi,lo].forEach(o=>{o.scale.setScalar(RS);o.position.y=.74*RS});robot.addLevel(hi,0);robot.addLevel(lo,2.6);s.add(robot);
+  robot.position.set(sx,0,sz);
+  runCam=new THREE.PerspectiveCamera(42,1,.05,60);resize();
+}
+let yaw=0,camPos,camLook;
+function stateAt(t){ // -> {pos,dir,hit,moving}
+  let hit=-1;for(const o of P.plan){if(t<o.t0)break;if(t<o.t1){const k=ease((t-o.t0)/(o.t1-o.t0));const c=P.curves[o.i];const u=Math.min(.9999,Math.max(0,k));
+      const before=P.lens.slice(0,o.i).reduce((a,b)=>a+b,0);return {pos:c.getPointAt(u),dir:c.getTangentAt(u),hit,moving:true,dist:before+P.lens[o.i]*u}}
+    hit=o.i}
+  const o=P.plan[Math.max(0,hit)],c=P.curves[Math.max(0,hit)];
+  if(hit<0)return {pos:P.curves[0].getPointAt(0),dir:P.curves[0].getTangentAt(0),hit,moving:false,dist:0};
+  return {pos:c.getPointAt(1),dir:c.getTangentAt(.999),hit,moving:false,dist:P.lens.slice(0,hit+1).reduce((a,b)=>a+b,0)}}
+let MM=null;
+function buildMini(){if(MM)return;const src=document.getElementById('arena-svg');const box=$('.r3d-mini');if(!src||!box)return;
+  const svg=src.cloneNode(true);svg.removeAttribute('id');svg.setAttribute('aria-hidden','true');svg.removeAttribute('role');box.appendChild(svg);
+  svg.querySelectorAll('.ar-stop circle').forEach(c=>c.setAttribute('r',24));
+  const tr=svg.querySelector('.ar-trail'),L=tr.getTotalLength();tr.style.strokeDasharray=L;tr.style.strokeDashoffset=L;
+  const bot=svg.querySelector('.ar-bot');bot.innerHTML='<circle r="20" fill="rgba(168,196,255,.25)"/><circle r="11" fill="#eceef0"/><path d="M8 -7L22 0L8 7Z" fill="#a8c4ff"/>';
+  MM={svg,tr,L,bot,stops:[...svg.querySelectorAll('.ar-stop')]};
+  box.addEventListener('click',()=>box.setAttribute('aria-pressed',box.getAttribute('aria-pressed')!=='true'))}
+function updMini(st){if(!MM)return;const p=robot.position,x=p.x*100+395,y=p.z*100+165,ang=Math.atan2(st.dir.z,st.dir.x)*180/Math.PI;
+  MM.bot.setAttribute('transform',`translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${ang.toFixed(1)})`);
+  MM.tr.style.strokeDashoffset=MM.L*(1-Math.min(1,st.dist/P.total));
+  MM.stops.forEach((g,i)=>g.classList.toggle('hit',i<=st.hit))}
+function setHud(t,st){const clk=$('.r3d-clock'),nx=$('.r3d-next'),stt=$('.r3d-stat');
+  const tt=Math.min(t,P.end)/P.end*RUN;clk.innerHTML=fmt(tt)+' <small>/ 3:00</small>';
+  nx.textContent=st.hit>=3?'—':String(st.hit+2);
+  stt.textContent=t>=P.end?'All 4 done':st.moving?'Driving':st.hit>=0?'Stopped at '+(st.hit+1):'Ready'}
+function applyRun(t,dt,snap){
+  const st=stateAt(t);robot.position.copy(st.pos);
+  const ty=Math.atan2(-st.dir.z,st.dir.x)+Math.PI/2; // model group faces +Z after prep; heading -> yaw
+  let d=ty-yaw;while(d>Math.PI)d-=2*Math.PI;while(d<-Math.PI)d+=2*Math.PI;yaw=snap?ty:yaw+d*Math.min(1,dt*8);robot.rotation.y=yaw;
+  robot.position.y=st.moving?Math.abs(Math.sin(t*18))*.004:0;
+  const n=Math.max(0,Math.min(P.all.length-1,Math.round(st.dist/P.total*(P.all.length-1))));trailMesh.geometry.setDrawRange(0,n*6);
+  stops.forEach((d,i)=>d.material.color.set(i<=st.hit?0xa8c4ff:0x6b7280));
+  beams.forEach((b,i)=>{const on=i<=st.hit;b.material.opacity+=((on?(i===st.hit&&!st.moving?.28:.1):0)-b.material.opacity)*Math.min(1,dt*4)});
+  setHud(t,st);updMini(st);return st}
+function camTarget(st){
+  const r=robot.position;
+  if(camMode==='chase'){const fwd=new THREE.Vector3(Math.sin(yaw),0,Math.cos(yaw));
+    return {pos:r.clone().addScaledVector(fwd,-1.15).add(new THREE.Vector3(0,.62,0)),look:r.clone().addScaledVector(fwd,.6).add(new THREE.Vector3(0,.08,0))}}
+  if(camMode==='top')return {pos:new THREE.Vector3(0,9.6,2.4),look:new THREE.Vector3(0,0,.12)};
+  // spectator: stands at the near side of the table and walks along it, turning to follow the robot
+  return {pos:new THREE.Vector3(r.x*.6,3.0,3.7),look:new THREE.Vector3(r.x*.85,0,r.z*.7)}}
+
+function loop(now){
+  now/=1000;const dt=Math.min(.05,now-(lastNow||now));lastNow=now;
+  if(!visible||!active)return;
+  if(mode==='close'){controls.update();renderer.render(closeScene,closeCam);return}
+  if(!P)return;
+  if(introT>=0){ // fly from robot's face out to the spectator seat
+    introT+=dt;const k=ease(Math.min(1,introT/2.2));const st=applyRun(0,dt,true);const tg=camTarget(st);
+    const r=robot.position,fwd=new THREE.Vector3(Math.sin(yaw),0,Math.cos(yaw));
+    const p0=r.clone().addScaledVector(fwd,.95).add(new THREE.Vector3(0,.16,0)),l0=r.clone().add(new THREE.Vector3(0,.12,0));
+    runCam.position.lerpVectors(p0,tg.pos,k);camLook=l0.clone().lerp(tg.look,k);runCam.lookAt(camLook);camPos=runCam.position.clone();
+    renderer.render(runScene,runCam);if(introT>=2.2){introT=-1;running=true;runT=0}return}
+  if(running){runT+=dt;if(runT>=P.end+.2){runT=P.end;running=false;finished=true;root.classList.add('done')}}
+  const st=applyRun(runT,dt,false);const tg=camTarget(st);
+  const k=Math.min(1,dt*(camMode==='chase'?3.2:2));camPos.lerp(tg.pos,k);camLook.lerp(tg.look,Math.min(1,dt*4));runCam.position.copy(camPos);runCam.lookAt(camLook);
+  renderer.render(runScene,runCam)}
+
+async function startRun(){
+  root.classList.add('busy');
+  await buildRun();root.classList.remove('busy');
+  fade.classList.add('on');await new Promise(r=>setTimeout(r,260));
+  buildMini();mode='run';root.classList.add('run');root.classList.remove('done');resize();finished=false;
+  applyRun(0,0,true);camPos=new THREE.Vector3();camLook=new THREE.Vector3();
+  if(reduce){const tg=camTarget(stateAt(0));camPos.copy(tg.pos);camLook.copy(tg.look);introT=-1;running=true;runT=0}else{introT=0;running=false}
+  fade.classList.remove('on')}
+function replay(){if(!P)return;root.classList.remove('done');runT=0;running=true;finished=false}
+async function backToModel(){fade.classList.add('on');await new Promise(r=>setTimeout(r,260));mode='close';running=false;introT=-1;root.classList.remove('run','done');resize();fade.classList.remove('on')}
+$('.r3d-go').addEventListener('click',startRun);
+$('.r3d-replay').addEventListener('click',replay);
+$('.r3d-back').addEventListener('click',backToModel);
+root.querySelectorAll('.r3d-cam button').forEach(b=>b.addEventListener('click',()=>{camMode=b.dataset.cam;root.querySelectorAll('.r3d-cam button').forEach(x=>x.setAttribute('aria-pressed',x===b))}));
+new IntersectionObserver(es=>{es.forEach(e=>{visible=e.isIntersecting;if(visible&&!started)init()})},{rootMargin:'500px'}).observe(root);
+return {show(){active=true;resize()},hide(){active=false}};
+})();
+
+window.R3D=R3D;
+</script>
+
+</body>
+</html>

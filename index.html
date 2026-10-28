@@ -3,15 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Chad J. Francis, mechanical engineering student at Stevens Institute of Technology. Born to innovate.">
+<meta name="description" content="Chad J. Francis, mechanical engineering student and varsity sprinter at Stevens Institute of Technology. Born to innovate.">
 <title>Chad J. Francis Engineering</title>
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://chadjfrancis.com/">
 <meta property="og:title" content="Chad J. Francis | Engineering Portfolio">
-<meta property="og:description" content="Mechanical engineering student at Stevens. Electric dirt bike built from the frame up, with an interactive 3D model, plus a self-driving robot and an automated plant watering system.">
-<meta property="og:image" content="https://chadjfrancis.com/og-image.jpg?v=3">
+<meta property="og:description" content="Mechanical engineering student and varsity sprinter at Stevens. Watch a self-driving robot's winning run replayed in 3D, explore an electric dirt bike built from the frame up, and see my road so far.">
+<meta name="twitter:description" content="Mechanical engineering student and varsity sprinter at Stevens. Watch a self-driving robot's winning run replayed in 3D, explore an electric dirt bike built from the frame up, and see my road so far.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0a0b0d">
+<meta property="og:image" content="https://chadjfrancis.com/og-image.jpg?v=4">
 <meta property="og:image:alt" content="Chad J. Francis, About me: Engineering portfolio">
-<meta name="twitter:image" content="https://chadjfrancis.com/og-image.jpg?v=3">
+<meta name="twitter:image" content="https://chadjfrancis.com/og-image.jpg?v=4">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="627">
 <meta name="twitter:card" content="summary_large_image">
@@ -1039,6 +1044,98 @@ body{transition:background-color .3s,color .3s}
 .ft-img.mv .ft-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:.9;transition:opacity .6s}
 .ft-img.mv.loaded .ft-poster{opacity:0}
 .ft:hover .ft-img.mv .ft-poster{transform:none}
+
+/* "watch the demo" button: high-contrast, hard to miss */
+.r3d .r3d-go{gap:11px;min-height:52px;padding:0 20px 0 7px;border:0;border-radius:999px;color:#1a0d00;
+  background:linear-gradient(135deg,#ffd27a 0%,#ffb347 45%,#ff8a3d 100%);
+  box-shadow:0 10px 30px -8px rgba(255,150,60,.75),0 0 0 1px rgba(255,255,255,.25) inset;backdrop-filter:none;overflow:hidden;isolation:isolate}
+.r3d .r3d-go::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.55) 48%,transparent 66%);transform:translateX(-130%)}
+.r3d .r3d-go:hover{background:linear-gradient(135deg,#ffdc92,#ffbe5c 45%,#ff9850);transform:translate(-50%,-2px) scale(1.03);box-shadow:0 14px 38px -8px rgba(255,150,60,.9)}
+.r3d.ready .r3d-go:hover{transform:translate(-50%,-2px) scale(1.03)}
+.go-ic{position:relative;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#1a0d00;color:#ffc56a;flex:none}
+.go-ic svg{width:15px;height:15px;margin-left:2px;color:#ffc56a}
+.go-ic::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid rgba(26,13,0,.55);opacity:0}
+.go-t{display:grid;text-align:left;line-height:1.15}
+.go-t b{font:700 15px/1.15 var(--sans);letter-spacing:-.01em}
+.go-t small{font:600 10.5px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;opacity:.72}
+@media (prefers-reduced-motion:no-preference){
+  .r3d.ready .r3d-go{animation:go-glow 2.4s ease-out infinite 1.2s}
+  .r3d.ready .r3d-go::before{animation:hp-sheen 3.6s var(--ease) infinite 1.8s}
+  .r3d.ready .go-ic::after{animation:dot-ping 1.8s ease-out infinite 1.2s}
+}
+@keyframes go-glow{0%{box-shadow:0 10px 30px -8px rgba(255,150,60,.75),0 0 0 0 rgba(255,170,80,.55)}70%,100%{box-shadow:0 10px 30px -8px rgba(255,150,60,.75),0 0 0 14px rgba(255,170,80,0)}}
+@media (max-width:560px){.r3d .r3d-go{min-height:46px;padding:0 16px 0 5px;gap:9px}.go-ic{width:34px;height:34px}.go-t b{font-size:13.5px}.go-t small{font-size:9.5px}}
+
+/* featured: robot first, gold tint */
+.ft-robot{border-color:rgba(255,179,71,.35);background:radial-gradient(120% 80% at 50% 0%,rgba(255,179,71,.12),transparent 60%),var(--surface)}
+.ft-robot:hover{border-color:rgba(255,179,71,.7);box-shadow:0 20px 50px -26px rgba(255,160,60,.55)}
+.ft-robot .ft-img.dark{position:relative;background:radial-gradient(70% 70% at 50% 60%,#2c2418,#121418 72%)}
+.ft-badge.gold{background:linear-gradient(135deg,#ffd27a,#ffb347 50%,#ff8a3d);color:#1a0d00;font-weight:600}
+.ft-robot .ft-img.dark > img{width:auto;height:100%;margin:0 auto;object-fit:contain;-webkit-mask-image:radial-gradient(closest-side,#000 70%,transparent 100%);mask-image:radial-gradient(closest-side,#000 70%,transparent 100%)}
+.ft-play{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);display:inline-flex;align-items:center;gap:7px;padding:7px 13px 7px 9px;border-radius:999px;background:linear-gradient(135deg,#ffd27a,#ffb347 50%,#ff8a3d);color:#1a0d00;font:600 12.5px/1 var(--sans);white-space:nowrap;box-shadow:0 8px 22px -8px rgba(255,150,60,.8);transition:transform .3s var(--ease)}
+.ft-play svg{width:12px;height:12px}
+.ft-robot:hover .ft-play{transform:translateX(-50%) scale(1.06)}
+.ft-robot b{color:var(--text)}
+:root[data-mode="light"] .ft-robot{background:radial-gradient(120% 80% at 50% 0%,rgba(255,179,71,.16),transparent 60%),var(--surface)}
+
+/* ===== About me: road map ===== */
+html[data-route="me"] #me-view{display:block}
+.me-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(20px,4vw,40px);align-items:center;margin-top:40px}
+.me-photo{width:clamp(110px,16vw,168px);aspect-ratio:1;border-radius:50%;padding:5px;background:conic-gradient(from 210deg,var(--line-2),var(--accent) 25%,var(--line-2) 45%,var(--line-2))}
+.me-photo img{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:50% 30%;border:4px solid var(--bg)}
+.me-head h1{margin:10px 0 0;font:400 clamp(40px,6.4vw,72px)/1 var(--sans);letter-spacing:-.045em}
+.me-head h1 em{font-style:normal;color:var(--faint)}
+.me-head p{margin:14px 0 0;color:var(--dim);max-width:56ch}
+.road{position:relative;margin-top:16px;--p:0}
+.road-track{position:absolute;left:50%;top:0;bottom:0;width:14px;transform:translateX(-50%);border-radius:999px;background:var(--surface-2);border:1px solid var(--line)}
+.road-track::before{content:"";position:absolute;left:50%;top:10px;bottom:10px;width:2px;transform:translateX(-50%);background:repeating-linear-gradient(to bottom,var(--line-2) 0 12px,transparent 12px 24px)}
+.road-fill{position:absolute;left:-1px;right:-1px;top:-1px;height:calc(var(--p)*100%);border-radius:999px;background:linear-gradient(to bottom,var(--accent),#c9b6ff);box-shadow:0 0 18px rgba(168,196,255,.45)}
+.road-car{position:absolute;left:50%;top:calc(var(--p)*100%);width:22px;height:22px;transform:translate(-50%,-50%);border-radius:50%;background:var(--text);border:4px solid var(--accent);box-shadow:0 0 0 6px rgba(168,196,255,.18),0 0 24px rgba(168,196,255,.6)}
+.rm{list-style:none;margin:0;padding:24px 0}
+.rm-stop{position:relative;display:grid;grid-template-columns:1fr 64px 1fr;align-items:center;min-height:120px}
+.rm-node{grid-column:2;justify-self:center;position:relative;z-index:1;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--bg);border:1.5px solid var(--line-2);color:var(--faint);transition:border-color .4s,color .4s,background .4s,transform .4s var(--ease)}
+.rm-node svg{width:20px;height:20px}
+.rm-stop.lit .rm-node{border-color:var(--accent);color:var(--accent);background:var(--bg);box-shadow:inset 0 0 0 20px var(--accent-soft),0 0 16px rgba(168,196,255,.35);transform:scale(1.08)}
+.rm-card{grid-row:1;padding:16px 18px;border:1px solid var(--line);border-radius:16px;background:var(--surface);opacity:.55;transform:translateY(10px);transition:opacity .5s var(--ease),transform .5s var(--ease),border-color .4s}
+.rm-stop:nth-child(odd) .rm-card{grid-column:1;margin-right:8px;text-align:right}
+.rm-stop:nth-child(even) .rm-card{grid-column:3;margin-left:8px}
+.rm-stop.lit .rm-card{opacity:1;transform:none}
+.rm-when{display:block;font:500 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.rm-card b{display:block;margin-top:8px;font-weight:500;font-size:17px;letter-spacing:-.01em}
+.rm-card p{margin:6px 0 0;font-size:14.5px;line-height:1.55;color:var(--dim)}
+.rm-tag{display:inline-block;margin-top:8px;padding:4px 9px;border-radius:999px;background:var(--accent);color:#0a0b0d;font:600 10.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.rm-tag.future{background:transparent;border:1px dashed var(--line-2);color:var(--faint)}
+.rm-now .rm-card{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 18px 40px -24px rgba(168,196,255,.5)}
+.rm-now .rm-node{width:52px;height:52px}
+.rm-next .rm-card{border-style:dashed;background:transparent}
+.rm-next .rm-node{border-style:dashed}
+.road-link{display:inline-flex;align-items:center;gap:8px;margin:16px 12px 0 0;min-height:44px;padding:0 16px;border-radius:999px;background:var(--accent-soft);border:1px solid rgba(168,196,255,.35);color:var(--text);font-size:14px;text-decoration:none;transition:border-color .2s}
+.road-link svg{width:14px;height:14px;transition:transform .3s var(--ease)}
+.road-link:hover{border-color:var(--accent)}.road-link:hover svg{transform:translateX(3px)}
+.in-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:28px}
+.in-card{padding:20px;border:1px solid var(--line);border-radius:18px;background:var(--surface);transition:border-color .25s,transform .35s var(--ease)}
+.in-card:hover{border-color:var(--line-2);transform:translateY(-3px)}
+.in-ic{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:var(--accent-soft);color:var(--accent)}
+.in-ic svg{width:22px;height:22px}
+.in-card b{display:block;margin-top:14px;font-weight:500;font-size:17px}
+.in-card p{margin:6px 0 0;font-size:14.5px;line-height:1.55;color:var(--dim)}
+.me-cta-card{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:26px;border:1px solid var(--line-2);border-radius:22px;background:radial-gradient(120% 140% at 0% 0%,var(--accent-soft),transparent 55%),var(--surface)}
+.me-cta-card b{font-size:22px;font-weight:500;letter-spacing:-.02em}
+.me-cta-card p{margin:6px 0 0;color:var(--dim)}
+.me-cta-btns{display:flex;gap:10px;flex-wrap:wrap}
+@media (max-width:760px){
+  .in-grid{grid-template-columns:1fr 1fr}
+  .road-track{left:22px;transform:none;width:12px}
+  .rm-stop{grid-template-columns:56px minmax(0,1fr);min-height:0;padding:10px 0}
+  .rm-node{grid-column:1;justify-self:start;margin-left:6px;width:40px;height:40px}
+  .rm-now .rm-node{width:44px;height:44px;margin-left:4px}
+  .rm-stop:nth-child(odd) .rm-card,.rm-stop:nth-child(even) .rm-card{grid-column:2;margin:0;text-align:left}
+  .me-cta-card{flex-direction:column;align-items:flex-start}
+}
+@media (max-width:520px){.me-head{grid-template-columns:1fr}.in-grid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.rm-card{opacity:1;transform:none}}
+:root[data-mode="light"] .rm-tag{color:#fff}
+:root[data-mode="light"] .road-fill{background:linear-gradient(to bottom,var(--accent),#7b5cd6)}
 </style>
 </head>
 <body>
@@ -1089,6 +1186,7 @@ body{transition:background-color .3s,color .3s}
       <p class="intro rv" style="--d:.18s">Mechanical engineering student at Stevens Institute of Technology and varsity track and field athlete, focused on design, prototyping and testing.</p>
       <div class="ctas rv" style="--d:.24s">
         <a class="btn primary" href="#projects">See my projects <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="btn" href="#me"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="5.2" r="2.6" stroke="currentColor" stroke-width="1.5"/><path d="M2.8 13.6c.7-2.5 2.8-3.9 5.2-3.9s4.5 1.4 5.2 3.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>About me</a>
         <a class="btn" href="#contact">Get in touch</a>
         <a class="btn resume-link" href="resume.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Resume</a>
       </div>
@@ -1110,8 +1208,9 @@ body{transition:background-color .3s,color .3s}
   <section class="fstrip rv" aria-label="Featured projects">
     <div class="feat-head"><span class="label fs-lbl"><i></i>Featured</span><a href="#projects" class="feat-all">All projects <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4l-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
     <div class="feat-grid">
+      <a class="ft ft-robot" href="#projects" data-jump="p-robot"><span class="ft-img dark"><img src="robot-3d-thumb.jpg" alt="" loading="lazy"><span class="ft-play" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M5.5 3.8v8.4l6.6-4.2z" fill="currentColor"/></svg>Watch the demo</span></span><span class="ft-badge gold">3D demo</span><b>Self-driving robot</b><span>Watch its winning run in 3D</span></a>
       <a class="ft" href="#projects" data-jump="p-bike"><span class="ft-img mv"><model-viewer class="ft-mv" data-src="bike-3d.glb" alt="3D model of the electric dirt bike, slowly rotating" auto-rotate auto-rotate-delay="0" rotation-per-second="22deg" interaction-prompt="none" shadow-intensity="1" shadow-softness="0.9" exposure="0.95" environment-image="neutral" camera-orbit="35deg 78deg 82%" field-of-view="26deg" disable-zoom disable-pan></model-viewer><img class="ft-poster" src="bike-3d-thumb.jpg" alt=""></span><span class="ft-badge">3D model</span><b>Electric dirt bike</b><span>61 mph, built from the frame up</span></a>
-      <a class="ft" href="#projects" data-jump="p-robot"><span class="ft-img dark"><img src="robot-3d-thumb.jpg" alt="" loading="lazy"></span><span class="ft-badge">3D replay</span><b>Self-driving robot</b><span>Watch its winning run in 3D</span></a>
+      
       <a class="ft ft-soon" href="#soon"><span class="ft-img po"><svg viewBox="0 0 120 120" aria-hidden="true"><polygon points="10,98 36,98 66,28 40,28" fill="#FF5A1F"/><polygon points="46,98 72,98 102,28 76,28" fill="#F5F3EE"/></svg></span><span class="ft-badge orange">Soon</span><b>Pushoff</b><span>The future of the sprint start</span></a>
     </div>
   </section>
@@ -1130,6 +1229,7 @@ body{transition:background-color .3s,color .3s}
       </div>
       <div class="bio">
         <p class="rv">I am a mechanical engineering student at Stevens Institute of Technology, Class of 2029, with a particular interest in the point where analysis meets physical reality. My work moves from concept sketches and CAD models to fabricated prototypes, and I treat testing as the stage where a design either proves itself or reveals what still needs to change.</p>
+        <a class="road-link" href="#me">See my road map <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4l-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <details class="more"><summary><span>Read more about me</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="more-body"><p>I also compete as an athlete on the Stevens varsity track and field team. Sustaining an NCAA training schedule alongside a demanding engineering curriculum has required disciplined planning and consistent performance under pressure. My experience on a competitive robotics team and as a counselor responsible for a group of thirty has strengthened my ability to communicate clearly and coordinate people toward a shared objective.</p><p>I am driven by a conviction that the most meaningful engineering produces something genuinely new, whether that is a better product, a more reliable system, or a smarter way to build it. I am most engaged when ideas are being validated, refined through iteration, and turned into hardware that solves real problems, and I want to contribute across that full cycle, from early concept through prototyping, testing, and production, while continually questioning how a design could perform better.</p><p>I am seeking a mechanical engineering internship, whether in design, R&amp;D, manufacturing, testing, or product development, where I can contribute to real projects, learn from experienced engineers, and keep building.</p></div></details>
       </div>
     </div>
@@ -1178,6 +1278,36 @@ body{transition:background-color .3s,color .3s}
   </section>
 </main>
 
+<div class="tv wrap" id="me-view" aria-labelledby="me-title" tabindex="-1">
+  <button type="button" class="tv-back" data-back><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3m0 0l4-4M3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="bk">Back to home</span></button>
+  <div class="me-head tv-in">
+    <div class="me-photo"><img src="headshot.jpg" alt="Chad J. Francis" width="400" height="400"></div>
+    <div>
+      <span class="label">About me</span>
+      <h1 id="me-title">My road <em>so far.</em></h1>
+      <p>Mechanical engineering student at Stevens, varsity track athlete, and someone who has always needed to know how things work. Scroll the road to see how I got here.</p>
+    </div>
+  </div>
+  <section class="tv-sec" style="padding:0">
+    <div class="road" id="road">
+      <div class="road-track" aria-hidden="true"><div class="road-fill"></div><div class="road-car"></div></div>
+      <ol class="rm"><li class="rm-stop"><span class="rm-node"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="rm-card"><span class="rm-when">Early on</span><b>Where it started</b><p>Seven years of soccer, and a love for anything with a motor. Riding electric dirt bikes is what first made me want to know how machines work.</p></div></li><li class="rm-stop"><span class="rm-node"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="8" width="14" height="10" rx="2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 4.5V8M9 12.5h.01M15 12.5h.01M3 13v2M21 13v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="rm-card"><span class="rm-when">2023</span><b>Joined FRC Team 75 Robotics</b><p>Hillsborough High School. My first time designing and building on a real engineering team.</p></div></li><li class="rm-stop"><span class="rm-node"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 2.5 5 13.5h6l-1 8 8-11h-6l1-8z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="rm-card"><span class="rm-when">2023 – 2024</span><b>Built an electric dirt bike from the frame up</b><p>72 V, 8 kW hub motor, parts from overseas suppliers. First test hit 61 mph, then blew a fuse. Fixing it taught me the most.</p></div></li><li class="rm-stop"><span class="rm-node"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 3.5 2 3.5H5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="rm-card"><span class="rm-when">2024</span><b>Helped run Robocon 2024</b><p>Organizing a robotics event for the team and our community.</p></div></li><li class="rm-stop"><span class="rm-node"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2.5 9 12 4.5 21.5 9 12 13.5 2.5 9z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 11v4.5c1.5 1.5 3.4 2.2 5.5 2.2s4-.7 5.5-2.2V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="rm-card"><span class="rm-when">Fall 2025</span><b>Started mechanical engineering at Stevens</b><p>Stevens Institute of Technology, Hoboken. Class of 2029. Built a sensor-driven plant-watering system that December.</p></div></li><li class="rm-stop"><span class="rm-node"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="8" width="14" height="10" rx="2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 4.5V8M9 12.5h.01M15 12.5h.01M3 13v2M21 13v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="rm-card"><span class="rm-when">Spring 2026</span><b>Self-driving robot, top 29% of teams</b><p>Designed the housing and sensor mounts in SolidWorks. Four of four targets in 1:25.</p></div></li><li class="rm-stop"><span class="rm-node"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="14.5" cy="4.8" r="1.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 20.5l3-5 3 2.5V22M6.5 11.5l3-3.5 4 1.5 2.5 3 3 .5M11 15.5l-1.5-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="rm-card"><span class="rm-when">Spring 2026</span><b>Sprinter of the Year</b><p>Freshman season on Stevens track and field. Ranked 5th all-time in the 100 m and 6th in the 200 m.</p></div></li><li class="rm-stop"><span class="rm-node"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="rm-card"><span class="rm-when">Summer 2026</span><b>Camp counselor, Superstar Counselor award</b><p>Responsible for a group of about 30 teens over eight weeks.</p></div></li><li class="rm-stop rm-now"><span class="rm-node"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="rm-card"><span class="rm-when">Fall 2026</span><span class="rm-tag">You are here</span><b>Launched this site, started Pushoff</b><p>Putting my work online and building something new for sprinters.</p></div></li><li class="rm-stop rm-next"><span class="rm-node"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 3.5 2 3.5H5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="rm-card"><span class="rm-when">Summer 2027</span><span class="rm-tag future">Up next</span><b>Next: an engineering internship</b><p>R&D, product design or testing. Where I want to put all of this to work.</p></div></li><li class="rm-stop rm-next"><span class="rm-node"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2.5 9 12 4.5 21.5 9 12 13.5 2.5 9z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.5 10.5V16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="rm-card"><span class="rm-when">2029</span><b>B.E. Mechanical Engineering</b><p>Stevens Institute of Technology.</p></div></li></ol>
+    </div>
+  </section>
+  <section class="tv-sec" style="padding:0">
+    <span class="label">Outside the lab</span>
+    <h2>What I'm into.</h2>
+    <div class="in-grid"><div class="in-card tv-in"><span class="in-ic"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="5.5" cy="16.5" r="3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18.5" cy="16.5" r="3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 16.5 9 10h5l2.5 6.5M14 10l-1.5-3H10M16 7.5h2.5l1 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Motors & machines</b><p>Five years riding electric dirt bikes. A manual-clutch motorcycle is next on my list.</p></div><div class="in-card tv-in"><span class="in-ic"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="14.5" cy="4.8" r="1.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 20.5l3-5 3 2.5V22M6.5 11.5l3-3.5 4 1.5 2.5 3 3 .5M11 15.5l-1.5-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Sprinting</b><p>Varsity track and field at Stevens. The 100 m and 200 m are my events.</p></div><div class="in-card tv-in"><span class="in-ic"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="m12 7.5 3.6 2.6-1.4 4.2H9.8l-1.4-4.2L12 7.5zM12 3v4.5M20.5 9.5l-4.9.6M17.5 19.5l-3.3-5.2M6.5 19.5l3.3-5.2M3.5 9.5l4.9.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Soccer</b><p>Seven years on the field before track took over.</p></div><div class="in-card tv-in"><span class="in-ic"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9h18M3 15h18M7.5 5v4M7.5 15v4M16.5 5v4M16.5 15v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Video production</b><p>I shoot and edit video, and I still enjoy telling a story with a cut.</p></div><div class="in-card tv-in"><span class="in-ic"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14.5 4.5c3-1.5 5-1 5-1s.5 2-1 5L13 14l-3-3 4.5-6.5z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 11 6.5 10 4 12.5l4 1M13 14l1 3.5-2.5 2.5-1-4M8 16l-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Commercial space</b><p>I follow the companies building rockets and satellites, and where the industry is heading.</p></div><div class="in-card tv-in"><span class="in-ic"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3.5 20.5h17M6 16l4.5-5 3.5 3 5.5-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 7h4.5v4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Markets</b><p>I like learning how companies, and the markets around them, actually work.</p></div></div>
+  </section>
+  <section class="tv-sec me-cta" style="padding:0">
+    <div class="me-cta-card tv-in">
+      <div><b>Want to see the work?</b><p>The projects are where the road gets interesting.</p></div>
+      <div class="me-cta-btns"><a class="btn primary" href="#projects">See my projects <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4l-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="btn" href="#contact">Get in touch</a></div>
+    </div>
+  </section>
+  <div class="tv-foot"><button type="button" class="tv-back" data-back><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3m0 0l4-4M3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="bk">Back to home</span></button></div>
+</div>
+
 <div class="tv wrap" id="projects-view" aria-labelledby="pv-title" tabindex="-1">
   <button type="button" class="tv-back" data-back><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3m0 0l4-4M3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="bk">Back to home</span></button>
   <div class="tv-head tv-in">
@@ -1185,13 +1315,15 @@ body{transition:background-color .3s,color .3s}
     <h1 id="pv-title">The lineup.</h1>
     <p>Three builds, from first sketch to final test. Pick one to explore.</p>
   </div>
-  <div class="tv-in"><div class="showcase" role="tablist" aria-label="Projects"><button type="button" class="pc" role="tab" data-target="p-bike" aria-selected="true" aria-controls="p-bike">
-        <span class="pc-img cover"><img src="bike-outdoor.jpg" alt="" loading="lazy"><span class="pc-badge">3D model</span><span class="pc-num">01</span></span>
-        <span class="pc-body"><b class="pc-name">Electric Dirt Bike</b><span class="pc-tag">Built from the frame up</span><span class="pc-specs"><span><b>61</b>mph</span><span><b>72</b>V</span><span><b>8</b>kW</span></span><span class="pc-go"><span class="pc-go-t">Explore</span><span class="pc-go-v">Viewing</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4l-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
-      </button><button type="button" class="pc" role="tab" data-target="p-robot" aria-selected="false" aria-controls="p-robot">
-        <span class="pc-img contain"><img src="robot-final.jpg" alt="" loading="lazy"><span class="pc-badge">3D replay</span><span class="pc-num">02</span></span>
+  <div class="tv-in"><div class="showcase" role="tablist" aria-label="Projects"><button type="button" class="pc" role="tab" data-target="p-robot" aria-selected="true" aria-controls="p-robot">
+        <span class="pc-img contain"><img src="robot-final.jpg" alt="" loading="lazy"><span class="pc-badge">3D replay</span><span class="pc-num">01</span></span>
         <span class="pc-body"><b class="pc-name">Self-Driving Robot</b><span class="pc-tag">Autonomous campus tour guide</span><span class="pc-specs"><span><b>1:25</b>run</span><span><b>4/4</b>stops</span><span><b>Top 29</b>%</span></span><span class="pc-go"><span class="pc-go-t">Explore</span><span class="pc-go-v">Viewing</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4l-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
-      </button><button type="button" class="pc" role="tab" data-target="p-plant" aria-selected="false" aria-controls="p-plant">
+      </button>
+      <button type="button" class="pc" role="tab" data-target="p-bike" aria-selected="false" aria-controls="p-bike">
+        <span class="pc-img cover"><img src="bike-outdoor.jpg" alt="" loading="lazy"><span class="pc-badge">3D model</span><span class="pc-num">02</span></span>
+        <span class="pc-body"><b class="pc-name">Electric Dirt Bike</b><span class="pc-tag">Built from the frame up</span><span class="pc-specs"><span><b>61</b>mph</span><span><b>72</b>V</span><span><b>8</b>kW</span></span><span class="pc-go"><span class="pc-go-t">Explore</span><span class="pc-go-v">Viewing</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4l-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+      </button>
+      <button type="button" class="pc" role="tab" data-target="p-plant" aria-selected="false" aria-controls="p-plant">
         <span class="pc-img contain"><img src="plant-final.jpg" alt="" loading="lazy"><span class="pc-badge">Data logging</span><span class="pc-num">03</span></span>
         <span class="pc-body"><b class="pc-name">Smart Plant Waterer</b><span class="pc-tag">Sensing, logging, watering itself</span><span class="pc-specs"><span><b>5</b>days</span><span><b>10</b>min log</span><span><b>20</b>mL</span></span><span class="pc-go"><span class="pc-go-t">Explore</span><span class="pc-go-v">Viewing</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4l-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
       </button></div></div>
@@ -1201,7 +1333,7 @@ body{transition:background-color .3s,color .3s}
     
 
     <div class="work">
-      <article class="proj proj-feature rv" id="p-bike">
+      <article class="proj proj-feature rv" id="p-bike" hidden>
         <div class="media amz" id="bike-gallery">
           <div class="stage">
             <div class="viewer3d" id="pane-3d">
@@ -1261,7 +1393,7 @@ body{transition:background-color .3s,color .3s}
         </div>
       </article>
 
-      <article class="proj rv" id="p-robot" hidden>
+      <article class="proj rv" id="p-robot">
         <div class="media" data-gallery>
           <div class="shot-wrap">
           <div class="r3d stage-layer" id="r3d" data-kind="3d" data-hi="robot-3d.glb" data-lo="robot-run.glb" aria-label="Interactive 3D model of the robot">
@@ -1269,7 +1401,7 @@ body{transition:background-color .3s,color .3s}
             <div class="r3d-load" aria-hidden="true"><i></i></div>
             <div class="r3d-ui r3d-close">
               <span class="r3d-tag">3D model<span class="r3d-hint"> · drag to look around</span></span>
-              <button type="button" class="r3d-go"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 3.5v9l7-4.5z" fill="currentColor"/></svg><span>See the final run reconstruction</span></button>
+              <button type="button" class="r3d-go"><span class="go-ic" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M5.5 3.8v8.4l6.6-4.2z" fill="currentColor"/></svg></span><span class="go-t"><b>Watch the 3D run demo</b><small>Final run reconstruction · 20 s</small></span></button>
             </div>
             <div class="r3d-ui r3d-run">
               <div class="r3d-top">
@@ -2170,6 +2302,17 @@ document.querySelectorAll('.xp-tog').forEach(b=>b.addEventListener('click',()=>{
 
 /* Pushoff: copy email */
 (function(){const b=document.getElementById('po-copy');if(!b)return;b.addEventListener('click',()=>{navigator.clipboard.writeText('chad.francis2029@gmail.com').then(()=>{b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy email',1600)}).catch(()=>{b.textContent='chad.francis2029@gmail.com'})})})();
+
+/* about me road: lights up as you scroll */
+(function(){const road=document.getElementById('road');if(!road)return;const stops=[...road.querySelectorAll('.rm-stop')];let raf=0;
+  const upd=()=>{raf=0;if(document.documentElement.dataset.route!=='me')return;const r=road.getBoundingClientRect(),mark=innerHeight*.62;
+    const p=Math.max(0,Math.min(1,(mark-r.top)/r.height));road.style.setProperty('--p',p.toFixed(4));
+    stops.forEach(s=>{const b=s.getBoundingClientRect();s.classList.toggle('lit',b.top+b.height/2<mark)})};
+  addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(upd)},{passive:true});addEventListener('resize',upd);
+  addEventListener('hashchange',()=>setTimeout(upd,50));addEventListener('popstate',()=>setTimeout(upd,50));
+  document.addEventListener('click',e=>{if(e.target.closest('a[href="#me"]'))setTimeout(upd,60)});
+  if(location.hash==='#me')setTimeout(upd,60);
+})();
 /* settings: theme */
 (function(){
   const root=document.documentElement,btn=document.querySelector('.set-btn'),pop=document.getElementById('set-pop');if(!btn)return;
@@ -2187,8 +2330,8 @@ document.querySelectorAll('.xp-tog').forEach(b=>b.addEventListener('click',()=>{
 /* Separate pages: #track and #robot, each with a back button */
 (function(){
   const html=document.documentElement,M=window.Motion,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const routes={'#track':'track','#robot':'robot','#projects':'projects','#soon':'soon'};
-  const NAMES={'':'home',track:'track page',robot:'robot',projects:'projects',soon:'coming soon'};
+  const routes={'#track':'track','#robot':'robot','#projects':'projects','#soon':'soon','#me':'me'};
+  const NAMES={'':'home',track:'track page',robot:'robot',projects:'projects',soon:'coming soon',me:'about me'};
   const mem={};let depth=0,prev='',pendingJump=null;
   try{history.scrollRestoration='manual'}catch(e){}
   let fromSite=false,savedY=0,drawn=false;
@@ -2208,7 +2351,7 @@ function chart(){if(drawn)return;drawn=true;
     const view=document.getElementById(name+'-view');
     const from=html.dataset.route||'';if(from!==name)prev=from;
     html.dataset.route=name;html.classList.add('route-on');
-    const RANK={'':0,projects:1,track:1,soon:2,robot:2};view.querySelectorAll('.bk').forEach(b=>b.textContent='Back to '+((RANK[prev]||0)<RANK[name]?(NAMES[prev]||'home'):'home'));
+    const RANK={'':0,projects:1,track:1,me:1,soon:2,robot:2};view.querySelectorAll('.bk').forEach(b=>b.textContent='Back to '+((RANK[prev]||0)<RANK[name]?(NAMES[prev]||'home'):'home'));
     document.querySelectorAll('.nav-hot a').forEach(a=>{if(a.getAttribute('href')==='#'+name)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
     const y=mem['#'+name];
     if(pendingJump){if(window.selectProject&&/^p-/.test(pendingJump))selectProject(pendingJump,null);const el=document.getElementById(pendingJump==='p-bike'||/^p-/.test(pendingJump)?'pv-detail-lbl':pendingJump);pendingJump=null;requestAnimationFrame(()=>{if(el){const t=el.getBoundingClientRect().top+scrollY-90;window.scrollTo({top:Math.max(0,t),behavior:'instant'})}})}
